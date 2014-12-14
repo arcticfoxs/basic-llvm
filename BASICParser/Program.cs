@@ -16,50 +16,33 @@ namespace BASICParser
             System.IO.StreamReader file = new System.IO.StreamReader("D:\\basictest.txt");
             while ((line = file.ReadLine()) != null)
             {
-                Console.WriteLine("Reading line " + counter.ToString());
-                parseLine(line);
+                Console.WriteLine("(line " + counter.ToString()+")");
+                lexLine(line);
                 counter++;
-                Console.ReadLine();
             }
 
             file.Close();
-            Console.WriteLine("done");
             // Suspend the screen.
             Console.ReadLine();
         }
 
-        static void parseLine(string line)
+        static void lexLine(string line)
         {
             StringReader reader = new StringReader(line);
 
             Yylex lexer = new Yylex(reader);
 
-			while (true)
+			Symbol nextSymbol = lexer.next_token();
+			while (nextSymbol != null)
 			{
-				Symbol nextSymbol = lexer.next_token();
-				Console.WriteLine("token");
+				if (nextSymbol.hasPayload)
+				{
+					if (nextSymbol.stringPayload != null) Console.WriteLine(nextSymbol.symType.ToString() + " " + nextSymbol.stringPayload.ToString());
+					else Console.WriteLine(nextSymbol.symType.ToString() + " " + nextSymbol.intPayload);
+				}
+				else Console.WriteLine(nextSymbol.symType);
+				nextSymbol = lexer.next_token();
 			}
-
-            /*
-            char[] characters = line.ToArray();
-            string[] words = line.Split(' ');
-            Line thisLine = new Line();
-
-            bool lineNumber;
-            // find line number
-            lineNumber = int.TryParse(words[0], out thisLine.lineNumber);
-
-            // find first keyword
-            string firstKeyword = (lineNumber ? words[1] : words[0]);
-
-            switch (firstKeyword)
-            {
-
-                  
-            }
-            lines.Add(thisLine);
-            Console.WriteLine(line);
-             */
         }
     }
 }

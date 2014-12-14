@@ -8,11 +8,12 @@ namespace BASICParser
 {
     class Symbol
     {
-        public enum sym { SEMI,PLUS,TIMES,LPAREN,RPAREN,INTLITERAL,STRINGLITERAL }
+        public enum sym { SEMI,PLUS,TIMES,LPAREN,RPAREN,INTLITERAL,STRINGLITERAL, PRINT, END }
 
         public sym symType;
         public int intPayload;
         public string stringPayload;
+		public bool hasPayload = false;
 
         public Symbol()
         {
@@ -27,8 +28,11 @@ namespace BASICParser
         public Symbol(sym symbolType, string payload)
         {
             symType = symbolType;
+			intPayload = -1;
+			stringPayload = null;
             if (symbolType == sym.INTLITERAL) intPayload = Convert.ToInt32(payload);
             else if (symbolType == sym.STRINGLITERAL) stringPayload = payload;
+			hasPayload = true;
         }
     }
 }
