@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace BASICParser
 {
@@ -32,6 +30,17 @@ namespace BASICParser
 
         static void parseLine(string line)
         {
+            StringReader reader = new StringReader(line);
+
+            Yylex lexer = new Yylex(reader);
+
+			while (true)
+			{
+				Symbol nextSymbol = lexer.next_token();
+				Console.WriteLine("token");
+			}
+
+            /*
             char[] characters = line.ToArray();
             string[] words = line.Split(' ');
             Line thisLine = new Line();
@@ -48,9 +57,9 @@ namespace BASICParser
 
                   
             }
-
             lines.Add(thisLine);
             Console.WriteLine(line);
+             */
         }
     }
 }

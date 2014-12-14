@@ -1,7 +1,6 @@
 using TUVienna.CS_CUP.Runtime;
 
-
-class Yylex : TUVienna.CS_CUP.Runtime.Scanner {
+class Yylex {
 	private const int YY_BUFFER_SIZE = 512;
 	private const int YY_F = -1;
 	private const int YY_NO_STATE = -1;
@@ -205,7 +204,7 @@ class Yylex : TUVienna.CS_CUP.Runtime.Scanner {
 	private int[][] yy_nxt = unpackFromString(4,11,
 "1,2,3,4,5,6,7,8,12,9:2,-1:17,7,-1:5,11:6,10,11:2,-1");
 
-	public TUVienna.CS_CUP.Runtime.Symbol next_token ()
+	public BASICParser.Symbol next_token ()
  {
 		int yy_lookahead;
 		int yy_anchor = YY_NO_ANCHOR;
@@ -254,27 +253,27 @@ class Yylex : TUVienna.CS_CUP.Runtime.Scanner {
 					case -2:
 						break;
 					case 2:
-						{ return new Symbol(sym.SEMI); }
+                        { return new BASICParser.Symbol(BASICParser.Symbol.sym.SEMI); }
 					case -3:
 						break;
 					case 3:
-						{ return new Symbol(sym.PLUS); }
+                        { return new BASICParser.Symbol(BASICParser.Symbol.sym.PLUS); }
 					case -4:
 						break;
 					case 4:
-						{ return new Symbol(sym.TIMES); }
+                        { return new BASICParser.Symbol(BASICParser.Symbol.sym.TIMES); }
 					case -5:
 						break;
 					case 5:
-						{ return new Symbol(sym.LPAREN); }
+                        { return new BASICParser.Symbol(BASICParser.Symbol.sym.LPAREN); }
 					case -6:
 						break;
 					case 6:
-						{ return new Symbol(sym.RPAREN); }
+                        { return new BASICParser.Symbol(BASICParser.Symbol.sym.RPAREN); }
 					case -7:
 						break;
 					case 7:
-						{ return new Symbol(sym.INTLITERAL, yytext()); }
+                        { return new BASICParser.Symbol(BASICParser.Symbol.sym.INTLITERAL, yytext()); }
 					case -8:
 						break;
 					case 8:
@@ -286,7 +285,7 @@ class Yylex : TUVienna.CS_CUP.Runtime.Scanner {
 					case -10:
 						break;
 					case 10:
-						{ return new Symbol(sym.STRINGLITERAL, yytext()); }
+                        { return new BASICParser.Symbol(BASICParser.Symbol.sym.STRINGLITERAL, yytext()); }
 					case -11:
 						break;
 					case 12:
