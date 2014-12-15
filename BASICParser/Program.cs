@@ -10,7 +10,11 @@ namespace BASICParser
         {
 			string inputFile = "D:\\basictest.txt"; // TODO: Read from parameter
 
-			Lexer.lex(inputFile);
+			List<Line> lines = Lexer.lex(inputFile);
+			for (int i = 0; i < lines.Count; i++)
+			{
+				lines[i] = lines[i].parse();
+			}
         }
 
     }

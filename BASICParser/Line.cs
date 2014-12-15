@@ -5,30 +5,56 @@ namespace BASICParser
     class Line
     {
 		public bool parsed = false;
-		public List<Symbol> lines;
+		public List<Symbol> tokens;
         public int lineNumber = -2;
 
-		public Line(List<Symbol> lexLines) {
-			lines = lexLines;
+		public Line()
+		{
+
 		}
 
-		public void parse()
+		public Line(List<Symbol> lexTokens) {
+			tokens = lexTokens;
+		}
+
+		public Line parse()
 		{
-			foreach (Symbol token in lines)
+			int numTokens = tokens.Count;
+			bool foundKeyword = false;
+
+			for (int i = 0; i < tokens.Count; i++)
 			{
-				if (lineNumber == -2)
+				Symbol thisToken = tokens[i];
+
+				if (i == 0 && thisToken.symType == Symbol.sym.INTLITERAL)
 				{
-					// No line number entered yet
-					if (token.symType == Symbol.sym.INTLITERAL)
-					{
-						lineNumber = token.intPayload; // Found a line number
-						continue;
-					}
-					else lineNumber = -1; // this line doesn't have a line number
+					// we found a line number!
+					lineNumber = thisToken.intPayload;
+					continue;
 				}
 
+				if (!foundKeyword)
+				{
+					switch (thisToken.symType)
+					{
+						case Symbol.sym.PRINT:
+							List<Symbol> printTokens = tokens.GetRange(i + 1, tokens.Count - i - 1);
+							Line_Print printLine = new Line_Print(this,printTokens);
+							printLine.parse();
+							return printLine;
+						case Symbol.sym.END:
+							Line_Exit exitLine = new Line_Exit(this);
+							return exitLine;
+					}
+				}
+
+				// something's gone wrong!
+				
 
 			}
+
+			return this;
 		}
+
     }
 }
