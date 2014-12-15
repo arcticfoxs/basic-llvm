@@ -8,7 +8,7 @@ namespace BASICParser
 {
     class Symbol
     {
-        public enum sym { SEMI,PLUS,TIMES,LPAREN,RPAREN,INTLITERAL,STRINGLITERAL, PRINT, END, LET, INTVAR, EQUALS }
+        public enum sym { SEMI,PLUS,TIMES,MINUS, LPAREN,RPAREN,INTLITERAL,STRINGLITERAL, PRINT, END, LET, INTVAR, EQUALS }
 
         public sym symType;
         public int intPayload;

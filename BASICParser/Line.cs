@@ -45,6 +45,19 @@ namespace BASICParser
 						case Symbol.sym.END:
 							Line_Exit exitLine = new Line_Exit(this);
 							return exitLine;
+						case Symbol.sym.LET:
+							if(tokens[i+2].symType == Symbol.sym.EQUALS) {
+								// this is a valid assignment
+								if ((tokens[i + 1].symType == Symbol.sym.INTVAR))
+								{
+									// this is an integer assignment
+									Line_Let_Int assignmentLine = new Line_Let_Int(this, tokens[i + 1].stringPayload, tokens.GetRange(i + 3, tokens.Count - i - 3));
+									return assignmentLine;
+								}
+							} else {
+								// this is not a valid assignment!
+							}
+							break;
 					}
 				}
 

@@ -14,7 +14,8 @@ namespace BASICParser
 			Console.ReadLine();
 			for (int i = 0; i < lines.Count; i++)
 			{
-				lines[i] = lines[i].parse();
+				Line parsedLine = lines[i].parse();
+				lines[i] = parsedLine;
 			}
         }
 
