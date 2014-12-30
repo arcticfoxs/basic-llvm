@@ -37,6 +37,16 @@ namespace BASICParser
 				{
 					switch (thisToken.symType)
 					{
+						case Symbol.sym.GOTO:
+							if (tokens[i + 1].symType == Symbol.sym.INTLITERAL)
+							{
+								Line_Goto gotoLine = new Line_Goto(this, tokens[i + 1].intPayload);
+								return gotoLine;
+							}
+							else { 
+								// invalid goto 
+							}
+							break;
 						case Symbol.sym.PRINT:
 							List<Symbol> printTokens = tokens.GetRange(i + 1, tokens.Count - i - 1);
 							Line_Print printLine = new Line_Print(this,printTokens);

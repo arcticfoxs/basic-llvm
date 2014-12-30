@@ -227,29 +227,33 @@ class Yylex
 		/* 14 */ YY_NO_ANCHOR,
 		/* 15 */ YY_NO_ANCHOR,
 		/* 16 */ YY_NO_ANCHOR,
-		/* 17 */ YY_NOT_ACCEPT,
-		/* 18 */ YY_NO_ANCHOR,
+		/* 17 */ YY_NO_ANCHOR,
+		/* 18 */ YY_NOT_ACCEPT,
 		/* 19 */ YY_NO_ANCHOR,
-		/* 20 */ YY_NOT_ACCEPT,
-		/* 21 */ YY_NO_ANCHOR,
-		/* 22 */ YY_NOT_ACCEPT,
-		/* 23 */ YY_NO_ANCHOR,
-		/* 24 */ YY_NOT_ACCEPT,
-		/* 25 */ YY_NO_ANCHOR,
-		/* 26 */ YY_NOT_ACCEPT,
-		/* 27 */ YY_NOT_ACCEPT
+		/* 20 */ YY_NO_ANCHOR,
+		/* 21 */ YY_NOT_ACCEPT,
+		/* 22 */ YY_NO_ANCHOR,
+		/* 23 */ YY_NOT_ACCEPT,
+		/* 24 */ YY_NO_ANCHOR,
+		/* 25 */ YY_NOT_ACCEPT,
+		/* 26 */ YY_NO_ANCHOR,
+		/* 27 */ YY_NOT_ACCEPT,
+		/* 28 */ YY_NO_ANCHOR,
+		/* 29 */ YY_NOT_ACCEPT,
+		/* 30 */ YY_NOT_ACCEPT,
+		/* 31 */ YY_NOT_ACCEPT
 	};
 	private int[] yy_cmap = unpackFromString(1, 130,
-"19:9,20,21,19,20,21,19:18,20,19,18,19:5,5,6,4,2,19,3,19:2,17:10,19,1,19,7,1" +
-"9:3,16:3,14,13,16:3,10,16:2,15,16,11,16,8,16,9,16,12,16:6,19:37,0:2")[0];
+"21:9,22,23,21,22,23,21:18,22,21,20,21:5,5,6,4,2,21,3,21:2,19:10,21,1,21,7,2" +
+"1:3,18:3,14,13,18,16,18,10,18:2,15,18,11,17,8,18,9,18,12,18:6,21:37,0:2")[0];
 
-	private int[] yy_rmap = unpackFromString(1, 28,
-"0,1:8,2,3,4,1,4,1:3,5,6,1,7,8,9,10,4,1,11,12")[0];
+	private int[] yy_rmap = unpackFromString(1, 32,
+"0,1:8,2,3,4,1,4,1:4,5,6,1,7,8,9,10,11,12,4,1,13,14,15")[0];
 
-	private int[][] yy_nxt = unpackFromString(13, 22,
-"1,2,3,4,5,6,7,8,9,18:4,21,18,23,18,10,11,19,12:2,-1:31,17,-1:7,25,-1:21,10," +
-"-1:5,24:17,13,24:2,-1:11,26,-1:28,25,-1:18,14,-1:18,20,-1:5,25,-1:16,15,-1:" +
-"22,22,-1:3,25,-1:15,27,-1:22,16,-1:9");
+	private int[][] yy_nxt = unpackFromString(16, 24,
+"1,2,3,4,5,6,7,8,9,19:4,22,19,24,26,19:2,10,11,20,12:2,-1:33,18,-1:9,28,-1:2" +
+"3,10,-1:5,27:19,13,27:2,-1:11,29,-1:32,28,-1:18,14,-1:20,21,-1:7,28,-1:16,1" +
+"5,-1:24,23,-1:5,28,-1:16,30,-1:28,25,-1,28,-1:15,31,-1:29,16,-1:18,17,-1:11");
 
 	public BASICParser.Symbol next_token()
 	{
@@ -366,28 +370,36 @@ class Yylex
 						case -16:
 							break;
 						case 16:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.PRINT); }
+							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.GOTO); }
 						case -17:
 							break;
-						case 18:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
+						case 17:
+							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.PRINT); }
 						case -18:
 							break;
 						case 19:
-							{ System.Console.Error.WriteLine("Illegal character: " + yytext()); break; }
+							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
 						case -19:
 							break;
-						case 21:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
+						case 20:
+							{ System.Console.Error.WriteLine("Illegal character: " + yytext()); break; }
 						case -20:
 							break;
-						case 23:
+						case 22:
 							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
 						case -21:
 							break;
-						case 25:
+						case 24:
 							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
 						case -22:
+							break;
+						case 26:
+							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
+						case -23:
+							break;
+						case 28:
+							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
+						case -24:
 							break;
 						default:
 							yy_error(YY_E_INTERNAL, false); break;
