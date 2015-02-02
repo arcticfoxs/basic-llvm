@@ -18,7 +18,7 @@ namespace BASICParser
 			tokens = lexTokens;
 		}
 
-		public void code(LLVMContext context, Module module)
+		public virtual void code(LLVMContext context, Module module, Function mainFn)
 		{
 			
 		}

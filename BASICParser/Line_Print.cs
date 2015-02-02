@@ -43,13 +43,27 @@ namespace BASICParser
 			}
 		}
 
-		public void code(LLVMContext context, Module module)
+		public override void code(LLVMContext context, Module module, Function mainFn)
 		{
+			BasicBlock block = new BasicBlock(context, mainFn, "line"+lineNumber.ToString());
+			IRBuilder builder = new IRBuilder(block);
+			
+			// Import printf function
+			LLVM.Type[] argTypes = new LLVM.Type[] { LLVM.Type.GetInteger8PointerType(context) };
+			FunctionType stringToVoid = new FunctionType(LLVM.Type.GetVoidType(context),argTypes);
+			Constant printf = module.GetOrInsertFunction("printf", stringToVoid);
+
+			// Call printf
+			Constant arg = new Constant(context, printTokens[0].stringPayload);
+			Value[] args = new Value[] { arg };
+			builder.CreateCall(printf, args);
+
+			/*
 			FunctionType fnType = new FunctionType(LLVM.Type.GetVoidType(context));
 			Function printFunction = new LLVM.Function(module, "PRINT", fnType);
 			Function mallocFunction = new LLVM.Function(module, "PRINT", fnType);
-			BasicBlock block = new LLVM.BasicBlock(context, printFunction, "print1");
-			IRBuilder builder = new LLVM.IRBuilder(block);
+			
+			
 			Constant string_to_print = new LLVM.Constant(context, printTokens[0].stringPayload);
 			UInt64 totalMemory = 512;
 			Constant valMemory = new Constant(context, 32, totalMemory);
@@ -64,6 +78,7 @@ namespace BASICParser
 			Value tape1 = builder.CreateSignExtend(out0, LLVM.Type.GetInteger32Type(context), "tape");
 			CallInstruction putcharCall = builder.CreateCall(printFunction, tape1);
 			putcharCall.TailCall = false;
+			 */
 		}
 	}
 }
