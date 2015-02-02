@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using LLVM;
 
 namespace BASICParser
 {
@@ -17,6 +18,10 @@ namespace BASICParser
 			tokens = lexTokens;
 		}
 
+		public void code(LLVMContext context, Module module)
+		{
+			
+		}
 		public Line parse()
 		{
 			int numTokens = tokens.Count;
