@@ -8,6 +8,7 @@ namespace BASICParser
 		public bool parsed = false;
 		public List<Symbol> tokens;
         public int lineNumber = -2;
+		public BasicBlock firstBlock,lastBlock;
 
 		public Line()
 		{
@@ -18,9 +19,14 @@ namespace BASICParser
 			tokens = lexTokens;
 		}
 
-		public virtual void code(LLVMContext context, Module module, Function mainFn)
+		public void addJump(Line jumpTo) {
+			IRBuilder builder = new IRBuilder(lastBlock);
+			builder.CreateBranch(jumpTo.firstBlock);
+		}
+
+		public virtual BasicBlock code(LLVMContext context, Module module, Function mainFn)
 		{
-			
+			return new BasicBlock(context, mainFn, "dummy");
 		}
 		public Line parse()
 		{

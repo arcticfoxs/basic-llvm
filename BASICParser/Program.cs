@@ -30,6 +30,11 @@ namespace BASICParser
 			{
 				lines[i].code(context, module, mainFunction);
 			}
+
+			for (int i = 0; i < lines.Count - 1; i++)
+			{
+				lines[i].addJump(lines[i + 1]);
+			}
 			
 			module.Dump();
 			module.WriteToFile("D:\\Project\\out.ll");
