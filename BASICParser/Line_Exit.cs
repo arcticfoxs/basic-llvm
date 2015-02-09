@@ -22,7 +22,8 @@ namespace BASICParser
 			
 			IRBuilder builder = new IRBuilder(block);
 
-			builder.CreateReturn();
+			Constant zero = new Constant(context, 32, 0L);
+			builder.CreateReturn(zero);
 
 			firstBlock = block;
 			lastBlock = block;

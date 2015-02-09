@@ -24,7 +24,11 @@ namespace BASICParser
 
 			LLVMContext context = new LLVMContext();
 			Module module = new Module(context, "SourceFile");
-			Function mainFunction = new Function(module,"main",new FunctionType(LLVM.Type.GetVoidType(context)));
+
+			LLVM.Type[] mainArgs = new LLVM.Type[] { LLVM.Type.GetInteger32Type(context), LLVM.PointerType.GetUnqualified(LLVM.Type.GetInteger8PointerType(context)) };
+			FunctionType mainType = new FunctionType(LLVM.Type.GetInteger32Type(context),mainArgs);
+			
+			Function mainFunction = new Function(module,"main",new FunctionType(mainType));
 
 			for (int i = 0; i < lines.Count; i++)
 			{
