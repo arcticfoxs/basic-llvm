@@ -28,18 +28,32 @@ namespace BASICParser
 			LLVM.Type[] mainArgs = new LLVM.Type[] { LLVM.Type.GetInteger32Type(context), LLVM.PointerType.GetUnqualified(LLVM.Type.GetInteger8PointerType(context)) };
 			FunctionType mainType = new FunctionType(LLVM.Type.GetInteger32Type(context),mainArgs);
 			
-			Function mainFunction = new Function(module,"main",new FunctionType(mainType));
+			Function mainFunction = new Function(module,"main",mainType);
+
+			Dictionary<int, Line> gotoLookup = new Dictionary<int, Line>();
+
+			BasicBlock newLine;
 
 			for (int i = 0; i < lines.Count; i++)
 			{
-				lines[i].code(context, module, mainFunction);
+				newLine = lines[i].code(context, module, mainFunction);
+				if(lines[i].lineNumber != -2) gotoLookup.Add(lines[i].lineNumber, lines[i]);
 			}
 
 			for (int i = 0; i < lines.Count - 1; i++)
 			{
-				lines[i].addJump(lines[i + 1]);
+				lines[i].jumpToNext(lines[i + 1]);
 			}
-			
+
+			for (int i = 0; i < lines.Count; i++)
+			{
+				if (lines[i].GetType().Name == "Line_Goto")
+				{
+					Line_Goto thisLine = (Line_Goto)lines[i];
+					thisLine.processGoto(gotoLookup);
+				}
+			}
+
 			module.Dump();
 			module.WriteToFile("D:\\Project\\out.ll");
 			Console.WriteLine("Compile Successful");
