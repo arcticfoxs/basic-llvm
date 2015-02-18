@@ -1,6 +1,5 @@
 using TUVienna.CS_CUP.Runtime;
 
-
 class Yylex
 {
 	private const int YY_BUFFER_SIZE = 512;
