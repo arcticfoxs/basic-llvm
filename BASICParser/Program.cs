@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using LLVM;
+using Antlr4.Runtime;
 
 namespace BASICLLVM
 {
@@ -10,7 +11,14 @@ namespace BASICLLVM
         static void Main(string[] args)
         {
 			string inputFile = "D:\\Project\\basictest.txt"; // TODO: Read from parameter
-			
+
+			String input = "GOTO 20";
+			AntlrInputStream stream = new AntlrInputStream(input);
+			ITokenSource lexer = new BASICLexer(stream);
+			ITokenStream tokens = new CommonTokenStream(lexer);
+			BASICParser parser = new BASICParser(tokens);
+						
+
 			List<Line> lines = Lexer.lex(inputFile,true);
 			Console.WriteLine("Done Lexing");
 			Console.ReadLine();
@@ -19,6 +27,7 @@ namespace BASICLLVM
 				Line parsedLine = lines[i].parse();
 				lines[i] = parsedLine;
 			}
+
 			Console.WriteLine("Done Parsing");
 			Console.ReadLine();
 
