@@ -203,7 +203,7 @@ public partial class BASICParser : Parser {
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 165; Match(DIGIT);
-			1,4
+			// 1,4 <- wtf is this?
 			}
 		}
 		catch (RecognitionException re) {
