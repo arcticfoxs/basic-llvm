@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace BASICParser
+namespace BASICLLVM
 {
 	class Parser
 	{
 		void parse()
 		{
-			Antlr4.Runtime.
+			
 		}
 	}
 }

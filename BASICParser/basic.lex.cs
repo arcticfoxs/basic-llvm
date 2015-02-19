@@ -357,7 +357,10 @@ class Yylex
 						case -13:
 							break;
 						case 13:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.STRINGLITERAL, yytext()); }
+							{ 
+								string literal = yytext();
+								return new BASICParser.Symbol(BASICParser.Symbol.sym.STRINGLITERAL, literal.Substring(1,literal.Length-2));
+							}
 						case -14:
 							break;
 						case 14:

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using LLVM;
 
-namespace BASICParser
+namespace BASICLLVM
 {
 	class Line_Exit : Line
 	{

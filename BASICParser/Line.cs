@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using LLVM;
 
-namespace BASICParser
+namespace BASICLLVM
 {
     class Line
     {

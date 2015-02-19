@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LLVM;
 
-namespace BASICParser
+namespace BASICLLVM
 {
 	class Line_Print : Line
 	{
