@@ -254,7 +254,7 @@ class Yylex
 "3,10,-1:5,27:19,13,27:2,-1:11,29,-1:32,28,-1:18,14,-1:20,21,-1:7,28,-1:16,1" +
 "5,-1:24,23,-1:5,28,-1:16,30,-1:28,25,-1,28,-1:15,31,-1:29,16,-1:18,17,-1:11");
 
-	public BASICParser.Symbol next_token()
+	public BASICLLVM.Symbol next_token()
 	{
 		int yy_lookahead;
 		int yy_anchor = YY_NO_ANCHOR;
@@ -313,39 +313,39 @@ class Yylex
 						case -2:
 							break;
 						case 2:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.SEMI); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.SEMI); }
 						case -3:
 							break;
 						case 3:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.PLUS); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.PLUS); }
 						case -4:
 							break;
 						case 4:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.MINUS); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.MINUS); }
 						case -5:
 							break;
 						case 5:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.TIMES); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.TIMES); }
 						case -6:
 							break;
 						case 6:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.LPAREN); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.LPAREN); }
 						case -7:
 							break;
 						case 7:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.RPAREN); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.RPAREN); }
 						case -8:
 							break;
 						case 8:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.EQUALS); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.EQUALS); }
 						case -9:
 							break;
 						case 9:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.INTVAR, yytext()); }
 						case -10:
 							break;
 						case 10:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTLITERAL, yytext()); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.INTLITERAL, yytext()); }
 						case -11:
 							break;
 						case 11:
@@ -359,28 +359,28 @@ class Yylex
 						case 13:
 							{ 
 								string literal = yytext();
-								return new BASICParser.Symbol(BASICParser.Symbol.sym.STRINGLITERAL, literal.Substring(1,literal.Length-2));
+								return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.STRINGLITERAL, literal.Substring(1,literal.Length-2));
 							}
 						case -14:
 							break;
 						case 14:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.END); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.END); }
 						case -15:
 							break;
 						case 15:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.LET); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.LET); }
 						case -16:
 							break;
 						case 16:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.GOTO); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.GOTO); }
 						case -17:
 							break;
 						case 17:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.PRINT); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.PRINT); }
 						case -18:
 							break;
 						case 19:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.INTVAR, yytext()); }
 						case -19:
 							break;
 						case 20:
@@ -388,19 +388,19 @@ class Yylex
 						case -20:
 							break;
 						case 22:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.INTVAR, yytext()); }
 						case -21:
 							break;
 						case 24:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.INTVAR, yytext()); }
 						case -22:
 							break;
 						case 26:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.INTVAR, yytext()); }
 						case -23:
 							break;
 						case 28:
-							{ return new BASICParser.Symbol(BASICParser.Symbol.sym.INTVAR, yytext()); }
+							{ return new BASICLLVM.Symbol(BASICLLVM.Symbol.sym.INTVAR, yytext()); }
 						case -24:
 							break;
 						default:
