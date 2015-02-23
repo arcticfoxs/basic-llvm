@@ -12,12 +12,17 @@ namespace BASICLLVM
         {
 			string inputFile = "D:\\Project\\basictest.txt"; // TODO: Read from parameter
 
-			String input = "GOTO 20";
+			String input = "20END";
 			AntlrInputStream stream = new AntlrInputStream(input);
 			ITokenSource lexer = new BASICLexer(stream);
 			ITokenStream tokens = new CommonTokenStream(lexer);
 			BASICParser parser = new BASICParser(tokens);
-						
+			Listener lis = new Listener();
+			parser.BuildParseTree = true;
+			parser.AddParseListener(lis);
+			RuleContext tree = parser.expression();
+			
+			
 
 			List<Line> lines = Lexer.lex(inputFile,true);
 			Console.WriteLine("Done Lexing");

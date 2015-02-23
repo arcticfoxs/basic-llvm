@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from BASIC.g4 by ANTLR 4.5
+// Generated from ../BASIC.g4 by ANTLR 4.5
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -969,18 +969,6 @@ public partial class BASICBaseListener : IBASICListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitBounds([NotNull] BASICParser.BoundsContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.optionstatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterOptionstatement([NotNull] BASICParser.OptionstatementContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.optionstatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitOptionstatement([NotNull] BASICParser.OptionstatementContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.remarkstatement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -1004,6 +992,90 @@ public partial class BASICBaseListener : IBASICListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitRandomizestatement([NotNull] BASICParser.RandomizestatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.stringcharacter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterStringcharacter([NotNull] BASICParser.StringcharacterContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.stringcharacter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitStringcharacter([NotNull] BASICParser.StringcharacterContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.quotedstringcharacter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterQuotedstringcharacter([NotNull] BASICParser.QuotedstringcharacterContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.quotedstringcharacter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitQuotedstringcharacter([NotNull] BASICParser.QuotedstringcharacterContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.unquotedstringcharacter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterUnquotedstringcharacter([NotNull] BASICParser.UnquotedstringcharacterContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.unquotedstringcharacter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitUnquotedstringcharacter([NotNull] BASICParser.UnquotedstringcharacterContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.plainstringcharacter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPlainstringcharacter([NotNull] BASICParser.PlainstringcharacterContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.plainstringcharacter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPlainstringcharacter([NotNull] BASICParser.PlainstringcharacterContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.remarkstring"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterRemarkstring([NotNull] BASICParser.RemarkstringContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.remarkstring"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitRemarkstring([NotNull] BASICParser.RemarkstringContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.quotedstring"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterQuotedstring([NotNull] BASICParser.QuotedstringContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.quotedstring"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitQuotedstring([NotNull] BASICParser.QuotedstringContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.unquotedstring"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterUnquotedstring([NotNull] BASICParser.UnquotedstringContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.unquotedstring"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitUnquotedstring([NotNull] BASICParser.UnquotedstringContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

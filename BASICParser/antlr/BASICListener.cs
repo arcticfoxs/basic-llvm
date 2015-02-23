@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from BASIC.g4 by ANTLR 4.5
+// Generated from ../BASIC.g4 by ANTLR 4.5
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -809,16 +809,6 @@ public interface IBASICListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitBounds([NotNull] BASICParser.BoundsContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.optionstatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterOptionstatement([NotNull] BASICParser.OptionstatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.optionstatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitOptionstatement([NotNull] BASICParser.OptionstatementContext context);
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.remarkstatement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -838,4 +828,74 @@ public interface IBASICListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitRandomizestatement([NotNull] BASICParser.RandomizestatementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.stringcharacter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStringcharacter([NotNull] BASICParser.StringcharacterContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.stringcharacter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStringcharacter([NotNull] BASICParser.StringcharacterContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.quotedstringcharacter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterQuotedstringcharacter([NotNull] BASICParser.QuotedstringcharacterContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.quotedstringcharacter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitQuotedstringcharacter([NotNull] BASICParser.QuotedstringcharacterContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.unquotedstringcharacter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUnquotedstringcharacter([NotNull] BASICParser.UnquotedstringcharacterContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.unquotedstringcharacter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUnquotedstringcharacter([NotNull] BASICParser.UnquotedstringcharacterContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.plainstringcharacter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPlainstringcharacter([NotNull] BASICParser.PlainstringcharacterContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.plainstringcharacter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPlainstringcharacter([NotNull] BASICParser.PlainstringcharacterContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.remarkstring"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterRemarkstring([NotNull] BASICParser.RemarkstringContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.remarkstring"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitRemarkstring([NotNull] BASICParser.RemarkstringContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.quotedstring"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterQuotedstring([NotNull] BASICParser.QuotedstringContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.quotedstring"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitQuotedstring([NotNull] BASICParser.QuotedstringContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.unquotedstring"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUnquotedstring([NotNull] BASICParser.UnquotedstringContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.unquotedstring"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUnquotedstring([NotNull] BASICParser.UnquotedstringContext context);
 }

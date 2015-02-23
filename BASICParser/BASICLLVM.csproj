@@ -50,11 +50,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="antlr\BASICBaseListener.cs" />
+    <Compile Include="antlr\BASICLexer.cs" />
+    <Compile Include="antlr\BASICListener.cs" />
+    <Compile Include="antlr\BASICParser.cs" />
     <Compile Include="basic.lex.cs" />
-    <Compile Include="BASICBaseListener.cs" />
-    <Compile Include="BASICLexer.cs" />
-    <Compile Include="BASICListener.cs" />
-    <Compile Include="BASICParser.cs" />
     <Compile Include="Expression_Int.cs" />
     <Compile Include="Lexer.cs" />
     <Compile Include="Line.cs" />
@@ -62,16 +62,25 @@
     <Compile Include="Line_Goto.cs" />
     <Compile Include="Line_Let_Int.cs" />
     <Compile Include="Line_Print.cs" />
-    <Compile Include="Parser.cs" />
+    <Compile Include="Listener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbol.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Antlr4 Include="antlr\BASIC.g4">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>BASICLLVM.antlr</CustomToolNamespace>
+    </Antlr4>
+    <AntlrTokens Include="antlr\BASIC.tokens">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>BASICLLVM.antlr</CustomToolNamespace>
+    </AntlrTokens>
+    <AntlrTokens Include="antlr\BASICLexer.tokens">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>BASICLLVM.antlr</CustomToolNamespace>
+    </AntlrTokens>
     <None Include="App.config" />
-    <None Include="BASIC.g4" />
-    <None Include="BASIC.tokens" />
-    <None Include="BASICLexer.tokens" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

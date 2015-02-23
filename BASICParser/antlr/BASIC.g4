@@ -1,52 +1,17 @@
 // BASIC Parser Grammar
 grammar BASIC;
 
-// LEXICAL TOKENS
-
-LETTER : ('a'..'z' |'A'..'Z' );
-DIGIT : ('0'..'9');
-STRINGCHARACTER : QUOTATIONMARK | QUOTEDSTRINGCHARACTER;
-QUOTEDSTRINGCHARACTER : EXCLAMATIONMARK | NUMBERSIGN | DOLLARSIGN | PERCENTSIGN | AMPERSAND | APOSTROPHE | LEFTPARENTHESIS | RIGHTPARENTHESIS | ASTERISK | COMMA | SOLIDUS | COLON | SEMICOLON | LESSTHANSIGN | EQUALSSIGN | GREATERTHANSIGN | QUESTIONMARK | CIRCUMFLEXACCENT | UNDERLINE | UNQUOTEDSTRINGCHARACTER;
-UNQUOTEDSTRINGCHARACTER : SPACE | PLAINSTRINGCHARACTER;
-PLAINSTRINGCHARACTER : PLUSSIGN | MINUSSIGN | FULLSTOP | DIGIT | LETTER;
-REMARKSTRING : STRINGCHARACTER*;
-QUOTEDSTRING : QUOTATIONMARK QUOTEDSTRINGCHARACTER* QUOTATIONMARK;
-UNQUOTEDSTRING : PLAINSTRINGCHARACTER | PLAINSTRINGCHARACTER UNQUOTEDSTRINGCHARACTER* PLAINSTRINGCHARACTER;
-
-// SYMBOLS
-
-SPACE : ' ';
-EXCLAMATIONMARK : '!';
-QUOTATIONMARK : '"';
-NUMBERSIGN : '#';
-DOLLARSIGN : '$';
-PERCENTSIGN : '%';
-AMPERSAND : '&';
-APOSTROPHE : '\'';
-LEFTPARENTHESIS : '(';
-RIGHTPARENTHESIS : ')';
-ASTERISK : '*';
-PLUSSIGN : '+';
-COMMA : ',';
-MINUSSIGN : '-';
-FULLSTOP : '.';
-SOLIDUS : '/';
-COLON : ':';
-SEMICOLON : ';';
-LESSTHANSIGN : '<';
-EQUALSSIGN : '=';
-GREATERTHANSIGN : '>';
-QUESTIONMARK : '?';
-CIRCUMFLEXACCENT : '^';
-UNDERLINE : '_';
+DIGIT : [0-9] ;
+LETTER : ([A-Z]|[a-z]);
 
 // LINES
 
-line : linenumber statement;
-linenumber : DIGIT{1,4};
+line : linenumber statement | endline;
+linenumber : integer;
 endline : linenumber endstatement;
-endstatement : 'end';
-statement : datastatement | defstatement | dimensionstatement | gosubstatement | gotostatement | ifthenstatement | inputstatement | letstatement | ongotostatement | optionstatement | printstatement | randomizestatement | readstatement | remarkstatement | restorestatement | returnstatement | stopstatement;
+endstatement : 'END';
+// don't forget to reinsert optionstatement
+statement : datastatement | defstatement | dimensionstatement | gosubstatement | gotostatement | ifthenstatement | inputstatement | letstatement | ongotostatement | printstatement | randomizestatement | readstatement | remarkstatement | restorestatement | returnstatement | stopstatement;
 
 // CONSTANTS
 
@@ -57,7 +22,7 @@ significand : integer FULLSTOP? | integer? fraction;
 integer : DIGIT DIGIT*;
 fraction : FULLSTOP DIGIT DIGIT*;
 exrad : 'E' sign? integer;
-stringconstant : QUOTEDSTRING;
+stringconstant : quotedstring;
 
 // VARIABLES
 
@@ -129,7 +94,7 @@ nextstatement : 'NEXT' controlvariable;
 // print statement
 
 printstatement : 'PRINT' printlist?;
-printlist : (printitem? printseparator)* printitem?;
+printlist : (printitem? printseparator)* printitem+;
 printitem : expression | tabcall;
 tabcall : 'TAB' LEFTPARENTHESIS numericexpression RIGHTPARENTHESIS;
 printseparator : COMMA | SEMICOLON;
@@ -142,7 +107,7 @@ inputprompt : 'INPUT?'; // implementationdefined
 inputreply : inputlist;
 inputlist : paddeddatum (COMMA paddeddatum)*;
 paddeddatum : SPACE* datum SPACE*;
-datum : QUOTEDSTRING | UNQUOTEDSTRING;
+datum : quotedstring | unquotedstring;
 
 // read and restore statements
 
@@ -159,12 +124,53 @@ datalist : datum (COMMA datum)*;
 dimensionstatement : 'DIM' arraydeclaration (COMMA arraydeclaration)*;
 arraydeclaration : numericarrayname LEFTPARENTHESIS bounds RIGHTPARENTHESIS;
 bounds : integer (COMMA integer)?;
-optionstatement : 'OPTION BASE' ('0'|'1');
+// this is totally causing problems!
+// optionstatement : 'OPTION BASE' ('0'|'1');
 
 // remark statement
 
-remarkstatement : 'REM' REMARKSTRING;
+remarkstatement : 'REM' remarkstring;
 
 // randomize statement
 
 randomizestatement : 'RANDOMIZE';
+
+// ignore whitespace
+WS : [ \t\r\n]+ -> skip ;
+
+// LEXICAL TOKENS
+
+stringcharacter : QUOTATIONMARK | quotedstringcharacter;
+quotedstringcharacter : EXCLAMATIONMARK | NUMBERSIGN | DOLLARSIGN | PERCENTSIGN | AMPERSAND | APOSTROPHE | LEFTPARENTHESIS | RIGHTPARENTHESIS | ASTERISK | COMMA | SOLIDUS | COLON | SEMICOLON | LESSTHANSIGN | EQUALSSIGN | GREATERTHANSIGN | QUESTIONMARK | CIRCUMFLEXACCENT | UNDERLINE | unquotedstringcharacter;
+unquotedstringcharacter : SPACE | plainstringcharacter;
+plainstringcharacter : PLUSSIGN | MINUSSIGN | FULLSTOP | DIGIT | LETTER;
+remarkstring : stringcharacter+;
+quotedstring : QUOTATIONMARK quotedstringcharacter* QUOTATIONMARK;
+unquotedstring : plainstringcharacter | plainstringcharacter unquotedstringcharacter* plainstringcharacter;
+
+// SYMBOLS
+
+SPACE : ' ';
+EXCLAMATIONMARK : '!';
+QUOTATIONMARK : '"';
+NUMBERSIGN : '#';
+DOLLARSIGN : '$';
+PERCENTSIGN : '%';
+AMPERSAND : '&';
+APOSTROPHE : '\'';
+LEFTPARENTHESIS : '(';
+RIGHTPARENTHESIS : ')';
+ASTERISK : '*';
+PLUSSIGN : '+';
+COMMA : ',';
+MINUSSIGN : '-';
+FULLSTOP : '.';
+SOLIDUS : '/';
+COLON : ':';
+SEMICOLON : ';';
+LESSTHANSIGN : '<';
+EQUALSSIGN : '=';
+GREATERTHANSIGN : '>';
+QUESTIONMARK : '?';
+CIRCUMFLEXACCENT : '^';
+UNDERLINE : '_';
