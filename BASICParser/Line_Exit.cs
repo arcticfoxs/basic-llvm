@@ -8,6 +8,11 @@ namespace BASICLLVM
 {
 	class Line_Exit : Line
 	{
+
+		public Line_Exit(int _lineNumber)
+		{
+			lineNumber = _lineNumber;
+		}
 		public Line_Exit(Line parentLine)
 		{
 			lineNumber = parentLine.lineNumber;

@@ -5,7 +5,6 @@ DIGIT : [0-9] ;
 LETTER : ([A-Z]|[a-z]);
 
 // LINES
-
 line : linenumber statement | endline;
 linenumber : integer;
 endline : linenumber endstatement;

@@ -9,59 +9,58 @@ namespace BASICLLVM
 {
 	class Listener : IBASICListener
 	{
-		void parse()
-		{
-			
-		}
+		int currentInteger,currentLineNumber;
+		public Line finishedLine;
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitLine(BASICParser.LineContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void EnterLinenumber(BASICParser.LinenumberContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitLinenumber(BASICParser.LinenumberContext context)
 		{
-			throw new NotImplementedException();
+			currentLineNumber = Convert.ToInt32(context.GetText());
 		}
 
 		public void EnterEndline(BASICParser.EndlineContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitEndline(BASICParser.EndlineContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = new Line_Exit(currentLineNumber);
+			// throw new NotImplementedException();
 		}
 
 		public void EnterEndstatement(BASICParser.EndstatementContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitEndstatement(BASICParser.EndstatementContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void EnterStatement(BASICParser.StatementContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitStatement(BASICParser.StatementContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void EnterNumericconstant(BASICParser.NumericconstantContext context)
@@ -106,12 +105,15 @@ namespace BASICLLVM
 
 		public void EnterInteger(BASICParser.IntegerContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitInteger(BASICParser.IntegerContext context)
 		{
-			throw new NotImplementedException();
+			int payload = Convert.ToInt32(context.GetText());
+			currentInteger = payload;
+			// throw new NotImplementedException();
+			
 		}
 
 		public void EnterFraction(BASICParser.FractionContext context)
@@ -216,7 +218,7 @@ namespace BASICLLVM
 
 		public void EnterExpression(BASICParser.ExpressionContext context)
 		{
-		//	throw new NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public void ExitExpression(BASICParser.ExpressionContext context)
@@ -406,12 +408,13 @@ namespace BASICLLVM
 
 		public void EnterGotostatement(BASICParser.GotostatementContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitGotostatement(BASICParser.GotostatementContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = new Line_Goto(currentLineNumber, currentInteger);
+			// throw new NotImplementedException();
 		}
 
 		public void EnterIfthenstatement(BASICParser.IfthenstatementContext context)
@@ -606,7 +609,7 @@ namespace BASICLLVM
 
 		public void EnterPrintstatement(BASICParser.PrintstatementContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitPrintstatement(BASICParser.PrintstatementContext context)
@@ -794,16 +797,6 @@ namespace BASICLLVM
 			throw new NotImplementedException();
 		}
 
-		public void EnterOptionstatement(BASICParser.OptionstatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitOptionstatement(BASICParser.OptionstatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
 		public void EnterRemarkstatement(BASICParser.RemarkstatementContext context)
 		{
 			throw new NotImplementedException();
@@ -824,6 +817,76 @@ namespace BASICLLVM
 			throw new NotImplementedException();
 		}
 
+		public void EnterStringcharacter(BASICParser.StringcharacterContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ExitStringcharacter(BASICParser.StringcharacterContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void EnterQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ExitQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void EnterUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ExitUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void EnterPlainstringcharacter(BASICParser.PlainstringcharacterContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ExitPlainstringcharacter(BASICParser.PlainstringcharacterContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void EnterRemarkstring(BASICParser.RemarkstringContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ExitRemarkstring(BASICParser.RemarkstringContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void EnterQuotedstring(BASICParser.QuotedstringContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ExitQuotedstring(BASICParser.QuotedstringContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void EnterUnquotedstring(BASICParser.UnquotedstringContext context)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ExitUnquotedstring(BASICParser.UnquotedstringContext context)
+		{
+			throw new NotImplementedException();
+		}
+
 		public void EnterEveryRule(Antlr4.Runtime.ParserRuleContext ctx)
 		{
 			// throw new NotImplementedException();
@@ -831,7 +894,7 @@ namespace BASICLLVM
 
 		public void ExitEveryRule(Antlr4.Runtime.ParserRuleContext ctx)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void VisitErrorNode(Antlr4.Runtime.Tree.IErrorNode node)
@@ -841,7 +904,7 @@ namespace BASICLLVM
 
 		public void VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode node)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 	}
 }

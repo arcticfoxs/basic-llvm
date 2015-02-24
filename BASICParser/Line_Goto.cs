@@ -9,12 +9,10 @@ namespace BASICLLVM
 	class Line_Goto : Line
 	{
 		public int gotoTarget;
-		public Line_Goto(Line parentLine, int gotoLineNumber)
+		public Line_Goto(int _lineNumber, int _gotoLineNumber)
 		{
-			lineNumber = parentLine.lineNumber;
-			tokens = parentLine.tokens;
-			gotoTarget = gotoLineNumber;
-			parsed = true;
+			lineNumber = _lineNumber;
+			gotoTarget = _gotoLineNumber;
 		}
 
 		public override BasicBlock code(LLVM.LLVMContext context, LLVM.Module module, LLVM.Function mainFn)

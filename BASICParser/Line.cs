@@ -56,8 +56,7 @@ namespace BASICLLVM
 						case Symbol.sym.GOTO:
 							if (tokens[i + 1].symType == Symbol.sym.INTLITERAL)
 							{
-								Line_Goto gotoLine = new Line_Goto(this, tokens[i + 1].intPayload);
-								return gotoLine;
+								
 							}
 							else { 
 								// invalid goto 
