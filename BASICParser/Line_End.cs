@@ -6,19 +6,19 @@ using LLVM;
 
 namespace BASICLLVM
 {
-	class Line_Exit : Line
+	class Line_End : Line
 	{
 
-		public Line_Exit(int _lineNumber)
+		public Line_End(int _lineNumber)
 		{
 			lineNumber = _lineNumber;
 		}
-		public Line_Exit(Line parentLine)
+		public Line_End(Line parentLine)
 		{
 			lineNumber = parentLine.lineNumber;
 			tokens = parentLine.tokens;
 			parsed = true;
-			// done! Exit is so easy to parse
+			// done! End is so easy to parse
 		}
 
 		public override BasicBlock code(LLVM.LLVMContext context, LLVM.Module module, LLVM.Function mainFn)

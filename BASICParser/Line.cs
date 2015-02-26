@@ -68,7 +68,7 @@ namespace BASICLLVM
 							printLine.parse();
 							return printLine;
 						case Symbol.sym.END:
-							Line_Exit exitLine = new Line_Exit(this);
+							Line_End exitLine = new Line_End(this);
 							return exitLine;
 						case Symbol.sym.LET:
 							if(tokens[i+2].symType == Symbol.sym.EQUALS) {

@@ -58,7 +58,7 @@
     <Compile Include="Expression_Int.cs" />
     <Compile Include="Lexer.cs" />
     <Compile Include="Line.cs" />
-    <Compile Include="Line_Exit.cs" />
+    <Compile Include="Line_End.cs" />
     <Compile Include="Line_Goto.cs" />
     <Compile Include="Line_Let_Int.cs" />
     <Compile Include="Line_Print.cs" />

@@ -39,7 +39,7 @@ namespace BASICLLVM
 
 		public void ExitEndline(BASICParser.EndlineContext context)
 		{
-			finishedLine = new Line_Exit(currentLineNumber);
+			finishedLine = new Line_End(currentLineNumber);
 			// throw new NotImplementedException();
 		}
 
