@@ -11,6 +11,10 @@ namespace BASICLLVM
 	{
 		int currentInteger,currentLineNumber;
 		public Line finishedLine;
+		String currentStringConstant;
+		Expression_String currentStringExpression;
+		bool isTabCall = false;
+		PrintItem currentPrintItem;
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
@@ -138,12 +142,15 @@ namespace BASICLLVM
 
 		public void EnterStringconstant(BASICParser.StringconstantContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitStringconstant(BASICParser.StringconstantContext context)
 		{
-			throw new NotImplementedException();
+			string theString = context.GetText();
+			// strip quotes
+			theString = theString.Substring(1, theString.Length - 2);
+			currentStringConstant = theString;
 		}
 
 		public void EnterVariable(BASICParser.VariableContext context)
@@ -218,12 +225,12 @@ namespace BASICLLVM
 
 		public void EnterExpression(BASICParser.ExpressionContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitExpression(BASICParser.ExpressionContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void EnterNumericexpression(BASICParser.NumericexpressionContext context)
@@ -318,12 +325,21 @@ namespace BASICLLVM
 
 		public void EnterStringexpression(BASICParser.StringexpressionContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitStringexpression(BASICParser.StringexpressionContext context)
 		{
-			throw new NotImplementedException();
+			if (currentStringConstant != null)
+			{
+				currentStringExpression = new Expression_String(true, currentStringConstant);
+				currentStringConstant = null;
+			} 
+			else
+			{
+				// handle variable
+			}
+			
 		}
 
 		public void EnterNumericsuppliedfunction(BASICParser.NumericsuppliedfunctionContext context)
@@ -619,7 +635,7 @@ namespace BASICLLVM
 
 		public void EnterPrintlist(BASICParser.PrintlistContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitPrintlist(BASICParser.PrintlistContext context)
@@ -629,12 +645,12 @@ namespace BASICLLVM
 
 		public void EnterPrintitem(BASICParser.PrintitemContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitPrintitem(BASICParser.PrintitemContext context)
 		{
-			throw new NotImplementedException();
+			currentPrintItem = isTabCall ? new PrintItem() : new PrintItem(currentStringExpression);
 		}
 
 		public void EnterTabcall(BASICParser.TabcallContext context)
@@ -829,32 +845,32 @@ namespace BASICLLVM
 
 		public void EnterQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void EnterUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void EnterPlainstringcharacter(BASICParser.PlainstringcharacterContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitPlainstringcharacter(BASICParser.PlainstringcharacterContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void EnterRemarkstring(BASICParser.RemarkstringContext context)
@@ -869,12 +885,13 @@ namespace BASICLLVM
 
 		public void EnterQuotedstring(BASICParser.QuotedstringContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitQuotedstring(BASICParser.QuotedstringContext context)
 		{
-			throw new NotImplementedException();
+
+			// throw new NotImplementedException();
 		}
 
 		public void EnterUnquotedstring(BASICParser.UnquotedstringContext context)
