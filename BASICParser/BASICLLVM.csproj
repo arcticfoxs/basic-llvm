@@ -66,6 +66,7 @@
     <Compile Include="Listener.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="PrintItem.cs" />
+    <Compile Include="PrintList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbol.cs" />
