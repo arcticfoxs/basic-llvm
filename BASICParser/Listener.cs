@@ -175,7 +175,7 @@ namespace BASICLLVM
 
 		public void ExitNumericvariable(BASICParser.NumericvariableContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void EnterSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
@@ -240,7 +240,7 @@ namespace BASICLLVM
 
 		public void EnterNumericexpression(BASICParser.NumericexpressionContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitNumericexpression(BASICParser.NumericexpressionContext context)
@@ -250,7 +250,7 @@ namespace BASICLLVM
 
 		public void EnterTerm(BASICParser.TermContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitTerm(BASICParser.TermContext context)
@@ -260,7 +260,7 @@ namespace BASICLLVM
 
 		public void EnterFactor(BASICParser.FactorContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitFactor(BASICParser.FactorContext context)
@@ -280,7 +280,7 @@ namespace BASICLLVM
 
 		public void EnterPrimary(BASICParser.PrimaryContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitPrimary(BASICParser.PrimaryContext context)
