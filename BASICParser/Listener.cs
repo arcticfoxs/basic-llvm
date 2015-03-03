@@ -9,12 +9,17 @@ namespace BASICLLVM
 {
 	class Listener : IBASICListener
 	{
-		int currentInteger,currentLineNumber;
-		public Line finishedLine;
+		public Line finishedLine; // write to this
+
+		// temporary variables
+		int currentInteger, currentLineNumber;
 		String currentStringConstant;
 		Expression_String currentStringExpression;
 		bool isTabCall = false;
 		PrintItem currentPrintItem;
+		PrintList currentPrintList;
+		PrintList.printseparator currentPrintSeparator = PrintList.printseparator.NULL;
+		string currentIntVariable;
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
@@ -165,7 +170,7 @@ namespace BASICLLVM
 
 		public void EnterNumericvariable(BASICParser.NumericvariableContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitNumericvariable(BASICParser.NumericvariableContext context)
@@ -175,12 +180,12 @@ namespace BASICLLVM
 
 		public void EnterSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
 		{
-			throw new NotImplementedException();
+			currentIntVariable = context.GetText();
 		}
 
 		public void EnterNumericarrayelement(BASICParser.NumericarrayelementContext context)
@@ -394,7 +399,7 @@ namespace BASICLLVM
 
 		public void EnterLetstatement(BASICParser.LetstatementContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitLetstatement(BASICParser.LetstatementContext context)
@@ -404,7 +409,7 @@ namespace BASICLLVM
 
 		public void EnterNumericletstatement(BASICParser.NumericletstatementContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitNumericletstatement(BASICParser.NumericletstatementContext context)
@@ -630,17 +635,22 @@ namespace BASICLLVM
 
 		public void ExitPrintstatement(BASICParser.PrintstatementContext context)
 		{
-			throw new NotImplementedException();
+			if (currentPrintList.items.Count != currentPrintList.separators.Count + 1)
+			{
+				// error! should be one more item than separator
+				throw new NotImplementedException();
+			}
+			finishedLine = new Line_Print(currentPrintList);
 		}
 
 		public void EnterPrintlist(BASICParser.PrintlistContext context)
 		{
-			// throw new NotImplementedException();
+			currentPrintList = new PrintList();
 		}
 
 		public void ExitPrintlist(BASICParser.PrintlistContext context)
 		{
-			throw new NotImplementedException();
+			currentPrintSeparator = PrintList.printseparator.NULL;
 		}
 
 		public void EnterPrintitem(BASICParser.PrintitemContext context)
@@ -651,6 +661,15 @@ namespace BASICLLVM
 		public void ExitPrintitem(BASICParser.PrintitemContext context)
 		{
 			currentPrintItem = isTabCall ? new PrintItem() : new PrintItem(currentStringExpression);
+			if (currentPrintSeparator == PrintList.printseparator.NULL)
+			{
+				currentPrintList.add(currentPrintItem);
+			}
+			else
+			{
+				currentPrintList.add(currentPrintItem, currentPrintSeparator);
+				currentPrintSeparator = PrintList.printseparator.NULL;
+			}
 		}
 
 		public void EnterTabcall(BASICParser.TabcallContext context)
@@ -665,12 +684,12 @@ namespace BASICLLVM
 
 		public void EnterPrintseparator(BASICParser.PrintseparatorContext context)
 		{
-			throw new NotImplementedException();
+			// throw new NotImplementedException();
 		}
 
 		public void ExitPrintseparator(BASICParser.PrintseparatorContext context)
 		{
-			throw new NotImplementedException();
+			currentPrintSeparator = context.GetText().Equals(",") ? PrintList.printseparator.COMMA : PrintList.printseparator.SEMICOLON;
 		}
 
 		public void EnterInputstatement(BASICParser.InputstatementContext context)

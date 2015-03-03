@@ -9,7 +9,19 @@ namespace BASICLLVM
 {
 	class Line_Print : Line
 	{
+
+		public PrintList printList;
+
+		public Line_Print(PrintList _printList)
+		{
+			printList = _printList;
+		}
+
+
+		// BELOW THIS IS ALL OLD!
+
 		public List<Symbol> printTokens = new List<Symbol>();
+
 
 		public Line_Print(Line parentLine,List<Symbol> printExpression)
 		{

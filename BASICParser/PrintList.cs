@@ -9,13 +9,14 @@ namespace BASICLLVM
 	class PrintList
 	{
 		public List<PrintItem> items;
-		public static enum printseparator { COMMA, SEMICOLON };
+		public enum printseparator { NULL, COMMA, SEMICOLON };
 
 		public List<printseparator> separators;
 
 		public PrintList()
 		{
 			items = new List<PrintItem>();
+			separators = new List<printseparator>();
 		}
 
 		public void add(PrintItem item, printseparator separator)
