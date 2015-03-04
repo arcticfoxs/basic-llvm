@@ -59,6 +59,11 @@
     <Compile Include="AST\CONSTANTS\NumericConstant.cs" />
     <Compile Include="AST\CONSTANTS\NumericRep.cs" />
     <Compile Include="AST\CONSTANTS\Significand.cs" />
+    <Compile Include="AST\CONSTANTS\StringConstant.cs" />
+    <Compile Include="AST\EXPRESSIONS\Factor.cs" />
+    <Compile Include="AST\EXPRESSIONS\NumericFunctionRef.cs" />
+    <Compile Include="AST\EXPRESSIONS\StringExpression.cs" />
+    <Compile Include="AST\EXPRESSIONS\Term.cs" />
     <Compile Include="AST\VARIABLES\SimpleNumericVariable.cs" />
     <Compile Include="AST\VARIABLES\StringVariable.cs" />
     <Compile Include="Old\basic.lex.cs" />

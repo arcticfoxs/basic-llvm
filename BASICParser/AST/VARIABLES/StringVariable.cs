@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BASICLLVM.AST.VARIABLES
 {
-	class StringVariable
+	class StringVariable : StringExpression
 	{
 		string name;
 		public StringVariable(string _name)

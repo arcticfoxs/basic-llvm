@@ -4,17 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BASICLLVM
+namespace BASICLLVM.AST
 {
 	class Primary
 	{
-		NumericVariable numericvariable;
-
-		enum primaryType { NUMERICVARIABLE, NUMERICREP, NUMERICFUNCTIONREF, PARENTHESES };
-
-		public Primary(NumericVariable var)
-		{
-
-		}
+		// override this!
 	}
 }

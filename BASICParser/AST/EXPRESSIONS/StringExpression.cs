@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BASICLLVM
+namespace BASICLLVM.AST
 {
-	abstract class NumericVariable : Primary
+	class StringExpression
 	{
+		// abstract
 	}
 }

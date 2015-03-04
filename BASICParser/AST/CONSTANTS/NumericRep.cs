@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BASICLLVM.AST
 {
-	class NumericRep
+	class NumericRep : Primary
 	{
 		Significand significand;
 		Exrad exrad;
