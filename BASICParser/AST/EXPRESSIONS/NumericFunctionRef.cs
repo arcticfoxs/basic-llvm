@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BASICLLVM.AST.EXPRESSIONS
+namespace BASICLLVM.AST
 {
-	class NumericFunctionRef
+	class NumericFunctionRef : Primary
 	{
 		public enum FunctionRefType { NUMERICDEFINEDFUNCTION, NUMERICSUPPLIEDFUNCTION };
 		public enum NumericSuppliedFunction { };
