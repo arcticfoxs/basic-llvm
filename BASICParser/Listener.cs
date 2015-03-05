@@ -18,15 +18,16 @@ namespace BASICLLVM
 		PrintList currentPrintList;
 		PrintList.printseparator currentPrintSeparator = PrintList.printseparator.NULL;
 		string currentIntVariable;
-		NumericExpression currentNumericExpression;
-		Term currentTerm;
-		Factor currentFactor;
-		Primary currentPrimary;
+		Stack<NumericExpression> currentNumericExpression = new Stack<NumericExpression>();
+		Stack<Term> currentTerm = new Stack<Term>();
+		Stack<Factor> currentFactor = new Stack<Factor>();
+		Stack<Primary> currentPrimary = new Stack<Primary>();
 		NumericRep currentNumericRep;
 		Significand currentSignificand;
 		Fraction currentFraction;
 		Exrad currentExrad;
 		NumericConstant.Sign currentSign;
+		Term.Multiplier currentMultiplier;
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
@@ -101,7 +102,10 @@ namespace BASICLLVM
 
 		public void EnterNumericrep(BASICParser.NumericrepContext context)
 		{
-			// dfdf
+			if (currentPrimary.Peek() is Primary)
+			{
+
+			}
 		}
 
 		public void ExitNumericrep(BASICParser.NumericrepContext context)
@@ -112,6 +116,9 @@ namespace BASICLLVM
 				currentNumericRep = new NumericRep(currentSignificand, currentExrad);
 				currentExrad = null;
 			}
+
+			currentPrimary.Pop();
+			currentPrimary.Push(currentNumericRep);
 			
 		}
 
@@ -259,7 +266,7 @@ namespace BASICLLVM
 
 		public void EnterNumericexpression(BASICParser.NumericexpressionContext context)
 		{
-			currentNumericExpression = new NumericExpression();
+			currentNumericExpression.Push(new NumericExpression());
 		}
 
 		public void ExitNumericexpression(BASICParser.NumericexpressionContext context)
@@ -269,42 +276,48 @@ namespace BASICLLVM
 
 		public void EnterTerm(BASICParser.TermContext context)
 		{
-			currentTerm = new Term();
+			currentTerm.Push(new Term());
+			currentTerm.Peek().precedingSign = currentSign;
+			currentSign = NumericConstant.Sign.PLUSSIGN;
 		}
 
 		public void ExitTerm(BASICParser.TermContext context)
 		{
-			throw new NotImplementedException();
+			// TODO SIGNS!!!!!
+			Term thisTerm = currentTerm.Pop();
+			currentNumericExpression.Peek().add(thisTerm,thisTerm.precedingSign);
 		}
 
 		public void EnterFactor(BASICParser.FactorContext context)
 		{
-			currentFactor = new Factor();
+			currentFactor.Push(new Factor());
 		}
 
 		public void ExitFactor(BASICParser.FactorContext context)
 		{
-			throw new NotImplementedException();
+			currentTerm.Peek().add(currentFactor.Pop(),currentMultiplier);
 		}
 
 		public void EnterMultiplier(BASICParser.MultiplierContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitMultiplier(BASICParser.MultiplierContext context)
 		{
-			throw new NotImplementedException();
+			
+			currentMultiplier = context.GetText().Equals("*") ? Term.Multiplier.ASTERISK : Term.Multiplier.SOLIDUS;
 		}
 
 		public void EnterPrimary(BASICParser.PrimaryContext context)
 		{
-			currentPrimary = new Primary();
+			currentPrimary.Push(new Primary());
 		}
 
 		public void ExitPrimary(BASICParser.PrimaryContext context)
 		{
-			throw new NotImplementedException();
+
+			currentFactor.Peek().add(currentPrimary.Pop());
 		}
 
 		public void EnterNumericfunctionref(BASICParser.NumericfunctionrefContext context)

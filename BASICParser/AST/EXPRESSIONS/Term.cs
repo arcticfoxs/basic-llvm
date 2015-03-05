@@ -13,6 +13,8 @@ namespace BASICLLVM.AST
 		public List<Factor> factors;
 		public List<Multiplier> multipliers;
 
+		public NumericConstant.Sign precedingSign;
+
 		public Term()
 		{
 			factors = new List<Factor>();
@@ -33,8 +35,8 @@ namespace BASICLLVM.AST
 		}
 
 		public void add(Factor factor, Multiplier multiplier) {
+			if(factors.Count > 0) multipliers.Add(multiplier);
 			factors.Add(factor);
-			multipliers.Add(multiplier);
 		}
 	}
 }

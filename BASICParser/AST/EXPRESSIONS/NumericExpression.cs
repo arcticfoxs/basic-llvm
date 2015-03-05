@@ -16,10 +16,10 @@ namespace BASICLLVM.AST
 		}
 		public void add(Term term, NumericConstant.Sign sign)
 		{
-			terms.Add(term);
-
 			if (terms.Count == 0) leadingSign = sign;
 			else subsequentSigns.Add(sign);
+
+			terms.Add(term);
 		}
 		public void add(Term term)
 		{
