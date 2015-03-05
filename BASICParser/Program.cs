@@ -16,7 +16,7 @@ namespace BASICLLVM
 			List<Line> lines = Parser.parseFile(inputFile);
 
 			//List<Line> lines = Lexer.lex(inputFile,true);
-			Console.WriteLine("Done Lexing");
+			Console.WriteLine("Done Parsing");
 			Console.ReadLine();
 			for (int i = 0; i < lines.Count; i++)
 			{

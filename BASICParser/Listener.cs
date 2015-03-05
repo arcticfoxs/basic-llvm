@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using BASICLLVM.AST;
 
 namespace BASICLLVM
 {
@@ -16,10 +13,18 @@ namespace BASICLLVM
 		String currentStringConstant;
 		Expression_String currentStringExpression;
 		bool isTabCall = false;
+		bool isInt = false;
 		PrintItem currentPrintItem;
 		PrintList currentPrintList;
 		PrintList.printseparator currentPrintSeparator = PrintList.printseparator.NULL;
 		string currentIntVariable;
+		NumericExpression currentNumericExpression;
+		Term currentTerm;
+		Factor currentFactor;
+		Primary currentPrimary;
+		NumericRep currentNumericRep;
+		Significand currentSignificand;
+		Fraction currentFraction;
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
@@ -94,7 +99,7 @@ namespace BASICLLVM
 
 		public void EnterNumericrep(BASICParser.NumericrepContext context)
 		{
-			throw new NotImplementedException();
+			// dfdf
 		}
 
 		public void ExitNumericrep(BASICParser.NumericrepContext context)
@@ -104,17 +109,22 @@ namespace BASICLLVM
 
 		public void EnterSignificand(BASICParser.SignificandContext context)
 		{
-			throw new NotImplementedException();
+			isInt = false;
+			
 		}
 
 		public void ExitSignificand(BASICParser.SignificandContext context)
 		{
-			throw new NotImplementedException();
+			if (currentFraction == null) currentSignificand = new Significand(currentInteger);
+			else
+			{
+				currentSignificand =  isInt ? new Significand(currentInteger, currentFraction) : new Significand(currentFraction);
+			}
 		}
 
 		public void EnterInteger(BASICParser.IntegerContext context)
 		{
-			// throw new NotImplementedException();
+			isInt = true;
 		}
 
 		public void ExitInteger(BASICParser.IntegerContext context)
@@ -240,7 +250,7 @@ namespace BASICLLVM
 
 		public void EnterNumericexpression(BASICParser.NumericexpressionContext context)
 		{
-			// throw new NotImplementedException();
+			currentNumericExpression = new NumericExpression();
 		}
 
 		public void ExitNumericexpression(BASICParser.NumericexpressionContext context)
@@ -250,7 +260,7 @@ namespace BASICLLVM
 
 		public void EnterTerm(BASICParser.TermContext context)
 		{
-			// throw new NotImplementedException();
+			currentTerm = new Term();
 		}
 
 		public void ExitTerm(BASICParser.TermContext context)
@@ -260,7 +270,7 @@ namespace BASICLLVM
 
 		public void EnterFactor(BASICParser.FactorContext context)
 		{
-			// throw new NotImplementedException();
+			currentFactor = new Factor();
 		}
 
 		public void ExitFactor(BASICParser.FactorContext context)
@@ -280,7 +290,7 @@ namespace BASICLLVM
 
 		public void EnterPrimary(BASICParser.PrimaryContext context)
 		{
-			// throw new NotImplementedException();
+			currentPrimary = new Primary();
 		}
 
 		public void ExitPrimary(BASICParser.PrimaryContext context)
