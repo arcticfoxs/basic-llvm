@@ -28,6 +28,7 @@ namespace BASICLLVM
 		Exrad currentExrad;
 		NumericConstant.Sign currentSign;
 		Term.Multiplier currentMultiplier;
+		Line_Let_Int currentLineLetInt;
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
@@ -102,10 +103,7 @@ namespace BASICLLVM
 
 		public void EnterNumericrep(BASICParser.NumericrepContext context)
 		{
-			if (currentPrimary.Peek() is Primary)
-			{
 
-			}
 		}
 
 		public void ExitNumericrep(BASICParser.NumericrepContext context)
@@ -201,7 +199,10 @@ namespace BASICLLVM
 
 		public void ExitNumericvariable(BASICParser.NumericvariableContext context)
 		{
-			// throw new NotImplementedException();
+			if (currentLineLetInt.varName == null)
+			{
+				currentLineLetInt.varName = context.GetText();
+			}
 		}
 
 		public void EnterSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
@@ -271,7 +272,12 @@ namespace BASICLLVM
 
 		public void ExitNumericexpression(BASICParser.NumericexpressionContext context)
 		{
-			throw new NotImplementedException();
+			
+			if (currentPrimary.Count > 0 && currentPrimary.Peek().GetType() == typeof(Primary))
+			{
+				currentPrimary.Pop();
+				currentPrimary.Push(currentNumericExpression.Pop());
+			}
 		}
 
 		public void EnterTerm(BASICParser.TermContext context)
@@ -436,17 +442,19 @@ namespace BASICLLVM
 
 		public void ExitLetstatement(BASICParser.LetstatementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void EnterNumericletstatement(BASICParser.NumericletstatementContext context)
 		{
-			// throw new NotImplementedException();
+			currentLineLetInt = new Line_Let_Int();
 		}
 
 		public void ExitNumericletstatement(BASICParser.NumericletstatementContext context)
 		{
-			throw new NotImplementedException();
+			currentLineLetInt.value = currentNumericExpression.Pop();
+			finishedLine = currentLineLetInt;
+			finishedLine.lineNumber = currentLineNumber;
 		}
 
 		public void EnterStringletstatement(BASICParser.StringletstatementContext context)

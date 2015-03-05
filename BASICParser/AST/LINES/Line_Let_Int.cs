@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BASICLLVM.AST;
 
 namespace BASICLLVM
 {
@@ -10,16 +6,12 @@ namespace BASICLLVM
 	{
 		public string varName;
 
-		public Expression_Int value;
+		public NumericExpression value;
 
-		public Line_Let_Int(Line parentLine,string intVar,List<Symbol> intExpression)
+		public Line_Let_Int()
 		{
-			lineNumber = parentLine.lineNumber;
-			tokens = parentLine.tokens;
 
-			varName = intVar;
-			value = Expression_Int.parse(intExpression);
-			parsed = true;
 		}
+
 	}
 }

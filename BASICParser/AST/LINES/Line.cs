@@ -3,23 +3,25 @@ using LLVM;
 
 namespace BASICLLVM
 {
-    class Line
-    {
+	class Line
+	{
 		public bool parsed = false;
 		public List<Symbol> tokens;
-        public int lineNumber = -2;
-		public BasicBlock firstBlock,lastBlock;
+		public int lineNumber = -2;
+		public BasicBlock firstBlock, lastBlock;
 
 		public Line()
 		{
 
 		}
 
-		public Line(List<Symbol> lexTokens) {
+		public Line(List<Symbol> lexTokens)
+		{
 			tokens = lexTokens;
 		}
 
-		public void addJump(Line jumpTo) {
+		public void addJump(Line jumpTo)
+		{
 			IRBuilder builder = new IRBuilder(lastBlock);
 			builder.CreateBranch(jumpTo.firstBlock);
 		}
@@ -33,6 +35,10 @@ namespace BASICLLVM
 		{
 			return new BasicBlock(context, mainFn, "dummy");
 		}
+
+	}
+}
+		/*
 		public Line parse()
 		{
 			int numTokens = tokens.Count;
@@ -96,3 +102,4 @@ namespace BASICLLVM
 
     }
 }
+		*/
