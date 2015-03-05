@@ -25,6 +25,8 @@ namespace BASICLLVM
 		NumericRep currentNumericRep;
 		Significand currentSignificand;
 		Fraction currentFraction;
+		Exrad currentExrad;
+		NumericConstant.Sign currentSign;
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
@@ -89,12 +91,12 @@ namespace BASICLLVM
 
 		public void EnterSign(BASICParser.SignContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitSign(BASICParser.SignContext context)
 		{
-			throw new NotImplementedException();
+			currentSign = context.GetText().Equals("-") ? NumericConstant.Sign.MINUSSIGN : NumericConstant.Sign.PLUSSIGN;
 		}
 
 		public void EnterNumericrep(BASICParser.NumericrepContext context)
@@ -104,7 +106,13 @@ namespace BASICLLVM
 
 		public void ExitNumericrep(BASICParser.NumericrepContext context)
 		{
-			throw new NotImplementedException();
+			if (currentExrad == null) currentNumericRep = new NumericRep(currentSignificand);
+			else
+			{
+				currentNumericRep = new NumericRep(currentSignificand, currentExrad);
+				currentExrad = null;
+			}
+			
 		}
 
 		public void EnterSignificand(BASICParser.SignificandContext context)
@@ -119,6 +127,7 @@ namespace BASICLLVM
 			else
 			{
 				currentSignificand =  isInt ? new Significand(currentInteger, currentFraction) : new Significand(currentFraction);
+				currentFraction = null;
 			}
 		}
 
@@ -152,7 +161,7 @@ namespace BASICLLVM
 
 		public void ExitExrad(BASICParser.ExradContext context)
 		{
-			throw new NotImplementedException();
+			currentExrad = new Exrad(currentInteger);
 		}
 
 		public void EnterStringconstant(BASICParser.StringconstantContext context)
