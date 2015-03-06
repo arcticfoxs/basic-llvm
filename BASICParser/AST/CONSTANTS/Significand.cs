@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -10,8 +7,8 @@ namespace BASICLLVM.AST
 	{
 		enum SignificandType { INTEGER, INTEGERFRACTION, FRACTION };
 
-		int integer;
-		Fraction fraction;
+		public int integer;
+		public Fraction fraction;
 		SignificandType type;
 
 		public Significand(int _integer)
@@ -31,6 +28,20 @@ namespace BASICLLVM.AST
 		{
 			fraction = _fraction;
 			type = SignificandType.FRACTION;
+		}
+
+		public Value val(LLVMContext context)
+		{
+			return new Constant(context, value());
+		}
+
+		public string value()
+		{
+			string val;
+			if (type == SignificandType.INTEGER) val = integer.ToString();
+			else if (type == SignificandType.FRACTION) val = "." + fraction;
+			else val = integer.ToString() +"."+ fraction.digits;
+			return val;
 		}
 		
 	}
