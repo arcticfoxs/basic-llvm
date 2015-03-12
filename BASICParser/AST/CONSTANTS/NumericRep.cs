@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -18,6 +14,11 @@ namespace BASICLLVM.AST
 		public NumericRep(Significand _significand)
 		{
 			significand = _significand;
+		}
+
+		public void code()
+		{
+
 		}
 	}
 }
