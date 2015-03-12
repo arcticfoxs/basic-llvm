@@ -14,11 +14,8 @@ namespace BASICLLVM.AST
 		public NumericRep(Significand _significand)
 		{
 			significand = _significand;
+			Value sigVal = significand.val();
 		}
 
-		public void code()
-		{
-
-		}
 	}
 }

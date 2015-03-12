@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using Antlr4.Runtime;
+using LLVM;
 
 namespace BASICLLVM
 {
 	class Parser
 	{
+		public static LLVMContext context;
 		public static List<Line> parseFile(string inputFile)
 		{
 			int counter = 0;

@@ -30,9 +30,9 @@ namespace BASICLLVM.AST
 			type = SignificandType.FRACTION;
 		}
 
-		public Value val(LLVMContext context)
+		public Value val()
 		{
-			return new Constant(context, value());
+			return new Constant(Parser.context, value());
 		}
 
 		public string value()

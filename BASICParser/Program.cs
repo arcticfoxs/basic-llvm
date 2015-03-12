@@ -12,17 +12,15 @@ namespace BASICLLVM
         {
 			string inputFile = "D:\\Project\\basictest.txt"; // TODO: Read from parameter
 
+			LLVMContext context = new LLVMContext();
+			Parser.context = context;
 
 			List<Line> lines = Parser.parseFile(inputFile);
 
-			//List<Line> lines = Lexer.lex(inputFile,true);
 			Console.WriteLine("Done Parsing");
 			Console.ReadLine();
 
-			Console.WriteLine("Done Parsing");
-			Console.ReadLine();
-
-			LLVMContext context = new LLVMContext();
+	
 			Module module = new Module(context, "SourceFile");
 
 			LLVM.Type[] mainArgs = new LLVM.Type[] { LLVM.Type.GetInteger32Type(context), LLVM.PointerType.GetUnqualified(LLVM.Type.GetInteger8PointerType(context)) };
