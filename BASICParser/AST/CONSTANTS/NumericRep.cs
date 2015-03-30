@@ -1,4 +1,4 @@
-﻿using LLVM;
+﻿using System;
 
 namespace BASICLLVM.AST
 {
@@ -14,8 +14,20 @@ namespace BASICLLVM.AST
 		public NumericRep(Significand _significand)
 		{
 			significand = _significand;
-			Value sigVal = significand.val();
 		}
+
+        public double value()
+        {
+            if (exrad == null) {
+                return significand.value();
+            }
+            else
+            {
+                string sign = exrad.sign == NumericConstant.Sign.PLUSSIGN ? "" : "-";
+                string val = significand.value().ToString() + "E" + sign + exrad.integer;
+                return Convert.ToDouble(val);
+            }
+        }
 
 	}
 }

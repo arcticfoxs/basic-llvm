@@ -23,5 +23,10 @@ namespace BASICLLVM.AST
 			numericrep = rep;
 			sign = _sign;
 		}
+
+        public double value()
+        {
+            return sign == Sign.PLUSSIGN ? numericrep.value() : -numericrep.value();
+        }
 	}
 }

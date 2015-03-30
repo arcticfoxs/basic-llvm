@@ -1,5 +1,4 @@
 ﻿using System;
-using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -30,18 +29,13 @@ namespace BASICLLVM.AST
 			type = SignificandType.FRACTION;
 		}
 
-		public Value val()
-		{
-			return new Constant(Parser.context, value());
-		}
-
-		public string value()
+		public double value()
 		{
 			string val;
-			if (type == SignificandType.INTEGER) val = integer.ToString();
-			else if (type == SignificandType.FRACTION) val = "." + fraction;
-			else val = integer.ToString() +"."+ fraction.digits;
-			return val;
+            if (type == SignificandType.INTEGER) val = integer.ToString();
+            else if (type == SignificandType.FRACTION) val = "." + fraction;
+            else val = integer.ToString() + "." + fraction.digits;
+            return Convert.ToDouble(val);
 		}
 		
 	}
