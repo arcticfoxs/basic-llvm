@@ -45,9 +45,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TUVienna.CS_Cup.Runtime">
-      <HintPath>D:\David\cs_lex\TUVienna.CS_Cup.Runtime.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="antlr\BASICBaseListener.cs" />
@@ -66,10 +63,8 @@
     <Compile Include="AST\EXPRESSIONS\Term.cs" />
     <Compile Include="AST\VARIABLES\SimpleNumericVariable.cs" />
     <Compile Include="AST\VARIABLES\StringVariable.cs" />
-    <Compile Include="Old\basic.lex.cs" />
     <Compile Include="Old\Expression_Int.cs" />
     <Compile Include="Old\Expression_String.cs" />
-    <Compile Include="Old\Lexer.cs" />
     <Compile Include="AST\LINES\Line.cs" />
     <Compile Include="AST\LINES\Line_End.cs" />
     <Compile Include="AST\LINES\Line_Goto.cs" />
