@@ -16,9 +16,6 @@ namespace BASICLLVM.AST
 		public override BasicBlock code(LLVMContext context, Module module, Function mainFn)
 		{
 			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
-
-			Constant nameConst = new Constant(context, var.name);
-
 			IRBuilder builder = new IRBuilder(block);
 
 			if (expr is StringConstant)
