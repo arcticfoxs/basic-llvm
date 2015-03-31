@@ -61,10 +61,9 @@
     <Compile Include="AST\EXPRESSIONS\NumericFunctionRef.cs" />
     <Compile Include="AST\EXPRESSIONS\StringExpression.cs" />
     <Compile Include="AST\EXPRESSIONS\Term.cs" />
+    <Compile Include="AST\LINES\Line_Let_String.cs" />
     <Compile Include="AST\VARIABLES\SimpleNumericVariable.cs" />
     <Compile Include="AST\VARIABLES\StringVariable.cs" />
-    <Compile Include="Old\Expression_Int.cs" />
-    <Compile Include="Old\Expression_String.cs" />
     <Compile Include="AST\LINES\Line.cs" />
     <Compile Include="AST\LINES\Line_End.cs" />
     <Compile Include="AST\LINES\Line_Goto.cs" />

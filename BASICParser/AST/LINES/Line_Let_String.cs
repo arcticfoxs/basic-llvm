@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace BASICLLVM.AST
 {
-	class PrintItem
+	class Line_Let_String : Line
 	{
+		StringVariable var;
 		StringExpression expr;
-		bool is_tabcall;
-		public PrintItem()
+
+		public Line_Let_String(StringVariable _var, StringExpression _expr)
 		{
-			is_tabcall = true;
-		}
-		public PrintItem(StringExpression payload)
-		{
-			expr = payload;
-			is_tabcall = false;
+			var = _var;
+			expr = _expr;
 		}
 	}
 }

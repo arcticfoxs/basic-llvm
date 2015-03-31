@@ -11,14 +11,15 @@ namespace BASICLLVM
 
 		// temporary variables
 		int currentInteger, currentLineNumber;
-		String currentStringConstant;
-		Expression_String currentStringExpression;
+		StringConstant currentStringConstant;
+		StringExpression currentStringExpression;
 		bool isTabCall = false;
 		bool isInt = false;
 		PrintItem currentPrintItem;
 		PrintList currentPrintList;
 		PrintList.printseparator currentPrintSeparator = PrintList.printseparator.NULL;
 		string currentIntVariable;
+        StringVariable currentStringVariable;
 		Stack<NumericExpression> currentNumericExpression = new Stack<NumericExpression>();
 		Stack<Term> currentTerm = new Stack<Term>();
 		Stack<Factor> currentFactor = new Stack<Factor>();
@@ -180,7 +181,7 @@ namespace BASICLLVM
 			string theString = context.GetText();
 			// strip quotes
 			theString = theString.Substring(1, theString.Length - 2);
-			currentStringConstant = theString;
+			currentStringConstant = new StringConstant(theString);
 		}
 
 		public void EnterVariable(BASICParser.VariableContext context)
@@ -248,12 +249,12 @@ namespace BASICLLVM
 
 		public void EnterStringvariable(BASICParser.StringvariableContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitStringvariable(BASICParser.StringvariableContext context)
 		{
-			throw new NotImplementedException();
+			currentStringVariable = new StringVariable(context.GetText());
 		}
 
 		public void EnterExpression(BASICParser.ExpressionContext context)
@@ -369,19 +370,20 @@ namespace BASICLLVM
 
 		public void EnterStringexpression(BASICParser.StringexpressionContext context)
 		{
-			// throw new NotImplementedException();
+			
 		}
 
 		public void ExitStringexpression(BASICParser.StringexpressionContext context)
 		{
 			if (currentStringConstant != null)
 			{
-				currentStringExpression = new Expression_String(true, currentStringConstant);
+				currentStringExpression = currentStringConstant;
 				currentStringConstant = null;
 			} 
 			else
 			{
-				// handle variable
+				currentStringExpression = currentStringVariable;
+				currentStringVariable = null;
 			}
 			
 		}
@@ -460,12 +462,12 @@ namespace BASICLLVM
 
 		public void EnterStringletstatement(BASICParser.StringletstatementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitStringletstatement(BASICParser.StringletstatementContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = new Line_Let_String(currentStringVariable,currentStringExpression);
 		}
 
 		public void EnterGotostatement(BASICParser.GotostatementContext context)
