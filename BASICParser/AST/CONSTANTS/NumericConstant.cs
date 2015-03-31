@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+ * NumericConstant is weirdly never referenced in the specification, so I don't know what this is for
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

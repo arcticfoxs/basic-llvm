@@ -29,13 +29,23 @@ namespace BASICLLVM
 					if (thisFactor.primarys.Count == 1)
 					{
 						Primary thisPrimary = thisFactor.primarys[0];
-						if (thisPrimary is NumericRep)
+						if (thisPrimary is NumericRep && ((NumericRep)thisPrimary).isInt())
 						{
-							double testDouble = ((NumericRep)thisPrimary).value();
+							double constDouble = ((NumericRep)thisPrimary).value();
 							Type i32Type = Type.GetInteger32Type(context);
 							AllocaInstruction alloc = builder.CreateAlloca(i32Type, varName);
-							Constant testValue = new Constant(context, 32, (ulong)System.Convert.ToInt32(testDouble));
-							builder.CreateStore(testValue, alloc);
+							Constant constValue = new Constant(context, 32, (ulong)System.Convert.ToInt32(constDouble));
+							builder.CreateStore(constValue, alloc);
+						}
+						else if (thisPrimary is SimpleNumericVariable)
+						{
+							SimpleNumericVariable loadVar = (SimpleNumericVariable)thisPrimary;
+							Type i32Type = Type.GetInteger32Type(context);
+							AllocaInstruction loadAlloc = builder.CreateAlloca(i32Type, loadVar.name);
+							Value loadValue = builder.CreateLoad(loadAlloc,"temp");
+
+							AllocaInstruction alloc = builder.CreateAlloca(i32Type, varName);
+							builder.CreateStore(loadValue, alloc);							
 						}
 					}
 				}

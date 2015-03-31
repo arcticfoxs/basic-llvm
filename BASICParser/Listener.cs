@@ -15,10 +15,16 @@ namespace BASICLLVM
 		StringExpression currentStringExpression;
 		bool isTabCall = false;
 		bool isInt = false;
+		bool wasArray = false;
+		bool inPrimary = false;
 		PrintItem currentPrintItem;
 		PrintList currentPrintList;
 		PrintList.printseparator currentPrintSeparator = PrintList.printseparator.NULL;
-		string currentIntVariable;
+
+		SimpleNumericVariable currentSimpleNumericVariable;
+		NumericVariable currentNumericVariable;
+		NumericArrayElement currentNumericArrayElement;
+
         StringVariable currentStringVariable;
 		Stack<NumericExpression> currentNumericExpression = new Stack<NumericExpression>();
 		Stack<Term> currentTerm = new Stack<Term>();
@@ -201,9 +207,15 @@ namespace BASICLLVM
 
 		public void ExitNumericvariable(BASICParser.NumericvariableContext context)
 		{
+			currentNumericVariable = wasArray ? (NumericVariable)currentNumericArrayElement : (NumericVariable)currentSimpleNumericVariable;
 			if (currentLineLetInt.varName == null)
 			{
 				currentLineLetInt.varName = context.GetText();
+			}
+			if (inPrimary)
+			{
+				currentPrimary.Pop();
+				currentPrimary.Push(currentNumericVariable);
 			}
 		}
 
@@ -214,7 +226,8 @@ namespace BASICLLVM
 
 		public void ExitSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
 		{
-			currentIntVariable = context.GetText();
+			currentSimpleNumericVariable = new SimpleNumericVariable(context.GetText());
+			wasArray = false;
 		}
 
 		public void EnterNumericarrayelement(BASICParser.NumericarrayelementContext context)
@@ -224,6 +237,7 @@ namespace BASICLLVM
 
 		public void ExitNumericarrayelement(BASICParser.NumericarrayelementContext context)
 		{
+			wasArray = true;
 			throw new NotImplementedException();
 		}
 
@@ -319,12 +333,13 @@ namespace BASICLLVM
 
 		public void EnterPrimary(BASICParser.PrimaryContext context)
 		{
+			inPrimary = true;
 			currentPrimary.Push(new Primary());
 		}
 
 		public void ExitPrimary(BASICParser.PrimaryContext context)
 		{
-
+			inPrimary = false;
 			currentFactor.Peek().add(currentPrimary.Pop());
 		}
 

@@ -81,7 +81,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AST\VARIABLES\Subscript.cs" />
-    <Compile Include="Old\Symbol.cs" />
   </ItemGroup>
   <ItemGroup>
     <Antlr4 Include="antlr\BASIC.g4">

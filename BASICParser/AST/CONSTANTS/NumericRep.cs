@@ -29,5 +29,12 @@ namespace BASICLLVM.AST
             }
         }
 
+		public bool isInt()
+		{
+			int intVersion;
+			return Int32.TryParse(this.value().ToString(),out intVersion);
+
+		}
+
 	}
 }
