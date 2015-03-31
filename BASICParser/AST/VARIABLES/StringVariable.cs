@@ -8,7 +8,7 @@ namespace BASICLLVM.AST
 {
 	class StringVariable : StringExpression
 	{
-		string name;
+		public string name;
 		public StringVariable(string _name)
 		{
 			name = _name;

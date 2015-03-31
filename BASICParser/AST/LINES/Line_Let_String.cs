@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -15,6 +11,33 @@ namespace BASICLLVM.AST
 		{
 			var = _var;
 			expr = _expr;
+		}
+
+		public override BasicBlock code(LLVMContext context, Module module, Function mainFn)
+		{
+			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
+
+			Constant nameConst = new Constant(context, var.name);
+
+			IRBuilder builder = new IRBuilder(block);
+
+			if (expr is StringConstant)
+			{
+				string strConst = ((StringConstant)expr).value;
+				Constant valConst = new Constant(context, strConst);
+				Constant valLength = new Constant(context,8,(ulong) strConst.Length+1);
+				Type i8Type = Type.GetInteger8Type(context);
+
+				// this doesn't work yet because need arrays to handle string
+				/*
+				AllocaInstruction alloc = builder.CreateAlloca(i8Type, valLength, var.name);
+				builder.CreateStore(valConst, alloc);
+				*/
+			}
+
+			firstBlock = block;
+			lastBlock = block;
+			return block;
 		}
 	}
 }
