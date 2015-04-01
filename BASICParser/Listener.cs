@@ -48,7 +48,7 @@ namespace BASICLLVM
 
 		public void ExitLine(BASICParser.LineContext context)
 		{
-			// throw new NotImplementedException();
+			if (currentLineNumber > 0) finishedLine.lineNumber = currentLineNumber;
 		}
 
 		public void EnterLinenumber(BASICParser.LinenumberContext context)
@@ -575,12 +575,12 @@ namespace BASICLLVM
 
 		public void EnterGosubstatement(BASICParser.GosubstatementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitGosubstatement(BASICParser.GosubstatementContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = new Line_GoSub(currentInteger);
 		}
 
 		public void EnterReturnstatement(BASICParser.ReturnstatementContext context)
@@ -590,7 +590,7 @@ namespace BASICLLVM
 
 		public void ExitReturnstatement(BASICParser.ReturnstatementContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = new Line_Return();
 		}
 
 		public void EnterOngotostatement(BASICParser.OngotostatementContext context)

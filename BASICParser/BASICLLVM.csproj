@@ -58,13 +58,19 @@
     <Compile Include="AST\CONSTANTS\NumericRep.cs" />
     <Compile Include="AST\CONSTANTS\Significand.cs" />
     <Compile Include="AST\CONSTANTS\StringConstant.cs" />
+    <Compile Include="AST\CONTROL\NumericRelationalExpression.cs" />
+    <Compile Include="AST\CONTROL\RelationalExpression.cs" />
+    <Compile Include="AST\CONTROL\StringRelationalExpression.cs" />
     <Compile Include="AST\EXPRESSIONS\Factor.cs" />
     <Compile Include="AST\EXPRESSIONS\NumericFunctionRef.cs" />
     <Compile Include="AST\EXPRESSIONS\StringExpression.cs" />
     <Compile Include="AST\EXPRESSIONS\Term.cs" />
     <Compile Include="AST\FUNCTIONS\NumericDefinedFunction.cs" />
     <Compile Include="AST\LINES\Line_Def.cs" />
+    <Compile Include="AST\LINES\Line_GoSub.cs" />
+    <Compile Include="AST\LINES\Line_IfThen.cs" />
     <Compile Include="AST\LINES\Line_Let_String.cs" />
+    <Compile Include="AST\LINES\Line_Return.cs" />
     <Compile Include="AST\VARIABLES\SimpleNumericVariable.cs" />
     <Compile Include="AST\VARIABLES\StringVariable.cs" />
     <Compile Include="AST\LINES\Line.cs" />
@@ -99,9 +105,7 @@
     </AntlrTokens>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AST\CONTROL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
