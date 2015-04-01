@@ -9,7 +9,7 @@ namespace BASICLLVM.AST
 	class NumericFunctionRef : Primary
 	{
 		public enum FunctionRefType { NUMERICDEFINEDFUNCTION, NUMERICSUPPLIEDFUNCTION };
-		public enum NumericSuppliedFunction { };
+		public enum NumericSuppliedFunction { ABS, ATN, COS, EXP, INT, LOG, RND, SGN, SIN, SQR, TAN };
 
 		public FunctionRefType refType;
 		public string numericDefinedFunctionName;
