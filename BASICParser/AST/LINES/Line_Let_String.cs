@@ -23,13 +23,12 @@ namespace BASICLLVM.AST
 				string strConst = ((StringConstant)expr).value;
 				Constant valConst = new Constant(context, strConst);
 				Constant valLength = new Constant(context,8,(ulong) strConst.Length+1);
-				Type i8Type = Type.GetInteger8Type(context);
+				Type i8Type = Type.GetInteger8PointerType(context);
+				
 
-				// this doesn't work yet because need arrays to handle string
-				/*
 				AllocaInstruction alloc = builder.CreateAlloca(i8Type, valLength, var.name);
 				builder.CreateStore(valConst, alloc);
-				*/
+				
 			}
 
 			firstBlock = block;

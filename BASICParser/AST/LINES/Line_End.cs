@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using LLVM;
 
-namespace BASICLLVM
+namespace BASICLLVM.AST
 {
 	class Line_End : Line
 	{

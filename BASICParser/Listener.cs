@@ -38,6 +38,9 @@ namespace BASICLLVM
 		Term.Multiplier currentMultiplier;
 		Line_Let_Int currentLineLetInt;
 
+		SimpleNumericVariable currentParameter;
+		string currentNumericDefinedFunction;
+
 		public void EnterLine(BASICParser.LineContext context)
 		{
 			// throw new NotImplementedException();
@@ -208,7 +211,7 @@ namespace BASICLLVM
 		public void ExitNumericvariable(BASICParser.NumericvariableContext context)
 		{
 			currentNumericVariable = wasArray ? (NumericVariable)currentNumericArrayElement : (NumericVariable)currentSimpleNumericVariable;
-			if (currentLineLetInt.varName == null)
+			if (currentLineLetInt != null && currentLineLetInt.varName == null)
 			{
 				currentLineLetInt.varName = context.GetText();
 			}
@@ -415,42 +418,46 @@ namespace BASICLLVM
 
 		public void EnterDefstatement(BASICParser.DefstatementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitDefstatement(BASICParser.DefstatementContext context)
 		{
-			throw new NotImplementedException();
+			if (currentParameter == null)
+				finishedLine = new Line_Def(currentNumericDefinedFunction, currentNumericExpression.Pop());
+			else
+				finishedLine = new Line_Def(currentNumericDefinedFunction, currentParameter, currentNumericExpression.Pop());
+			currentParameter = null;
 		}
 
 		public void EnterNumericdefinedfunction(BASICParser.NumericdefinedfunctionContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitNumericdefinedfunction(BASICParser.NumericdefinedfunctionContext context)
 		{
-			throw new NotImplementedException();
+			currentNumericDefinedFunction = context.GetText().Substring(context.GetText().Length - 1);
 		}
 
 		public void EnterParameterlist(BASICParser.ParameterlistContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitParameterlist(BASICParser.ParameterlistContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void EnterParameter(BASICParser.ParameterContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitParameter(BASICParser.ParameterContext context)
 		{
-			throw new NotImplementedException();
+			currentParameter = currentSimpleNumericVariable;
 		}
 
 		public void EnterLetstatement(BASICParser.LetstatementContext context)

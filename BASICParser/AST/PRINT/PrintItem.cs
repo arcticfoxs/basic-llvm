@@ -8,8 +8,8 @@ namespace BASICLLVM.AST
 {
 	class PrintItem
 	{
-		StringExpression expr;
-		bool is_tabcall;
+		public StringExpression expr;
+		public bool is_tabcall;
 		public PrintItem()
 		{
 			is_tabcall = true;

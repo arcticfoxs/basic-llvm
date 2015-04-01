@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using LLVM;
 using Antlr4.Runtime;
+using BASICLLVM.AST;
 
 namespace BASICLLVM
 {
