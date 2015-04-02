@@ -22,12 +22,25 @@ namespace BASICLLVM.AST
 			{
 				string strConst = ((StringConstant)expr).value;
 				Constant valConst = new Constant(context, strConst);
+
+				GlobalVariable global = new GlobalVariable(
+					module,
+				  valConst.GetType(),
+				  true, // constant
+				  LinkageType.PrivateLinkage, // only visible in this module
+				  valConst,
+				  ".str"); // the name of the global constant
+
+
+
 				Constant valLength = new Constant(context,8,(ulong) strConst.Length+1);
 				Type i8Type = Type.GetInteger8PointerType(context);
 				
-
 				AllocaInstruction alloc = builder.CreateAlloca(i8Type, valLength, var.name);
-				builder.CreateStore(valConst, alloc);
+				Constant zero = new Constant(context, 32, 0);
+				Value stringVal = ConstantExpr.GEP(global,zero,zero);
+
+				builder.CreateStore(stringVal, alloc);
 				
 			}
 

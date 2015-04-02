@@ -70,7 +70,7 @@ namespace BASICLLVM
 			Constant zero = new Constant(context, 32, 0);
 			Value[] args = new Value[] {
 				// get the address of the string (two indices because the first one references the array and the second one references the first element in the array)
-				// ConstantExpr.GEP(global, zero, zero)
+				ConstantExpr.GEP(global, zero, zero)
 			};
 
 			// Call printf

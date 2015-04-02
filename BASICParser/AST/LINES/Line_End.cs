@@ -9,11 +9,6 @@ namespace BASICLLVM.AST
 	class Line_End : Line
 	{
 
-		public Line_End(int _lineNumber)
-		{
-			lineNumber = _lineNumber;
-		}
-
 		public override BasicBlock code(LLVM.LLVMContext context, LLVM.Module module, LLVM.Function mainFn)
 		{
 			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());

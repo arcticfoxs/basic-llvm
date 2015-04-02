@@ -19,7 +19,6 @@ namespace BASICLLVM
 			List<Line> lines = Parser.parseFile(inputFile);
 
 			Console.WriteLine("Done Parsing");
-			Console.ReadLine();
 
 	
 			Module module = new Module(context, "SourceFile");

@@ -11,6 +11,7 @@ namespace BASICLLVM
 
 		// temporary variables
 		int currentInteger, currentLineNumber;
+		int thisLineNumber;
 		StringConstant currentStringConstant;
 		StringExpression currentStringExpression;
 		bool isTabCall = false;
@@ -48,7 +49,7 @@ namespace BASICLLVM
 
 		public void ExitLine(BASICParser.LineContext context)
 		{
-			if (currentLineNumber > 0) finishedLine.lineNumber = currentLineNumber;
+			if (currentLineNumber > 0) finishedLine.lineNumber = thisLineNumber;
 		}
 
 		public void EnterLinenumber(BASICParser.LinenumberContext context)
@@ -59,6 +60,7 @@ namespace BASICLLVM
 		public void ExitLinenumber(BASICParser.LinenumberContext context)
 		{
 			currentLineNumber = Convert.ToInt32(context.GetText());
+			if (thisLineNumber == 0) thisLineNumber = currentLineNumber;
 		}
 
 		public void EnterEndline(BASICParser.EndlineContext context)
@@ -68,8 +70,7 @@ namespace BASICLLVM
 
 		public void ExitEndline(BASICParser.EndlineContext context)
 		{
-			finishedLine = new Line_End(currentLineNumber);
-			// throw new NotImplementedException();
+			finishedLine = new Line_End();
 		}
 
 		public void EnterEndstatement(BASICParser.EndstatementContext context)
@@ -605,12 +606,12 @@ namespace BASICLLVM
 
 		public void EnterStopstatement(BASICParser.StopstatementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitStopstatement(BASICParser.StopstatementContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = new Line_End();
 		}
 
 		public void EnterForline(BASICParser.ForlineContext context)
