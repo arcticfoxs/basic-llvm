@@ -8,7 +8,7 @@ namespace BASICLLVM.AST
 {
 	class Factor
 	{
-		List<Primary> primarys;
+		public List<Primary> primarys;
 
 		public Factor()
 		{

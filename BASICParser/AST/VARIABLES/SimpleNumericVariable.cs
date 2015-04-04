@@ -8,7 +8,7 @@ namespace BASICLLVM.AST
 {
 	class SimpleNumericVariable : NumericVariable
 	{
-		string name;
+		public string name;
 
 		public SimpleNumericVariable(string _name)
 		{

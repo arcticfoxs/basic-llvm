@@ -4,22 +4,10 @@ using System.Linq;
 using System.Text;
 using LLVM;
 
-namespace BASICLLVM
+namespace BASICLLVM.AST
 {
 	class Line_End : Line
 	{
-
-		public Line_End(int _lineNumber)
-		{
-			lineNumber = _lineNumber;
-		}
-		public Line_End(Line parentLine)
-		{
-			lineNumber = parentLine.lineNumber;
-			tokens = parentLine.tokens;
-			parsed = true;
-			// done! End is so easy to parse
-		}
 
 		public override BasicBlock code(LLVM.LLVMContext context, LLVM.Module module, LLVM.Function mainFn)
 		{

@@ -1,7 +1,6 @@
 ﻿namespace BASICLLVM.AST
 {
-	class Primary
+	class Line_Return : Line
 	{
-		// override this!
 	}
 }

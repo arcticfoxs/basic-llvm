@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace BASICLLVM
+namespace BASICLLVM.AST
 {
 	class Subscript
 	{
-		public List<Expression_Int> expressions;
-		public Subscript(List<Expression_Int> _expressions)
+		public List<NumericExpression> expressions;
+		public Subscript(List<NumericExpression> _expressions)
 		{
 			expressions = _expressions;
 		}

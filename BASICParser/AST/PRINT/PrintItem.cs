@@ -8,13 +8,13 @@ namespace BASICLLVM.AST
 {
 	class PrintItem
 	{
-		Expression_String expr;
-		bool is_tabcall;
+		public StringExpression expr;
+		public bool is_tabcall;
 		public PrintItem()
 		{
 			is_tabcall = true;
 		}
-		public PrintItem(Expression_String payload)
+		public PrintItem(StringExpression payload)
 		{
 			expr = payload;
 			is_tabcall = false;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using LLVM;
 using Antlr4.Runtime;
+using BASICLLVM.AST;
 
 namespace BASICLLVM
 {
@@ -18,7 +19,6 @@ namespace BASICLLVM
 			List<Line> lines = Parser.parseFile(inputFile);
 
 			Console.WriteLine("Done Parsing");
-			Console.ReadLine();
 
 	
 			Module module = new Module(context, "SourceFile");
