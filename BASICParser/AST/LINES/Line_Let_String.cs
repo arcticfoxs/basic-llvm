@@ -35,8 +35,20 @@ namespace BASICLLVM.AST
 
 				Constant valLength = new Constant(context,8,(ulong) strConst.Length+1);
 				Type i8Type = Type.GetInteger8PointerType(context);
+
+				AllocaInstruction alloc;
+
+				if (VariableStore.strings.ContainsKey(var.name))
+					alloc = VariableStore.strings[var.name]; // already allocated
+				else
+				{
+					// new allocation
+					alloc = builder.CreateAlloca(i8Type, valLength, var.name);
+					// remember allocation
+					VariableStore.strings[var.name] = alloc;
+				}
+
 				
-				AllocaInstruction alloc = builder.CreateAlloca(i8Type, valLength, var.name);
 				Constant zero = new Constant(context, 32, 0);
 				Value stringVal = ConstantExpr.GEP(global,zero,zero);
 
