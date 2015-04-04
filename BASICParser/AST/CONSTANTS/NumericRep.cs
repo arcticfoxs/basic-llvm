@@ -36,18 +36,5 @@ namespace BASICLLVM.AST
 
 		}
 
-		public Value val()
-		{
-			if (exrad == null) return significand.val();
-			else
-			{
-				string output = significand.value();
-				output += "E";
-				output += ((exrad.sign == NumericConstant.Sign.MINUSSIGN) ? "-" : "");
-				output += exrad.integer.ToString();
-				return new Constant(Parser.context, output);
-			}
-		}
-
 	}
 }
