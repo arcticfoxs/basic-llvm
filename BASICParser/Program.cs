@@ -15,7 +15,7 @@ namespace BASICLLVM
 
 			LLVMContext context = new LLVMContext();
 			Parser.context = context;
-
+			// VariableStore.init();
 			List<Line> lines = Parser.parseFile(inputFile);
 
 			Console.WriteLine("Done Parsing");

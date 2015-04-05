@@ -1,8 +1,14 @@
 ﻿using System.Collections.Generic;
+
 namespace BASICLLVM
 {
 	class VariableStore
 	{
-		public static Dictionary<string, LLVM.AllocaInstruction> strings = new Dictionary<string, LLVM.AllocaInstruction>();
+		public Dictionary<string, LLVM.AllocaInstruction> strings;
+
+		public VariableStore()
+		{
+			strings = new Dictionary<string, LLVM.AllocaInstruction>();
+		}
 	}
 }

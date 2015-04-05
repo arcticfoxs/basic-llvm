@@ -38,14 +38,14 @@ namespace BASICLLVM.AST
 
 				AllocaInstruction alloc;
 
-				if (VariableStore.strings.ContainsKey(var.name))
-					alloc = VariableStore.strings[var.name]; // already allocated
+				if (Parser.variables.strings.ContainsKey(var.name))
+					alloc = Parser.variables.strings[var.name]; // already allocated
 				else
 				{
 					// new allocation
 					alloc = builder.CreateAlloca(i8Type, valLength, var.name);
 					// remember allocation
-					VariableStore.strings[var.name] = alloc;
+					Parser.variables.strings[var.name] = alloc;
 				}
 
 				
@@ -53,7 +53,11 @@ namespace BASICLLVM.AST
 				Value stringVal = ConstantExpr.GEP(global,zero,zero);
 
 				builder.CreateStore(stringVal, alloc);
-				
+
+			}
+			else
+			{
+
 			}
 
 			firstBlock = block;

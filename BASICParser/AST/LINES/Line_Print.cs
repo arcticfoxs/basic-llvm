@@ -85,7 +85,7 @@ namespace BASICLLVM
 			// stringType = PointerType.Get(stringType, 0);
 
 
-			AllocaInstruction loadAlloc = VariableStore.strings[variableName];
+			AllocaInstruction loadAlloc = Parser.variables.strings[variableName];
 			Value loadValue = builder.CreateLoad(loadAlloc, "temp");
 
 			Constant zero = new Constant(context, 32, 0);

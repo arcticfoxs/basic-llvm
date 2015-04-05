@@ -10,10 +10,13 @@ namespace BASICLLVM
 	class Parser
 	{
 		public static LLVMContext context;
+		public static VariableStore variables;
 		public static List<Line> parseFile(string inputFile)
 		{
 			int counter = 0;
 			string line;
+
+			variables = new VariableStore();
 
 			List<Line> parsedLines = new List<Line>();
 
