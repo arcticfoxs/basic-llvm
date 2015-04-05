@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -37,6 +35,21 @@ namespace BASICLLVM.AST
 		public void add(Factor factor, Multiplier multiplier) {
 			if(factors.Count > 0) multipliers.Add(multiplier);
 			factors.Add(factor);
+		}
+
+		public Value code(LLVMContext context,IRBuilder builder)
+		{
+			Value L = factors[0].code(context,builder);
+			factors.RemoveAt(0);
+			while (factors.Count > 0)
+			{
+				Value R = factors[0].code(context, builder);
+				if (multipliers[0] == Multiplier.ASTERISK) L = builder.CreateFMul(L, R, "multmp");
+				else L = builder.CreateFDiv(L, R, "divtmp");
+				factors.RemoveAt(0);
+				multipliers.RemoveAt(0);
+			}
+			return L;
 		}
 	}
 }

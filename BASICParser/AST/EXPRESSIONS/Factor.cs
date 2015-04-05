@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -21,6 +18,19 @@ namespace BASICLLVM.AST
 		public void add(Primary primary)
 		{
 			primarys.Add(primary);
+		}
+
+		public Value code(LLVMContext context,IRBuilder builder)
+		{
+			if (primarys.Count == 1)
+			{
+				return primarys[0].code(context, builder);
+			}
+			else
+			{
+				// TODO POWERS
+				return primarys[0].code(context,builder);
+			}
 		}
 	}
 }

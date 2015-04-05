@@ -720,12 +720,17 @@ namespace BASICLLVM
 
 		public void EnterPrintitem(BASICParser.PrintitemContext context)
 		{
-			// throw new NotImplementedException();
+			currentStringExpression = null;
+			currentNumericExpression = new Stack<NumericExpression>();
 		}
 
 		public void ExitPrintitem(BASICParser.PrintitemContext context)
 		{
-			currentPrintItem = isTabCall ? new PrintItem() : new PrintItem(currentStringExpression);
+			if (currentStringExpression == null)
+				currentPrintItem = isTabCall ? new PrintItem() : new PrintItem(currentNumericExpression.Pop());
+			else
+				currentPrintItem = isTabCall ? new PrintItem() : new PrintItem(currentStringExpression);
+
 			if (currentPrintSeparator == PrintList.printseparator.NULL)
 			{
 				currentPrintList.add(currentPrintItem);

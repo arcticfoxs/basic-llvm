@@ -1,4 +1,5 @@
 ﻿using System;
+using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -33,7 +34,11 @@ namespace BASICLLVM.AST
 		{
 			int intVersion;
 			return Int32.TryParse(this.value().ToString(),out intVersion);
+		}
 
+		public override Value code(LLVMContext context, IRBuilder builder)
+		{
+			return ConstantFP.Get(context, new APFloat(value()));
 		}
 
 	}

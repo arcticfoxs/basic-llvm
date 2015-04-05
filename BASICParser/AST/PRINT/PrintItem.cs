@@ -8,7 +8,8 @@ namespace BASICLLVM.AST
 {
 	class PrintItem
 	{
-		public StringExpression expr;
+		public StringExpression stringExpr;
+		public NumericExpression numExpr;
 		public bool is_tabcall;
 		public PrintItem()
 		{
@@ -16,7 +17,12 @@ namespace BASICLLVM.AST
 		}
 		public PrintItem(StringExpression payload)
 		{
-			expr = payload;
+			stringExpr = payload;
+			is_tabcall = false;
+		}
+		public PrintItem(NumericExpression payload)
+		{
+			numExpr = payload;
 			is_tabcall = false;
 		}
 	}

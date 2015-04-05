@@ -16,10 +16,40 @@ namespace BASICLLVM
 
 		public override BasicBlock code(LLVMContext context, Module module, Function mainFn)
 		{
-			// let's just do a really simple one
 			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
 			IRBuilder builder = new IRBuilder(block);
 
+			Type fpType = Type.GetDoubleType(context);
+
+			AllocaInstruction alloc;
+			if (Parser.variables.numbers.ContainsKey(varName)) alloc = Parser.variables.numbers[varName];
+			else
+			{
+				alloc = builder.CreateAlloca(fpType, varName);
+				Parser.variables.numbers[varName] = alloc;
+			}
+
+
+			Value exprVal = value.code(context, builder);
+			
+			builder.CreateStore(exprVal, alloc);
+
+
+			
+			
+
+
+			
+/*
+			Value exprVal = value.code(context,builder);
+
+			
+			
+
+			builder.CreateStore(exprVal, alloc);
+
+			
+			
 			if (value.leadingSign == NumericConstant.Sign.PLUSSIGN && value.terms.Count == 1)
 			{
 				Term thisTerm = value.terms[0];
@@ -51,6 +81,9 @@ namespace BASICLLVM
 				}
 				
 			}
+			
+			 */
+
 			firstBlock = block;
 			lastBlock = block;
 			return block;

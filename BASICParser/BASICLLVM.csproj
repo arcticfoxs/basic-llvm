@@ -36,10 +36,8 @@
     <Reference Include="Antlr4.Runtime">
       <HintPath>D:\Project\antlr\Antlr4.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="LLVMSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="LLVMSharp">
       <HintPath>D:\Project\LLVMSharp\src\Release\LLVMSharp.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -107,7 +105,9 @@
     </AntlrTokens>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

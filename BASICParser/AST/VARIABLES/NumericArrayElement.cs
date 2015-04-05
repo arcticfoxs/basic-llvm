@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -14,6 +11,11 @@ namespace BASICLLVM.AST
 		{
 			numericarrayname = _name;
 			subscript = _subscript;
+		}
+
+		public override Value code(LLVMContext context, IRBuilder builder)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

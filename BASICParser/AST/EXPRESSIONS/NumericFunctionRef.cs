@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -37,6 +34,11 @@ namespace BASICLLVM.AST
 			numericSuppliedFunctionName = _suppliedFunction;
 			argument = arg;
 			refType = FunctionRefType.NUMERICSUPPLIEDFUNCTION;
+		}
+
+		public override Value code(LLVMContext context, IRBuilder builder)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

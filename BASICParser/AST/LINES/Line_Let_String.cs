@@ -31,8 +31,7 @@ namespace BASICLLVM.AST
 				  valConst,
 				  ".str"); // the name of the global constant
 
-
-
+				
 				Constant valLength = new Constant(context,8,(ulong) strConst.Length+1);
 				Type i8Type = Type.GetInteger8PointerType(context);
 

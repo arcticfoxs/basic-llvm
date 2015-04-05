@@ -14,7 +14,7 @@ namespace BASICLLVM
 		Function mainFn;
 		BasicBlock block;
 		IRBuilder builder;
-		Constant printf;
+		Constant printf,doubleprintf;
 
 		public Line_Print(PrintList _printList)
 		{
@@ -32,16 +32,44 @@ namespace BASICLLVM
 				}
 				else
 				{
-					if (thisItem.expr is StringConstant)
+					if (thisItem.stringExpr == null)
 					{
-						StringConstant thisConstant = (StringConstant)thisItem.expr;
-						printConstant(thisConstant.value);
+						NumericExpression thisExpression = thisItem.numExpr;
+						Value expressionValue = thisExpression.code(context,builder);
+						Constant stringFormat = new Constant(context,"%f");
+
+						GlobalVariable global = new GlobalVariable(
+							module,
+						  stringFormat.GetType(),
+						  true, // constant
+						  LinkageType.PrivateLinkage, // only visible in this module
+						  stringFormat,
+						  ".str"); // the name of the global constant
+
+						Constant zero = new Constant(context, 32, 0);
+
+
+						Value[] args = new Value[] {
+							ConstantExpr.GEP(global,zero,zero),
+							expressionValue
+						};
+						// Call printf
+						builder.CreateCall(doubleprintf, args);
 					}
 					else
 					{
-						StringVariable var = (StringVariable)thisItem.expr;
-						printVariable(var.name);
+						if (thisItem.stringExpr is StringConstant)
+						{
+							StringConstant thisConstant = (StringConstant)thisItem.stringExpr;
+							printConstant(thisConstant.value);
+						}
+						else
+						{
+							StringVariable var = (StringVariable)thisItem.stringExpr;
+							printVariable(var.name);
+						}
 					}
+
 				}
 
 				if (i < printList.separators.Count)
@@ -67,6 +95,11 @@ namespace BASICLLVM
 			LLVM.Type[] argTypes = new LLVM.Type[] { LLVM.Type.GetInteger8PointerType(context) };
 			FunctionType stringToVoid = new FunctionType(LLVM.Type.GetVoidType(context),argTypes);
 			printf = module.GetOrInsertFunction("printf", stringToVoid);
+
+			// Import doubleprintf function
+			argTypes = new LLVM.Type[] { LLVM.Type.GetInteger8PointerType(context),LLVM.Type.GetDoubleType(context) };
+			FunctionType stringAndDouble = new FunctionType(LLVM.Type.GetVoidType(context), argTypes);
+			doubleprintf = module.GetOrInsertFunction("printf", stringAndDouble);
 
 			// do it
 			this.compileString();

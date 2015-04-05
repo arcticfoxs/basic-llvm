@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -25,6 +26,20 @@ namespace BASICLLVM.AST
 		{
 			terms.Add(term);
 		}
-		
+
+		public override LLVM.Value code(LLVM.LLVMContext context, IRBuilder builder)
+		{
+			Value L = terms[0].code(context, builder);
+			terms.RemoveAt(0);
+			while (terms.Count > 0)
+			{
+				Value R = terms[0].code(context, builder);
+				if (subsequentSigns[0] == NumericConstant.Sign.PLUSSIGN) L = builder.CreateFAdd(L, R, "multmp");
+				else L = builder.CreateFSub(L, R, "subtmp");
+				terms.RemoveAt(0);
+				subsequentSigns.RemoveAt(0);
+			}
+			return L;
+		}
 	}
 }
