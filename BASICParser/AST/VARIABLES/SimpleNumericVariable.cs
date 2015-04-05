@@ -11,7 +11,7 @@ namespace BASICLLVM.AST
 		{
 			name = _name;
 		}
-		public override Value code(LLVMContext context, IRBuilder builder)
+		public override Value code(LLVMContext context, Module module, IRBuilder builder)
 		{
 			AllocaInstruction alloc;
 			if (Parser.variables.numbers.ContainsKey(name)) alloc = Parser.variables.numbers[name];

@@ -36,7 +36,7 @@ namespace BASICLLVM.AST
 			refType = FunctionRefType.NUMERICSUPPLIEDFUNCTION;
 		}
 
-		public override Value code(LLVMContext context, IRBuilder builder)
+		public override Value code(LLVMContext context, Module module, IRBuilder builder)
 		{
 			throw new NotImplementedException();
 		}

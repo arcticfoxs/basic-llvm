@@ -35,7 +35,7 @@ namespace BASICLLVM
 					if (thisItem.stringExpr == null)
 					{
 						NumericExpression thisExpression = thisItem.numExpr;
-						Value expressionValue = thisExpression.code(context,builder);
+						Value expressionValue = thisExpression.code(context,module,builder);
 						Constant stringFormat = new Constant(context,"%f");
 
 						GlobalVariable global = new GlobalVariable(

@@ -20,17 +20,27 @@ namespace BASICLLVM.AST
 			primarys.Add(primary);
 		}
 
-		public Value code(LLVMContext context,IRBuilder builder)
+		public Value code(LLVMContext context,Module module,IRBuilder builder)
 		{
 			if (primarys.Count == 1)
+				return primarys[0].code(context, module, builder);
+
+			// Import printf function
+			LLVM.Type[] argTypes = new LLVM.Type[] { LLVM.Type.GetDoubleType(context), LLVM.Type.GetDoubleType(context) };
+			FunctionType powType = new FunctionType(LLVM.Type.GetVoidType(context), argTypes);
+			Constant pow = module.GetOrInsertFunction("pow", powType);
+
+
+			Value L = primarys[0].code(context, module, builder);
+			primarys.RemoveAt(0);
+			while (primarys.Count > 0)
 			{
-				return primarys[0].code(context, builder);
+				Value R = primarys[0].code(context, module, builder);
+				Value[] args = {L,R};
+				L = builder.CreateCall(pow, args);
+				primarys.RemoveAt(0);
 			}
-			else
-			{
-				// TODO POWERS
-				return primarys[0].code(context,builder);
-			}
+			return L;
 		}
 	}
 }

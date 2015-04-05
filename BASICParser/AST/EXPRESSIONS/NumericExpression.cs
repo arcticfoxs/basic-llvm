@@ -27,13 +27,13 @@ namespace BASICLLVM.AST
 			terms.Add(term);
 		}
 
-		public override LLVM.Value code(LLVM.LLVMContext context, IRBuilder builder)
+		public override LLVM.Value code(LLVM.LLVMContext context, Module module, IRBuilder builder)
 		{
-			Value L = terms[0].code(context, builder);
+			Value L = terms[0].code(context, module, builder);
 			terms.RemoveAt(0);
 			while (terms.Count > 0)
 			{
-				Value R = terms[0].code(context, builder);
+				Value R = terms[0].code(context,module, builder);
 				if (subsequentSigns[0] == NumericConstant.Sign.PLUSSIGN) L = builder.CreateFAdd(L, R, "multmp");
 				else L = builder.CreateFSub(L, R, "subtmp");
 				terms.RemoveAt(0);

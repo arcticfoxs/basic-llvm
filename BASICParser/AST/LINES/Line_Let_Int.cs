@@ -30,7 +30,7 @@ namespace BASICLLVM
 			}
 
 
-			Value exprVal = value.code(context, builder);
+			Value exprVal = value.code(context, module, builder);
 			
 			builder.CreateStore(exprVal, alloc);
 
