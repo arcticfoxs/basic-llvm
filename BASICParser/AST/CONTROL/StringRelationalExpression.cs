@@ -13,9 +13,26 @@ namespace BASICLLVM.AST
 			RHS = _rhs;
 			relation = _rel;
 		}
-		public Value code()
+		public override Value code(LLVMContext context, Module module, IRBuilder builder)
 		{
-			throw new NotImplementedException();
+			Value L = LHS.code(context, module, builder);
+			Value R = RHS.code(context, module, builder);
+
+			Predicate fcmpPredicate;
+
+			switch (relation)
+			{
+				case EqualityRelation.EQUAL:
+					fcmpPredicate = Predicate.OrderedEqual;
+					break;
+				case EqualityRelation.NOTEQUAL:
+					fcmpPredicate = Predicate.OrderedNotEqual;
+					break;
+				default:
+					fcmpPredicate = Predicate.OrderedEqual;
+					break;
+			}
+			return builder.CreateFCmp(fcmpPredicate, L, R, "tempStrEqExp");
 		}
 	}
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -12,6 +8,12 @@ namespace BASICLLVM.AST
 		public StringVariable(string _name)
 		{
 			name = _name;
+		}
+
+		public override Value code(LLVMContext context, Module module, IRBuilder builder)
+		{
+			AllocaInstruction loadAlloc = Parser.variables.strings[name];
+			return builder.CreateLoad(loadAlloc, "temp");
 		}
 	}
 }

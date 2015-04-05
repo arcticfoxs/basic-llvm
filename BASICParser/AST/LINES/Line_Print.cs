@@ -61,7 +61,7 @@ namespace BASICLLVM
 						if (thisItem.stringExpr is StringConstant)
 						{
 							StringConstant thisConstant = (StringConstant)thisItem.stringExpr;
-							printConstant(thisConstant.value);
+							printLiteral(thisConstant.value);
 						}
 						else
 						{
@@ -75,11 +75,11 @@ namespace BASICLLVM
 				if (i < printList.separators.Count)
 				{
 					PrintList.printseparator thisSeparator = printList.separators[i];
-					if (thisSeparator == PrintList.printseparator.COMMA) printConstant(",");
-					if (thisSeparator == PrintList.printseparator.SEMICOLON) printConstant(";");
+					if (thisSeparator == PrintList.printseparator.COMMA) printLiteral(",");
+					if (thisSeparator == PrintList.printseparator.SEMICOLON) printLiteral(";");
 				}
 			}
-			printConstant("\r\n");
+			printLiteral("\r\n");
 		}
 
 		public override BasicBlock code(LLVMContext _context, Module _module, Function _mainFn)
@@ -130,21 +130,15 @@ namespace BASICLLVM
 			builder.CreateCall(printf, args);
 		}
 
-		public void printConstant(string strToPrint)
+		public void printLiteral(string strToPrint)
 		{
-			Constant toPrint = new Constant(context, strToPrint);
-			GlobalVariable global = new GlobalVariable(
-				module,
-			  toPrint.GetType(),
-			  true, // constant
-			  LinkageType.PrivateLinkage, // only visible in this module
-			  toPrint,
-			  ".str"); // the name of the global constant
-
-			Constant zero = new Constant(context, 32, 0);
+			StringConstant tmp = new StringConstant(strToPrint);
+			printConstant(tmp);
+		}
+		public void printConstant(StringConstant toPrint)
+		{
 			Value[] args = new Value[] {
-				// get the address of the string (two indices because the first one references the array and the second one references the first element in the array)
-				ConstantExpr.GEP(global, zero, zero)
+				toPrint.code(context,module,builder)
 			};
 
 			// Call printf

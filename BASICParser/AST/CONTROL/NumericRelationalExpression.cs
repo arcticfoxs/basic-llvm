@@ -47,7 +47,6 @@ namespace BASICLLVM.AST
 					break;
 			}
 			return builder.CreateFCmp(fcmpPredicate, L, R, "tempNumEqExp");
-			throw new NotImplementedException();
 		}
 	}
 }
