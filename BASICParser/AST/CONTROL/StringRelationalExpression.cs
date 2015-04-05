@@ -1,4 +1,7 @@
-﻿namespace BASICLLVM.AST
+﻿using System;
+using LLVM;
+
+namespace BASICLLVM.AST
 {
 	class StringRelationalExpression : RelationalExpression
 	{
@@ -9,6 +12,10 @@
 			LHS = _lhs;
 			RHS = _rhs;
 			relation = _rel;
+		}
+		public Value code()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

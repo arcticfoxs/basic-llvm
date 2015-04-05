@@ -13,7 +13,7 @@ namespace BASICLLVM
 		int currentInteger, currentLineNumber;
 		int thisLineNumber;
 		StringConstant currentStringConstant;
-		StringExpression currentStringExpression;
+		Stack<StringExpression> currentStringExpression = new Stack<StringExpression>();
 		bool isTabCall = false;
 		bool isInt = false;
 		bool wasArray = false;
@@ -41,6 +41,10 @@ namespace BASICLLVM
 
 		SimpleNumericVariable currentParameter;
 		string currentNumericDefinedFunction;
+
+		RelationalExpression currentRelationalExpression;
+		RelationalExpression.Relation currentRelation;
+		RelationalExpression.EqualityRelation currentEqualityRelation;
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
@@ -389,19 +393,19 @@ namespace BASICLLVM
 
 		public void EnterStringexpression(BASICParser.StringexpressionContext context)
 		{
-			
+			if (currentStringExpression == null) currentStringExpression = new Stack<StringExpression>();
 		}
 
 		public void ExitStringexpression(BASICParser.StringexpressionContext context)
 		{
 			if (currentStringConstant != null)
 			{
-				currentStringExpression = currentStringConstant;
+				currentStringExpression.Push(currentStringConstant);
 				currentStringConstant = null;
 			} 
 			else
 			{
-				currentStringExpression = currentStringVariable.Pop();
+				currentStringExpression.Push(currentStringVariable.Pop());
 			}
 			
 		}
@@ -489,7 +493,7 @@ namespace BASICLLVM
 
 		public void ExitStringletstatement(BASICParser.StringletstatementContext context)
 		{
-			finishedLine = new Line_Let_String(currentStringVariable.Pop(),currentStringExpression);
+			finishedLine = new Line_Let_String(currentStringVariable.Pop(),currentStringExpression.Pop());
 		}
 
 		public void EnterGotostatement(BASICParser.GotostatementContext context)
@@ -505,42 +509,75 @@ namespace BASICLLVM
 
 		public void EnterIfthenstatement(BASICParser.IfthenstatementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitIfthenstatement(BASICParser.IfthenstatementContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = new Line_IfThen(currentRelationalExpression, currentInteger);
 		}
 
 		public void EnterRelationalexpression(BASICParser.RelationalexpressionContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitRelationalexpression(BASICParser.RelationalexpressionContext context)
 		{
-			throw new NotImplementedException();
+			if (currentNumericExpression.Count == 0)
+				currentRelationalExpression = new StringRelationalExpression(currentStringExpression.Pop(), currentStringExpression.Pop(), currentEqualityRelation);
+			else
+				currentRelationalExpression = new NumericRelationalExpression(currentNumericExpression.Pop(), currentNumericExpression.Pop(), currentRelation);
 		}
 
 		public void EnterRelation(BASICParser.RelationContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitRelation(BASICParser.RelationContext context)
 		{
-			throw new NotImplementedException();
+			switch (context.GetText())
+			{
+				case "=":
+					currentRelation = RelationalExpression.Relation.EQUAL;
+					break;
+				case "!=":
+					currentRelation = RelationalExpression.Relation.NOTEQUAL;
+					break;
+				case ">":
+					currentRelation = RelationalExpression.Relation.GREATERTHAN;
+					break;
+				case "<":
+					currentRelation = RelationalExpression.Relation.LESSTHAN;
+					break;
+				case "<=":
+					currentRelation = RelationalExpression.Relation.NOTGREATER;
+					break;
+				case ">=":
+					currentRelation = RelationalExpression.Relation.NOTLESS;
+					break;
+			}
 		}
 
 		public void EnterEqualityrelation(BASICParser.EqualityrelationContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitEqualityrelation(BASICParser.EqualityrelationContext context)
 		{
-			throw new NotImplementedException();
+			switch (context.GetText())
+			{
+				case "=":
+					currentRelation = RelationalExpression.Relation.EQUAL;
+					currentEqualityRelation = RelationalExpression.EqualityRelation.EQUAL;
+					break;
+				case "!=":
+					currentRelation = RelationalExpression.Relation.NOTEQUAL;
+					currentEqualityRelation = RelationalExpression.EqualityRelation.EQUAL;
+					break;
+			}
 		}
 
 		public void EnterNotless(BASICParser.NotlessContext context)
@@ -729,7 +766,7 @@ namespace BASICLLVM
 			if (currentStringExpression == null)
 				currentPrintItem = isTabCall ? new PrintItem() : new PrintItem(currentNumericExpression.Pop());
 			else
-				currentPrintItem = isTabCall ? new PrintItem() : new PrintItem(currentStringExpression);
+				currentPrintItem = isTabCall ? new PrintItem() : new PrintItem(currentStringExpression.Pop());
 
 			if (currentPrintSeparator == PrintList.printseparator.NULL)
 			{

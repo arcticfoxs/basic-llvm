@@ -24,5 +24,10 @@ namespace BASICLLVM.AST
 			return new BasicBlock(context, mainFn, "dummy");
 		}
 
+		public virtual void processGoto(Dictionary<int, Line> lookup)
+		{
+			// most lines don't need to process GOTOs so this is blank
+		}
+
 	}
 }

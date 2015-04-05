@@ -28,7 +28,7 @@ namespace BASICLLVM.AST
 			// This is just an empty block, but we can't process gotos until all lines are created!
 		}
 
-		public void processGoto(Dictionary<int, Line> lookup)
+		public override void processGoto(Dictionary<int, Line> lookup)
 		{
 			Line target = lookup[gotoTarget];
 			this.addJump(target);

@@ -39,18 +39,10 @@ namespace BASICLLVM
 			}
 
 			for (int i = 0; i < lines.Count - 1; i++)
-			{
 				lines[i].jumpToNext(lines[i + 1]);
-			}
 
 			for (int i = 0; i < lines.Count; i++)
-			{
-				if (lines[i].GetType().Name == "Line_Goto")
-				{
-					Line_Goto thisLine = (Line_Goto)lines[i];
-					thisLine.processGoto(gotoLookup);
-				}
-			}
+				lines[i].processGoto(gotoLookup);
 
 			module.Dump();
 			module.WriteToFile("D:\\Project\\out.ll");
