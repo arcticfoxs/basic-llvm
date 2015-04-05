@@ -27,7 +27,7 @@ namespace BASICLLVM.AST
 
 			// Import printf function
 			LLVM.Type[] argTypes = new LLVM.Type[] { LLVM.Type.GetDoubleType(context), LLVM.Type.GetDoubleType(context) };
-			FunctionType powType = new FunctionType(LLVM.Type.GetVoidType(context), argTypes);
+			FunctionType powType = new FunctionType(LLVM.Type.GetDoubleType(context), argTypes);
 			Constant pow = module.GetOrInsertFunction("pow", powType);
 
 
