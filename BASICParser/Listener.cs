@@ -26,7 +26,7 @@ namespace BASICLLVM
 		NumericVariable currentNumericVariable;
 		NumericArrayElement currentNumericArrayElement;
 
-        StringVariable currentStringVariable;
+		Stack<StringVariable> currentStringVariable = new Stack<StringVariable>();
 		Stack<NumericExpression> currentNumericExpression = new Stack<NumericExpression>();
 		Stack<Term> currentTerm = new Stack<Term>();
 		Stack<Factor> currentFactor = new Stack<Factor>();
@@ -272,7 +272,7 @@ namespace BASICLLVM
 
 		public void ExitStringvariable(BASICParser.StringvariableContext context)
 		{
-			currentStringVariable = new StringVariable(context.GetText());
+			currentStringVariable.Push(new StringVariable(context.GetText()));
 		}
 
 		public void EnterExpression(BASICParser.ExpressionContext context)
@@ -401,8 +401,7 @@ namespace BASICLLVM
 			} 
 			else
 			{
-				currentStringExpression = currentStringVariable;
-				currentStringVariable = null;
+				currentStringExpression = currentStringVariable.Pop();
 			}
 			
 		}
@@ -490,7 +489,7 @@ namespace BASICLLVM
 
 		public void ExitStringletstatement(BASICParser.StringletstatementContext context)
 		{
-			finishedLine = new Line_Let_String(currentStringVariable,currentStringExpression);
+			finishedLine = new Line_Let_String(currentStringVariable.Pop(),currentStringExpression);
 		}
 
 		public void EnterGotostatement(BASICParser.GotostatementContext context)

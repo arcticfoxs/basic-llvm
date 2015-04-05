@@ -57,7 +57,27 @@ namespace BASICLLVM.AST
 			}
 			else
 			{
+				StringVariable loadVariable = (StringVariable)expr;
 
+				AllocaInstruction loadAlloc = Parser.variables.strings[loadVariable.name];
+				Value loadValue = builder.CreateLoad(loadAlloc, "temp");
+
+				AllocaInstruction alloc;
+
+				Type i8Type = Type.GetInteger8PointerType(context);
+				Constant zero = new Constant(context, 32, 0);
+
+				if (Parser.variables.strings.ContainsKey(var.name))
+					alloc = Parser.variables.strings[var.name]; // already allocated
+				else
+				{
+					// new allocation
+					alloc = builder.CreateAlloca(i8Type, zero, var.name);
+					// remember allocation
+					 Parser.variables.strings[var.name] = alloc;
+				}
+
+				 builder.CreateStore(loadValue, alloc);
 			}
 
 			firstBlock = block;
