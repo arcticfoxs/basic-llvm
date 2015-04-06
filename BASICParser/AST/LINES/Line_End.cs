@@ -22,5 +22,10 @@ namespace BASICLLVM.AST
 			lastBlock = block;
 			return block;
 		}
+
+		public override void jumpToNext(Line nextLine)
+		{
+			// Do nothing! This is an END instruction
+		}
 	}
 }

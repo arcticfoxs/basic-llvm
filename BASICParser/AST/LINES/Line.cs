@@ -8,6 +8,10 @@ namespace BASICLLVM.AST
 		public int lineNumber = -2;
 		public BasicBlock firstBlock, lastBlock;
 
+		public Line()
+		{
+			
+		}
 		public void addJump(Line jumpTo)
 		{
 			IRBuilder builder = new IRBuilder(lastBlock);
@@ -21,7 +25,10 @@ namespace BASICLLVM.AST
 
 		public virtual BasicBlock code(LLVMContext context, Module module, Function mainFn)
 		{
-			return new BasicBlock(context, mainFn, "dummy");
+			BasicBlock block = new BasicBlock(context, mainFn, "remark"+lineNumber.ToString());
+			firstBlock = block;
+			lastBlock = block;
+			return block;
 		}
 
 		public virtual void processGoto()

@@ -22,12 +22,13 @@ namespace BASICLLVM
 
 	
 			Module module = new Module(context, "SourceFile");
-
+			Parser.module = module;
 			LLVM.Type[] mainArgs = new LLVM.Type[] { LLVM.Type.GetInteger32Type(context), LLVM.PointerType.GetUnqualified(LLVM.Type.GetInteger8PointerType(context)) };
 			FunctionType mainType = new FunctionType(LLVM.Type.GetInteger32Type(context),mainArgs);
 			
 			Function mainFunction = new Function(module,"main",mainType);
 
+			Parser.function = mainFunction;
 			
 
 			BasicBlock newLine;

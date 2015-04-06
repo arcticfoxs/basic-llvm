@@ -10,7 +10,9 @@ namespace BASICLLVM
 	class Parser
 	{
 		public static LLVMContext context;
+		public static Module module;
 		public static VariableStore variables;
+		public static Function function;
 		public static List<Line> parseFile(string inputFile)
 		{
 			int counter = 0;

@@ -615,7 +615,7 @@ namespace BASICLLVM
 
 		public void EnterReturnstatement(BASICParser.ReturnstatementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitReturnstatement(BASICParser.ReturnstatementContext context)
@@ -914,12 +914,12 @@ namespace BASICLLVM
 
 		public void EnterRemarkstatement(BASICParser.RemarkstatementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitRemarkstatement(BASICParser.RemarkstatementContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = new Line();
 		}
 
 		public void EnterRandomizestatement(BASICParser.RandomizestatementContext context)
@@ -934,12 +934,12 @@ namespace BASICLLVM
 
 		public void EnterStringcharacter(BASICParser.StringcharacterContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitStringcharacter(BASICParser.StringcharacterContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void EnterQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context)
@@ -974,12 +974,12 @@ namespace BASICLLVM
 
 		public void EnterRemarkstring(BASICParser.RemarkstringContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitRemarkstring(BASICParser.RemarkstringContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void EnterQuotedstring(BASICParser.QuotedstringContext context)
