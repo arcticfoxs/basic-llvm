@@ -66,9 +66,11 @@
     <Compile Include="AST\EXPRESSIONS\Term.cs" />
     <Compile Include="AST\FUNCTIONS\NumericDefinedFunction.cs" />
     <Compile Include="AST\LINES\Line_Def.cs" />
+    <Compile Include="AST\LINES\Line_For.cs" />
     <Compile Include="AST\LINES\Line_GoSub.cs" />
     <Compile Include="AST\LINES\Line_IfThen.cs" />
     <Compile Include="AST\LINES\Line_Let_String.cs" />
+    <Compile Include="AST\LINES\Line_Next.cs" />
     <Compile Include="AST\LINES\Line_Return.cs" />
     <Compile Include="AST\VARIABLES\SimpleNumericVariable.cs" />
     <Compile Include="AST\VARIABLES\StringVariable.cs" />

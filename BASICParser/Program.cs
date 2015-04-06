@@ -28,21 +28,21 @@ namespace BASICLLVM
 			
 			Function mainFunction = new Function(module,"main",mainType);
 
-			Dictionary<int, Line> gotoLookup = new Dictionary<int, Line>();
+			
 
 			BasicBlock newLine;
 
 			for (int i = 0; i < lines.Count; i++)
 			{
 				newLine = lines[i].code(context, module, mainFunction);
-				if(lines[i].lineNumber != -2) gotoLookup.Add(lines[i].lineNumber, lines[i]);
+				if(lines[i].lineNumber != -2) Parser.variables.lines.Add(lines[i].lineNumber, lines[i]);
 			}
 
 			for (int i = 0; i < lines.Count - 1; i++)
 				lines[i].jumpToNext(lines[i + 1]);
 
 			for (int i = 0; i < lines.Count; i++)
-				lines[i].processGoto(gotoLookup);
+				lines[i].processGoto();
 
 			module.Dump();
 			module.WriteToFile("D:\\Project\\out.ll");

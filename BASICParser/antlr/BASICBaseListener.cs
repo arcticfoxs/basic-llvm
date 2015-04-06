@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from ../BASIC.g4 by ANTLR 4.5
+// Generated from BASIC.g4 by ANTLR 4.5
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -92,18 +92,6 @@ public partial class BASICBaseListener : IBASICListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitStatement([NotNull] BASICParser.StatementContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.numericconstant"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterNumericconstant([NotNull] BASICParser.NumericconstantContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.numericconstant"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitNumericconstant([NotNull] BASICParser.NumericconstantContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.sign"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -644,30 +632,6 @@ public partial class BASICBaseListener : IBASICListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitStopstatement([NotNull] BASICParser.StopstatementContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.forline"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterForline([NotNull] BASICParser.ForlineContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.forline"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitForline([NotNull] BASICParser.ForlineContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.nextline"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterNextline([NotNull] BASICParser.NextlineContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.nextline"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitNextline([NotNull] BASICParser.NextlineContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.forstatement"/>.
 	/// <para>The default implementation does nothing.</para>

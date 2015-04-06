@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from ../BASIC.g4 by ANTLR 4.5
+// Generated from BASIC.g4 by ANTLR 4.5
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -78,16 +78,6 @@ public interface IBASICListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitStatement([NotNull] BASICParser.StatementContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.numericconstant"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterNumericconstant([NotNull] BASICParser.NumericconstantContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.numericconstant"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitNumericconstant([NotNull] BASICParser.NumericconstantContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.sign"/>.
 	/// </summary>
@@ -538,26 +528,6 @@ public interface IBASICListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitStopstatement([NotNull] BASICParser.StopstatementContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.forline"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterForline([NotNull] BASICParser.ForlineContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.forline"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitForline([NotNull] BASICParser.ForlineContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.nextline"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterNextline([NotNull] BASICParser.NextlineContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.nextline"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitNextline([NotNull] BASICParser.NextlineContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.forstatement"/>.
 	/// </summary>

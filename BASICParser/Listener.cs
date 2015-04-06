@@ -46,6 +46,9 @@ namespace BASICLLVM
 		RelationalExpression.Relation currentRelation;
 		RelationalExpression.EqualityRelation currentEqualityRelation;
 
+		SimpleNumericVariable currentControlVariable;
+		NumericExpression currentInitialValue, currentLimit, currentIncrement;
+
 		public void EnterLine(BASICParser.LineContext context)
 		{
 			// throw new NotImplementedException();
@@ -95,16 +98,6 @@ namespace BASICLLVM
 		public void ExitStatement(BASICParser.StatementContext context)
 		{
 			// throw new NotImplementedException();
-		}
-
-		public void EnterNumericconstant(BASICParser.NumericconstantContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitNumericconstant(BASICParser.NumericconstantContext context)
-		{
-			throw new NotImplementedException();
 		}
 
 		public void EnterSign(BASICParser.SignContext context)
@@ -650,84 +643,64 @@ namespace BASICLLVM
 			finishedLine = new Line_End();
 		}
 
-		public void EnterForline(BASICParser.ForlineContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitForline(BASICParser.ForlineContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterNextline(BASICParser.NextlineContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitNextline(BASICParser.NextlineContext context)
-		{
-			throw new NotImplementedException();
-		}
-
 		public void EnterForstatement(BASICParser.ForstatementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitForstatement(BASICParser.ForstatementContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = new Line_For(currentControlVariable, currentInitialValue, currentLimit, currentIncrement);
 		}
 
 		public void EnterControlvariable(BASICParser.ControlvariableContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitControlvariable(BASICParser.ControlvariableContext context)
 		{
-			throw new NotImplementedException();
+			currentControlVariable = currentSimpleNumericVariable;
 		}
 
 		public void EnterInitialvalue(BASICParser.InitialvalueContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitInitialvalue(BASICParser.InitialvalueContext context)
 		{
-			throw new NotImplementedException();
+			currentInitialValue = currentNumericExpression.Pop();
 		}
 
 		public void EnterLimit(BASICParser.LimitContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitLimit(BASICParser.LimitContext context)
 		{
-			throw new NotImplementedException();
+			currentLimit = currentNumericExpression.Pop();
 		}
 
 		public void EnterIncrement(BASICParser.IncrementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitIncrement(BASICParser.IncrementContext context)
 		{
-			throw new NotImplementedException();
+			currentIncrement = currentNumericExpression.Pop();
 		}
 
 		public void EnterNextstatement(BASICParser.NextstatementContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitNextstatement(BASICParser.NextstatementContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = new Line_Next(currentControlVariable);
 		}
 
 		public void EnterPrintstatement(BASICParser.PrintstatementContext context)

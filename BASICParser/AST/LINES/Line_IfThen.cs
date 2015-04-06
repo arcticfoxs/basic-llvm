@@ -29,9 +29,9 @@ namespace BASICLLVM.AST
 			return block;
 		}
 
-		public override void processGoto(Dictionary<int, Line> lookup)
+		public override void processGoto()
 		{
-			Line trueLine = lookup[target];
+			Line trueLine = Parser.variables.lines[target];
 			builder.CreateCondBranch(resultOfExpression, trueLine.firstBlock, falseLine.firstBlock);
 		}
 
