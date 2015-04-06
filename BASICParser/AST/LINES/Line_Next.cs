@@ -7,6 +7,7 @@ namespace BASICLLVM.AST
 		BasicBlock block;
 		Value limit, increment;
 		BasicBlock nextBlock;
+		IRBuilder builder;
 
 		public Line_Next(SimpleNumericVariable v)
 		{
@@ -16,13 +17,13 @@ namespace BASICLLVM.AST
 		public override LLVM.BasicBlock code(LLVM.LLVMContext context, LLVM.Module module, LLVM.Function mainFn)
 		{
 			block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
-			IRBuilder builder = new IRBuilder(block);
+			builder = new IRBuilder(block);
 
 			AllocaInstruction limitAlloc = Parser.variables.limits[controlVariable.name];
 			limit = builder.CreateLoad(limitAlloc, "limit_"+controlVariable.name);
 
 			AllocaInstruction incrementAlloc = Parser.variables.increments[controlVariable.name];
-			increment = builder.CreateLoad(limitAlloc, "increment_" + controlVariable.name);
+			increment = builder.CreateLoad(incrementAlloc, "increment_" + controlVariable.name);
 
 			// Can't do any actual stuff now because we don't know where the FOR statement is!
 
@@ -39,6 +40,13 @@ namespace BASICLLVM.AST
 		public override void processGoto()
 		{
 			BasicBlock loopBlock = Parser.variables.forLines[controlVariable.name].nextBlock;
+			AllocaInstruction alloc = Parser.variables.numbers[controlVariable.name];
+			Value controlVal = builder.CreateLoad(alloc, "controlVal");
+			controlVal = builder.CreateFAdd(controlVal, increment, "tempIncrement");
+			builder.CreateStore(controlVal, alloc);
+			Value comparison = builder.CreateFCmp(Predicate.OrderedGreaterThan, controlVal, limit, "tempLimitTest");
+
+			builder.CreateCondBranch(comparison, nextBlock, loopBlock);
 		}
 	}
 }

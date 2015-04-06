@@ -53,7 +53,7 @@ namespace BASICLLVM.AST
 			if (Parser.variables.limits.ContainsKey(varName)) alloc = Parser.variables.limits[varName];
 			else
 			{
-				alloc = builder.CreateAlloca(fpType, varName);
+				alloc = builder.CreateAlloca(fpType, "limit_"+varName);
 				Parser.variables.limits[varName] = alloc;
 			}
 			exprVal = limit.code(context, module, builder);
@@ -63,7 +63,7 @@ namespace BASICLLVM.AST
 			if (Parser.variables.increments.ContainsKey(varName)) alloc = Parser.variables.increments[varName];
 			else
 			{
-				alloc = builder.CreateAlloca(fpType, varName);
+				alloc = builder.CreateAlloca(fpType, "increment_"+varName);
 				Parser.variables.increments[varName] = alloc;
 			}
 			exprVal = increment.code(context, module, builder);
