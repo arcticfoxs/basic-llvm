@@ -25,7 +25,7 @@ namespace BASICLLVM.AST
 			if (primarys.Count == 1)
 				return primarys[0].code(context, module, builder);
 
-			// Import printf function
+			// Import pow function
 			LLVM.Type[] argTypes = new LLVM.Type[] { LLVM.Type.GetDoubleType(context), LLVM.Type.GetDoubleType(context) };
 			FunctionType powType = new FunctionType(LLVM.Type.GetDoubleType(context), argTypes);
 			Constant pow = module.GetOrInsertFunction("pow", powType);

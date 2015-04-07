@@ -49,6 +49,12 @@ namespace BASICLLVM
 		SimpleNumericVariable currentControlVariable;
 		NumericExpression currentInitialValue, currentLimit, currentIncrement;
 
+		NumericFunctionRef.NumericSuppliedFunction currentNumericSuppliedFunction;
+		NumericExpression currentArgument;
+		NumericFunctionRef currentNumericFunctionRef;
+		enum PrimaryOptions {VAR,REP,FN,EXP};
+		PrimaryOptions primaryOp;
+
 		public void EnterLine(BASICParser.LineContext context)
 		{
 			// throw new NotImplementedException();
@@ -124,9 +130,7 @@ namespace BASICLLVM
 				currentExrad = null;
 			}
 
-			currentPrimary.Pop();
-			currentPrimary.Push(currentNumericRep);
-			
+			primaryOp = PrimaryOptions.REP;
 		}
 
 		public void EnterSignificand(BASICParser.SignificandContext context)
@@ -160,12 +164,12 @@ namespace BASICLLVM
 
 		public void EnterFraction(BASICParser.FractionContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitFraction(BASICParser.FractionContext context)
 		{
-			throw new NotImplementedException();
+			currentFraction = new Fraction(context.GetText());
 		}
 
 		public void EnterExrad(BASICParser.ExradContext context)
@@ -213,11 +217,7 @@ namespace BASICLLVM
 			{
 				currentLineLetInt.varName = context.GetText();
 			}
-			if (inPrimary)
-			{
-				currentPrimary.Pop();
-				currentPrimary.Push(currentNumericVariable);
-			}
+			primaryOp = PrimaryOptions.VAR;
 		}
 
 		public void EnterSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
@@ -289,12 +289,7 @@ namespace BASICLLVM
 
 		public void ExitNumericexpression(BASICParser.NumericexpressionContext context)
 		{
-			
-			if (currentPrimary.Count > 0 && currentPrimary.Peek().GetType() == typeof(Primary))
-			{
-				currentPrimary.Pop();
-				currentPrimary.Push(currentNumericExpression.Pop());
-			}
+			primaryOp = PrimaryOptions.EXP;
 		}
 
 		public void EnterTerm(BASICParser.TermContext context)
@@ -334,54 +329,84 @@ namespace BASICLLVM
 
 		public void EnterPrimary(BASICParser.PrimaryContext context)
 		{
-			inPrimary = true;
-			currentPrimary.Push(new Primary());
+			
 		}
 
 		public void ExitPrimary(BASICParser.PrimaryContext context)
 		{
-			inPrimary = false;
+			switch(primaryOp) {
+				case PrimaryOptions.EXP:
+					currentPrimary.Push(currentNumericExpression.Pop());
+					break;
+				case PrimaryOptions.FN:
+					currentPrimary.Push(currentNumericFunctionRef);
+					break;
+				case PrimaryOptions.REP:
+					currentPrimary.Push(currentNumericRep);
+					break;
+				case PrimaryOptions.VAR:
+					currentPrimary.Push(currentNumericVariable);
+					break;
+			}
 			currentFactor.Peek().add(currentPrimary.Pop());
 		}
 
 		public void EnterNumericfunctionref(BASICParser.NumericfunctionrefContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitNumericfunctionref(BASICParser.NumericfunctionrefContext context)
 		{
-			throw new NotImplementedException();
+			if (currentNumericDefinedFunction == null)
+			{
+				if (currentArgument == null)
+					currentNumericFunctionRef = new NumericFunctionRef(currentNumericSuppliedFunction);
+				else
+					currentNumericFunctionRef = new NumericFunctionRef(currentNumericSuppliedFunction, currentArgument);
+			}
+			else
+			{
+				if (currentArgument == null)
+					currentNumericFunctionRef = new NumericFunctionRef(currentNumericDefinedFunction);
+				else
+					currentNumericFunctionRef = new NumericFunctionRef(currentNumericDefinedFunction, currentArgument);
+			}
+
+			currentNumericDefinedFunction = null;
+			currentArgument = null;
+
+			primaryOp = PrimaryOptions.FN;
 		}
 
 		public void EnterNumericfunctionname(BASICParser.NumericfunctionnameContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitNumericfunctionname(BASICParser.NumericfunctionnameContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void EnterArgumentlist(BASICParser.ArgumentlistContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitArgumentlist(BASICParser.ArgumentlistContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void EnterArgument(BASICParser.ArgumentContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitArgument(BASICParser.ArgumentContext context)
 		{
-			throw new NotImplementedException();
+			currentArgument = currentNumericExpression.Pop();
 		}
 
 		public void EnterStringexpression(BASICParser.StringexpressionContext context)
@@ -405,12 +430,12 @@ namespace BASICLLVM
 
 		public void EnterNumericsuppliedfunction(BASICParser.NumericsuppliedfunctionContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitNumericsuppliedfunction(BASICParser.NumericsuppliedfunctionContext context)
 		{
-			throw new NotImplementedException();
+			Enum.TryParse<NumericFunctionRef.NumericSuppliedFunction>(context.GetText(), out currentNumericSuppliedFunction);
 		}
 
 		public void EnterDefstatement(BASICParser.DefstatementContext context)

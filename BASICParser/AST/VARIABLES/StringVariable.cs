@@ -2,7 +2,7 @@
 
 namespace BASICLLVM.AST
 {
-	class StringVariable : StringExpression
+	class StringVariable : StringExpression,Variable
 	{
 		public string name;
 		public StringVariable(string _name)

@@ -70,6 +70,7 @@
     <Compile Include="AST\LINES\Line_For.cs" />
     <Compile Include="AST\LINES\Line_GoSub.cs" />
     <Compile Include="AST\LINES\Line_IfThen.cs" />
+    <Compile Include="AST\LINES\Line_Input.cs" />
     <Compile Include="AST\LINES\Line_Let_String.cs" />
     <Compile Include="AST\LINES\Line_Next.cs" />
     <Compile Include="AST\LINES\Line_Return.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="AST\LINES\Line_Goto.cs" />
     <Compile Include="AST\LINES\Line_Let_Int.cs" />
     <Compile Include="AST\LINES\Line_Print.cs" />
+    <Compile Include="AST\VARIABLES\Variable.cs" />
     <Compile Include="Listener.cs" />
     <Compile Include="AST\VARIABLES\NumericArrayElement.cs" />
     <Compile Include="AST\EXPRESSIONS\NumericExpression.cs" />

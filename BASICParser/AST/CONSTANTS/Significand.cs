@@ -33,8 +33,8 @@ namespace BASICLLVM.AST
 		{
 			string val;
             if (type == SignificandType.INTEGER) val = integer.ToString();
-            else if (type == SignificandType.FRACTION) val = "." + fraction;
-            else val = integer.ToString() + "." + fraction.digits;
+            else if (type == SignificandType.FRACTION) val = fraction.digits;
+            else val = integer.ToString() + fraction.digits;
             return Convert.ToDouble(val);
 		}
 		
