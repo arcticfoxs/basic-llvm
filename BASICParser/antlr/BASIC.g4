@@ -24,11 +24,11 @@ stringconstant : quotedstring;
 
 variable : numericvariable | stringvariable;
 numericvariable : simplenumericvariable | numericarrayelement;
-simplenumericvariable : LETTER DIGIT?;
+simplenumericvariable : LETTER DIGIT? | LETTERE DIGIT?;
 numericarrayelement : numericarrayname subscript;
-numericarrayname : LETTER;
+numericarrayname : LETTERE | LETTER;
 subscript : LEFTPARENTHESIS numericexpression (COMMA numericexpression)? RIGHTPARENTHESIS;
-stringvariable : LETTER DOLLARSIGN;
+stringvariable : LETTERE DOLLARSIGN | LETTER DOLLARSIGN;
 
 // expressions
 

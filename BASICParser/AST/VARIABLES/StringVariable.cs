@@ -22,6 +22,7 @@ namespace BASICLLVM.AST
 			} else {
 				loadAlloc = Parser.variables.strings[name];
 				output =  builder.CreateGEP(loadAlloc, zero, "tempStringVariable");
+				// output = builder.CreateLoad(loadAlloc, "temp");
 			}
 			return output;
 		}

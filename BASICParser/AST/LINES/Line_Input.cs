@@ -36,10 +36,8 @@ namespace BASICLLVM.AST
 					alloc = Parser.variables.strings[var.name]; // already allocated
 				else
 				{
-					// new allocation
-					alloc = builder.CreateAlloca(i8Type, valLength, var.name);
-					// remember allocation
-					Parser.variables.strings[var.name] = alloc;
+					alloc = builder.CreateAlloca(i8Type, valLength, var.name); // new allocation
+					Parser.variables.strings[var.name] = alloc; // remember allocation
 				}
 				Parser.variables.stringIsPointer[var.name] = false;
 			}

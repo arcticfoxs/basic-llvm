@@ -20,6 +20,7 @@ namespace BASICLLVM.AST
 
 			Constant zero = new Constant(context, 32, 0);
 			Type i8p = Type.GetInteger8PointerType(context);
+			Type i8 = Type.GetInteger8Type(context);
 
 			AllocaInstruction alloc;
 			Value stringVal = expr.code(context, module, builder); // get value of RHS
@@ -38,15 +39,17 @@ namespace BASICLLVM.AST
 			}
 			else
 			{
-				if (Parser.variables.strings.ContainsKey(var.name))
-					alloc = Parser.variables.strings[var.name]; // already allocated
+				if (Parser.variables.stringPointers.ContainsKey(var.name))
+					alloc = Parser.variables.stringPointers[var.name]; // already allocated
 				else
 				{
 					alloc = builder.CreateAlloca(i8p, zero, var.name); // new allocation
-					Parser.variables.strings[var.name] = alloc; // remember allocation
+					Parser.variables.stringPointers[var.name] = alloc; // remember allocation
 				}
+				Parser.variables.stringIsPointer[var.name] = true;
 			}
 
+			stringVal.Dump();
 			builder.CreateStore(stringVal, alloc);
 
 			firstBlock = block;

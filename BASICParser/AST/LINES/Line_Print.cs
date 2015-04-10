@@ -52,7 +52,9 @@ namespace BASICLLVM
 
 		public void printStringExpression(StringExpression thisExpression)
 		{
-			Value[] args = new Value[] { thisExpression.code(context, module, builder) };
+			Value expressionValue = thisExpression.code(context, module, builder);
+			expressionValue.Dump();
+			Value[] args = new Value[] { expressionValue };
 			// Call printf
 			builder.CreateCall(printf, args);
 		}
