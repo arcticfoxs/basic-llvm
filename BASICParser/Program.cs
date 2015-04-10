@@ -11,7 +11,6 @@ namespace BASICLLVM
     {
 		public static bool dump = false;
 		public static bool block = false;
-		public static bool amDebug = false;
         static void Main(string[] args)
         {
 			string inputFile = args[0];
@@ -23,7 +22,6 @@ namespace BASICLLVM
 				if (arg == "-dump") dump = true;
 				if (arg == "-block") block = true;
 				if (arg == "-o") outNext = true;
-				if (arg == "-debug") amDebug = true;
 			}
 
 			LLVMContext context = new LLVMContext();
@@ -53,7 +51,18 @@ namespace BASICLLVM
 
 			for (int i = 0; i < lines.Count; i++)
 			{
-				newLine = lines[i].code();
+				Parser.counter = i;
+
+				try {
+					newLine = lines[i].code();
+				}
+				catch (CompileException ex)
+				{
+					ex.print("COMPILE ERROR");
+					if (block) Console.ReadLine();
+					return;
+				}
+
 				if(lines[i].hasLineNumber) Parser.variables.lines.Add(lines[i].lineNumber, lines[i]);
 			}
 
@@ -68,14 +77,5 @@ namespace BASICLLVM
 			if(dump) Console.WriteLine("Compile Successful");
 			if(block) Console.ReadLine();
         }
-
-		public static void debug(string info)
-		{
-			if (amDebug)
-			{
-				Console.WriteLine(info);
-				Console.WriteLine();
-			}			
-		}
     }
 }

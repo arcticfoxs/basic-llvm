@@ -15,6 +15,12 @@ namespace BASICLLVM.AST
 		{
 			AllocaInstruction loadAlloc;
 			Value output;
+			if (!Parser.variables.stringIsPointer.ContainsKey(name))
+			{
+				CompileException ex = new CompileException(Parser.counter, "Undefined string variable");
+				ex.message = name + " is undefined";
+				throw ex;
+			}
 			if (Parser.variables.stringIsPointer[name]) {
 				loadAlloc = Parser.variables.stringPointers[name];
 				output = builder.CreateLoad(loadAlloc, "temp");

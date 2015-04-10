@@ -72,6 +72,7 @@ namespace BASICLLVM
 			{
 				finishedLine.lineNumber = thisLineNumber;
 				finishedLine.hasLineNumber = true;
+				Parser.variables.codeLineNumbers[Parser.counter] = thisLineNumber;
 			}
 			else
 			{
@@ -987,11 +988,7 @@ namespace BASICLLVM
 
 		public void VisitErrorNode(Antlr4.Runtime.Tree.IErrorNode node)
 		{
-			if (thisLineNumber > 0)
-				throw new SyntaxErrorException(Parser.counter, node.GetText());
-			else
-				throw new SyntaxErrorException(Parser.counter, thisLineNumber, node.GetText());
-
+			throw new CompileException(Parser.counter,"Syntax Error");
 		}
 
 		public void VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode node) {}

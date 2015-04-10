@@ -15,7 +15,12 @@ namespace BASICLLVM.AST
 		{
 			AllocaInstruction alloc;
 			if (Parser.variables.numbers.ContainsKey(name)) alloc = Parser.variables.numbers[name];
-			else throw new NotImplementedException();
+			else
+			{
+				CompileException ex = new CompileException(Parser.counter,"Undefined numeric variable");
+				ex.message = name + " is undefined";
+				throw ex;
+			}
 			return builder.CreateLoad(alloc, "temp");
 		}
 	}

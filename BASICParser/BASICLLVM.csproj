@@ -82,6 +82,7 @@
     <Compile Include="AST\LINES\Line_Let_Int.cs" />
     <Compile Include="AST\LINES\Line_Print.cs" />
     <Compile Include="AST\VARIABLES\Variable.cs" />
+    <Compile Include="Exceptions\CompileException.cs" />
     <Compile Include="Listener.cs" />
     <Compile Include="AST\VARIABLES\NumericArrayElement.cs" />
     <Compile Include="AST\EXPRESSIONS\NumericExpression.cs" />
@@ -93,7 +94,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AST\VARIABLES\Subscript.cs" />
-    <Compile Include="SyntaxErrorException.cs" />
     <Compile Include="VariableStore.cs" />
   </ItemGroup>
   <ItemGroup>

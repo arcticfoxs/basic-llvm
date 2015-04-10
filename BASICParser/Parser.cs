@@ -42,8 +42,6 @@ namespace BASICLLVM
 			StreamReader file =  new System.IO.StreamReader(inputFile);
 			while ((line = file.ReadLine()) != null)
 			{
-				Program.debug("Parsing line " + counter.ToString());
-				Program.debug(line);
 				AntlrInputStream stream = new AntlrInputStream(line);
 				ITokenSource lexer = new BASICLexer(stream);
 				ITokenStream tokens = new CommonTokenStream(lexer);
@@ -54,9 +52,8 @@ namespace BASICLLVM
 
 				try {
 					RuleContext tree = parser.line();
-				} catch(SyntaxErrorException ex) {
-					Console.WriteLine("Syntax Error at input line " + ex.lineNumber.ToString());
-					if(ex.codeLineNumber > 2) Console.WriteLine("Labelled line" + ex.codeLineNumber.ToString());
+				} catch(CompileException ex) {
+					ex.print("PARSE ERROR");
 					return null;
 				}
 				parsedLines.Add(lis.finishedLine);

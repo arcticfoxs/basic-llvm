@@ -15,6 +15,7 @@ namespace BASICLLVM
 		public Dictionary<string, AST.Line_For> forLines;
 		public Dictionary<string, AST.Line_GoSub> gosubLines;
 		public Dictionary<int, AST.Line> lines;
+		public Dictionary<int, int> codeLineNumbers;
 		public List<LLVM.BasicBlock> returnBlocks;
 		public Dictionary<string, LLVM.Value> stringLiterals;
 
@@ -32,6 +33,7 @@ namespace BASICLLVM
 			returnAddresses = new Stack<LLVM.AllocaInstruction>();
 			returnBlocks = new List<LLVM.BasicBlock>();
 			stringLiterals = new Dictionary<string, LLVM.Value>();
+			codeLineNumbers = new Dictionary<int, int>();
 		}
 	}
 }
