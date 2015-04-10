@@ -27,8 +27,6 @@ namespace BASICLLVM.AST
 			Constant zero = new Constant(context, 32, 0);
 			Value output = ConstantExpr.GEP(global, zero, zero);
 			Parser.variables.stringLiterals[value] = output;
-			Console.WriteLine("StringConstant "+value);
-			output.Dump();
 			return output;
 		}
 	}
