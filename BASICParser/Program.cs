@@ -48,7 +48,7 @@ namespace BASICLLVM
 			for (int i = 0; i < lines.Count; i++)
 			{
 				newLine = lines[i].code(context, module, mainFunction);
-				if(lines[i].lineNumber != -2) Parser.variables.lines.Add(lines[i].lineNumber, lines[i]);
+				if(lines[i].hasLineNumber) Parser.variables.lines.Add(lines[i].lineNumber, lines[i]);
 			}
 
 			for (int i = 0; i < lines.Count - 1; i++)

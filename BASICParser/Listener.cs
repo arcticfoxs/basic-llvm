@@ -59,12 +59,17 @@ namespace BASICLLVM
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
-			// throw new NotImplementedException();
+			currentLineNumber = -2;
+			thisLineNumber = -2;
 		}
 
 		public void ExitLine(BASICParser.LineContext context)
 		{
-			if (currentLineNumber > 0) finishedLine.lineNumber = thisLineNumber;
+			if (thisLineNumber > -2)
+			{
+				finishedLine.lineNumber = thisLineNumber;
+				finishedLine.hasLineNumber = true;
+			}
 		}
 
 		public void EnterLinenumber(BASICParser.LinenumberContext context)
@@ -75,7 +80,6 @@ namespace BASICLLVM
 		public void ExitLinenumber(BASICParser.LinenumberContext context)
 		{
 			currentLineNumber = Convert.ToInt32(context.GetText());
-			if (thisLineNumber == 0) thisLineNumber = currentLineNumber;
 		}
 
 		public void EnterEndline(BASICParser.EndlineContext context)
@@ -90,7 +94,7 @@ namespace BASICLLVM
 
 		public void EnterEndstatement(BASICParser.EndstatementContext context)
 		{
-			// throw new NotImplementedException();
+			thisLineNumber = currentLineNumber;
 		}
 
 		public void ExitEndstatement(BASICParser.EndstatementContext context)
@@ -100,7 +104,7 @@ namespace BASICLLVM
 
 		public void EnterStatement(BASICParser.StatementContext context)
 		{
-			// throw new NotImplementedException();
+			thisLineNumber = currentLineNumber;
 		}
 
 		public void ExitStatement(BASICParser.StatementContext context)
@@ -595,32 +599,32 @@ namespace BASICLLVM
 
 		public void EnterNotless(BASICParser.NotlessContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitNotless(BASICParser.NotlessContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void EnterNotgreater(BASICParser.NotgreaterContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitNotgreater(BASICParser.NotgreaterContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void EnterNotequals(BASICParser.NotequalsContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void ExitNotequals(BASICParser.NotequalsContext context)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public void EnterGosubstatement(BASICParser.GosubstatementContext context)

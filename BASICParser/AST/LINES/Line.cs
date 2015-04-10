@@ -5,7 +5,8 @@ namespace BASICLLVM.AST
 {
 	class Line
 	{
-		public int lineNumber = -2;
+		public int lineNumber;
+		public bool hasLineNumber = false;
 		public BasicBlock firstBlock, lastBlock;
 
 		public Line()

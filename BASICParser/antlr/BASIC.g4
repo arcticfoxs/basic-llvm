@@ -3,9 +3,9 @@ grammar BASIC;
 
 
 // LINES
-line : linenumber statement | endline;
+line : linenumber? statement | endline;
 linenumber : integer;
-endline : linenumber endstatement;
+endline : linenumber? endstatement;
 endstatement : 'END';
 // don't forget to reinsert optionstatement
 statement : datastatement | defstatement | dimensionstatement | gosubstatement | gotostatement | ifthenstatement | inputstatement | letstatement | ongotostatement | printstatement | randomizestatement | readstatement | remarkstatement | restorestatement | returnstatement | stopstatement | forstatement | nextstatement;
