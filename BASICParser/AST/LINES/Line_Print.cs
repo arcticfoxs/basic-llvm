@@ -34,6 +34,7 @@ namespace BASICLLVM
 				{
 					if (thisItem.stringExpr == null)
 					{
+						// print NumericExpression
 						NumericExpression thisExpression = thisItem.numExpr;
 						Value expressionValue = thisExpression.code(context,module,builder);
 						Constant stringFormat = new Constant(context,"%f");
@@ -117,15 +118,26 @@ namespace BASICLLVM
 			Type stringType = Type.GetInteger8PointerType(context);
 			// stringType = PointerType.Get(stringType, 0);
 
+			AllocaInstruction loadAlloc;
+			if (Parser.variables.stringIsPointer[variableName])
+				loadAlloc = Parser.variables.stringPointers[variableName];
+			else
+				loadAlloc = Parser.variables.strings[variableName];
 
-			AllocaInstruction loadAlloc = Parser.variables.strings[variableName];
 			Value loadValue = builder.CreateLoad(loadAlloc, "temp");
+			Constant zero = new Constant(context, 32, 0L);
+			loadValue.Dump();
 
-			Constant zero = new Constant(context, 32, 0);
+			if (!Parser.variables.stringIsPointer[variableName])
+			{
+				loadValue = builder.CreateGEP(loadAlloc, zero, "tempStringVariable");
+			}
+			
 			Value[] args = new Value[] {
 				// get the address of the string (two indices because the first one references the array and the second one references the first element in the array)
 				loadValue
 			};
+
 			// Call printf
 			builder.CreateCall(printf, args);
 		}

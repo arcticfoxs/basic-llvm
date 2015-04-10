@@ -5,7 +5,10 @@ namespace BASICLLVM
 	class VariableStore
 	{
 		public Dictionary<string, LLVM.AllocaInstruction> strings;
+		public Dictionary<string, LLVM.AllocaInstruction> stringPointers;
+		public Dictionary<string, bool> stringIsPointer;
 		public Dictionary<string, LLVM.AllocaInstruction> numbers;
+
 		public Dictionary<string, LLVM.AllocaInstruction> limits;
 		public Dictionary<string, LLVM.AllocaInstruction> increments;
 		public Stack<LLVM.AllocaInstruction> returnAddresses;
@@ -17,6 +20,8 @@ namespace BASICLLVM
 		public VariableStore()
 		{
 			strings = new Dictionary<string, LLVM.AllocaInstruction>();
+			stringPointers = new Dictionary<string, LLVM.AllocaInstruction>();
+			stringIsPointer = new Dictionary<string, bool>();
 			numbers = new Dictionary<string, LLVM.AllocaInstruction>();
 			limits = new Dictionary<string, LLVM.AllocaInstruction>();
 			increments = new Dictionary<string, LLVM.AllocaInstruction>();

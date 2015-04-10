@@ -45,6 +45,9 @@ namespace BASICLLVM
 			for (int i = 0; i < lines.Count; i++)
 				lines[i].processGoto();
 
+			Console.WriteLine("");
+			Console.WriteLine("-----");
+			Console.WriteLine("");
 			module.Dump();
 			module.WriteToFile("D:\\Project\\out.ll");
 			Console.WriteLine("Compile Successful");

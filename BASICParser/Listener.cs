@@ -55,6 +55,8 @@ namespace BASICLLVM
 		enum PrimaryOptions {VAR,REP,FN,EXP};
 		PrimaryOptions primaryOp;
 
+		Line_Input currentInputLine;
+
 		public void EnterLine(BASICParser.LineContext context)
 		{
 			// throw new NotImplementedException();
@@ -195,34 +197,26 @@ namespace BASICLLVM
 			currentStringConstant = new StringConstant(theString);
 		}
 
-		public void EnterVariable(BASICParser.VariableContext context)
-		{
-			throw new NotImplementedException();
-		}
+		public void EnterVariable(BASICParser.VariableContext context) {}
 
-		public void ExitVariable(BASICParser.VariableContext context)
-		{
-			throw new NotImplementedException();
-		}
+		public void ExitVariable(BASICParser.VariableContext context) {}
 
-		public void EnterNumericvariable(BASICParser.NumericvariableContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterNumericvariable(BASICParser.NumericvariableContext context) {}
 
 		public void ExitNumericvariable(BASICParser.NumericvariableContext context)
 		{
 			currentNumericVariable = wasArray ? (NumericVariable)currentNumericArrayElement : (NumericVariable)currentSimpleNumericVariable;
+
 			if (currentLineLetInt != null && currentLineLetInt.varName == null)
-			{
 				currentLineLetInt.varName = context.GetText();
-			}
+
 			primaryOp = PrimaryOptions.VAR;
+			if (currentInputLine != null) currentInputLine.vars.Add(currentNumericVariable);
 		}
 
 		public void EnterSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
 		{
-			// throw new NotImplementedException();
+		
 		}
 
 		public void ExitSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
@@ -270,6 +264,7 @@ namespace BASICLLVM
 		public void ExitStringvariable(BASICParser.StringvariableContext context)
 		{
 			currentStringVariable.Push(new StringVariable(context.GetText()));
+			if(currentInputLine != null) currentInputLine.vars.Add(currentStringVariable.Pop());
 		}
 
 		public void EnterExpression(BASICParser.ExpressionContext context)
@@ -799,23 +794,17 @@ namespace BASICLLVM
 
 		public void EnterInputstatement(BASICParser.InputstatementContext context)
 		{
-			throw new NotImplementedException();
+			currentInputLine = new Line_Input();
 		}
 
 		public void ExitInputstatement(BASICParser.InputstatementContext context)
 		{
-			throw new NotImplementedException();
+			finishedLine = currentInputLine;
 		}
 
-		public void EnterVariablelist(BASICParser.VariablelistContext context)
-		{
-			throw new NotImplementedException();
-		}
+		public void EnterVariablelist(BASICParser.VariablelistContext context) {}
 
-		public void ExitVariablelist(BASICParser.VariablelistContext context)
-		{
-			throw new NotImplementedException();
-		}
+		public void ExitVariablelist(BASICParser.VariablelistContext context) {}
 
 		public void EnterInputprompt(BASICParser.InputpromptContext context)
 		{
