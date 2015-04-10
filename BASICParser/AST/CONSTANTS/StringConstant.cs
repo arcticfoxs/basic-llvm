@@ -1,4 +1,5 @@
 ﻿using LLVM;
+using System;
 
 namespace BASICLLVM.AST
 {
@@ -11,6 +12,9 @@ namespace BASICLLVM.AST
 		}
 		public override Value code(LLVMContext context, Module module, IRBuilder builder)
 		{
+			if (Parser.variables.stringLiterals.ContainsKey(value))
+				return Parser.variables.stringLiterals[value];
+
 			Constant toPrint = new Constant(context, value);
 			GlobalVariable global = new GlobalVariable(
 				module,
@@ -21,11 +25,11 @@ namespace BASICLLVM.AST
 			  ".str"); // the name of the global constant
 
 			Constant zero = new Constant(context, 32, 0);
-			Value[] args = new Value[] {
-				// get the address of the string (two indices because the first one references the array and the second one references the first element in the array)
-				ConstantExpr.GEP(global, zero, zero)
-			};
-			return ConstantExpr.GEP(global, zero, zero);
+			Value output = ConstantExpr.GEP(global, zero, zero);
+			Parser.variables.stringLiterals[value] = output;
+			Console.WriteLine("StringConstant "+value);
+			output.Dump();
+			return output;
 		}
 	}
 }

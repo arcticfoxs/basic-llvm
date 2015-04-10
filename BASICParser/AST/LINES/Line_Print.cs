@@ -33,43 +33,9 @@ namespace BASICLLVM
 				else
 				{
 					if (thisItem.stringExpr == null)
-					{
-						// print NumericExpression
-						NumericExpression thisExpression = thisItem.numExpr;
-						Value expressionValue = thisExpression.code(context,module,builder);
-						Constant stringFormat = new Constant(context,"%f");
-
-						GlobalVariable global = new GlobalVariable(
-							module,
-						  stringFormat.GetType(),
-						  true, // constant
-						  LinkageType.PrivateLinkage, // only visible in this module
-						  stringFormat,
-						  ".str"); // the name of the global constant
-
-						Constant zero = new Constant(context, 32, 0);
-
-
-						Value[] args = new Value[] {
-							ConstantExpr.GEP(global,zero,zero),
-							expressionValue
-						};
-						// Call printf
-						builder.CreateCall(doubleprintf, args);
-					}
+						printNumericExpression(thisItem.numExpr);
 					else
-					{
-						if (thisItem.stringExpr is StringConstant)
-						{
-							StringConstant thisConstant = (StringConstant)thisItem.stringExpr;
-							printLiteral(thisConstant.value);
-						}
-						else
-						{
-							StringVariable var = (StringVariable)thisItem.stringExpr;
-							printVariable(var.name);
-						}
-					}
+						printStringExpression(thisItem.stringExpr);
 
 				}
 
@@ -83,6 +49,13 @@ namespace BASICLLVM
 			printLiteral("\r\n");
 		}
 
+
+		public void printStringExpression(StringExpression thisExpression)
+		{
+			Value[] args = new Value[] { thisExpression.code(context, module, builder) };
+			// Call printf
+			builder.CreateCall(printf, args);
+		}
 		public override BasicBlock code(LLVMContext _context, Module _module, Function _mainFn)
 		{
 			// set up vars
@@ -113,46 +86,34 @@ namespace BASICLLVM
 			
 		}
 
-		public void printVariable(string variableName)
-		{
-			Type stringType = Type.GetInteger8PointerType(context);
-
-			AllocaInstruction loadAlloc;
-			if (Parser.variables.stringIsPointer[variableName])
-				loadAlloc = Parser.variables.stringPointers[variableName];
-			else
-				loadAlloc = Parser.variables.strings[variableName];
-
-			Value loadValue = builder.CreateLoad(loadAlloc, "temp");
-			Constant zero = new Constant(context, 32, 0L);
-
-			if (!Parser.variables.stringIsPointer[variableName])
-			{
-				loadValue = builder.CreateGEP(loadAlloc, zero, "tempStringVariable");
-			}
-			
-			Value[] args = new Value[] {
-				// get the address of the string (two indices because the first one references the array and the second one references the first element in the array)
-				loadValue
-			};
-
-			// Call printf
-			builder.CreateCall(printf, args);
-		}
-
 		public void printLiteral(string strToPrint)
 		{
 			StringConstant tmp = new StringConstant(strToPrint);
-			printConstant(tmp);
+			printStringExpression(tmp);
 		}
-		public void printConstant(StringConstant toPrint)
-		{
-			Value[] args = new Value[] {
-				toPrint.code(context,module,builder)
-			};
 
+		public void printNumericExpression(NumericExpression expr)
+		{
+			Value expressionValue = expr.code(context, module, builder);
+			Constant stringFormat = new Constant(context, "%f");
+
+			GlobalVariable global = new GlobalVariable(
+				module,
+			  stringFormat.GetType(),
+			  true, // constant
+			  LinkageType.PrivateLinkage, // only visible in this module
+			  stringFormat,
+			  ".str"); // the name of the global constant
+
+			Constant zero = new Constant(context, 32, 0);
+
+
+			Value[] args = new Value[] {
+							ConstantExpr.GEP(global,zero,zero),
+							expressionValue
+						};
 			// Call printf
-			builder.CreateCall(printf, args);
+			builder.CreateCall(doubleprintf, args);
 		}
 	}
 }

@@ -18,6 +18,21 @@ namespace BASICLLVM.AST
 			Value L = LHS.code(context, module, builder);
 			Value R = RHS.code(context, module, builder);
 
+			Constant zero = new Constant(context, 32, 0);
+
+			// import strcmp function
+			LLVM.Type[] argTypes = new LLVM.Type[] { LLVM.Type.GetInteger8PointerType(context), LLVM.Type.GetInteger8PointerType(context) };
+			FunctionType stringStringToInt = new FunctionType(LLVM.Type.GetInteger8Type(context), argTypes);
+			Value strcmp = module.GetOrInsertFunction("strcmp", stringStringToInt);
+
+			L.Dump();
+			R.Dump();
+			strcmp.Dump();
+
+			LLVM.Value[] args = new LLVM.Value[] { L, R };
+
+			builder.CreateCall(strcmp, args);
+
 			Predicate fcmpPredicate;
 
 			switch (relation)

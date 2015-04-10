@@ -1,4 +1,5 @@
-﻿using LLVM;
+﻿using System;
+using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -12,8 +13,19 @@ namespace BASICLLVM.AST
 
 		public override Value code(LLVMContext context, Module module, IRBuilder builder)
 		{
-			AllocaInstruction loadAlloc = Parser.variables.strings[name];
-			return builder.CreateLoad(loadAlloc, "temp");
+			Constant zero = new Constant(context, 32, 0);
+			AllocaInstruction loadAlloc;
+			Value output;
+			if (Parser.variables.stringIsPointer[name]) {
+				loadAlloc = Parser.variables.stringPointers[name];
+				output = builder.CreateLoad(loadAlloc, "temp");
+			} else {
+				loadAlloc = Parser.variables.strings[name];
+				output =  builder.CreateGEP(loadAlloc, zero, "tempStringVariable");
+			}
+			Console.WriteLine("StringVariable " + name + " " + Parser.variables.stringIsPointer[name].ToString());
+			output.Dump();
+			return output;
 		}
 	}
 }
