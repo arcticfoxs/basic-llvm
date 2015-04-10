@@ -17,7 +17,7 @@ namespace BASICLLVM.AST
 			Value output;
 			if (!Parser.variables.stringIsPointer.ContainsKey(name))
 			{
-				CompileException ex = new CompileException(Parser.counter, "Undefined string variable");
+				CompileException ex = new CompileException("Undefined string variable");
 				ex.message = name + " is undefined";
 				throw ex;
 			}

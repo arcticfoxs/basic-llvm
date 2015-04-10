@@ -82,6 +82,7 @@
     <Compile Include="AST\LINES\Line_Let_Int.cs" />
     <Compile Include="AST\LINES\Line_Print.cs" />
     <Compile Include="AST\VARIABLES\Variable.cs" />
+    <Compile Include="Exceptions\AntlrErrorListener.cs" />
     <Compile Include="Exceptions\CompileException.cs" />
     <Compile Include="Listener.cs" />
     <Compile Include="AST\VARIABLES\NumericArrayElement.cs" />

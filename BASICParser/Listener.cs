@@ -68,6 +68,14 @@ namespace BASICLLVM
 
 		public void ExitLine(BASICParser.LineContext context)
 		{
+			if (finishedLine == null)
+			{
+				// something has gone HORRIBLY wrong!
+				CompileException ex = new CompileException("Syntax Error");
+				ex.message = "Expected statement";
+				throw ex;
+			}	
+
 			if (thisLineNumber > -2)
 			{
 				finishedLine.lineNumber = thisLineNumber;
@@ -171,8 +179,15 @@ namespace BASICLLVM
 
 		public void ExitInteger(BASICParser.IntegerContext context)
 		{
-			int payload = Convert.ToInt32(context.GetText());
-			currentInteger = payload;			
+			try
+			{
+				int payload = Convert.ToInt32(context.GetText());
+				currentInteger = payload;
+			}
+			catch
+			{
+				throw new CompileException("Couldn't parse int literal");
+			}		
 		}
 
 		public void EnterFraction(BASICParser.FractionContext context){}
@@ -511,6 +526,12 @@ namespace BASICLLVM
 
 		public void ExitStringletstatement(BASICParser.StringletstatementContext context)
 		{
+			if (currentStringVariable.Count == 0 || currentStringExpression.Count ==0)
+			{
+				CompileException ex = new CompileException("Malformed LET statement");
+				ex.message = "Expected: LET <StringVariable> = <StringExpression>";
+				throw ex;
+			}
 			finishedLine = new Line_Let_String(currentStringVariable.Pop(),currentStringExpression.Pop());
 		}
 
@@ -737,8 +758,8 @@ namespace BASICLLVM
 		{
 			if (currentPrintList.items.Count != currentPrintList.separators.Count + 1)
 			{
-				// error! should be one more item than separator
-				throw new NotImplementedException();
+				CompileException ex = new CompileException("Malformed print statement");
+				throw ex;
 			}
 			finishedLine = new Line_Print(currentPrintList);
 		}
@@ -988,7 +1009,7 @@ namespace BASICLLVM
 
 		public void VisitErrorNode(Antlr4.Runtime.Tree.IErrorNode node)
 		{
-			throw new CompileException(Parser.counter,"Syntax Error");
+			throw new CompileException("Lexical syntax error");
 		}
 
 		public void VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode node) {}

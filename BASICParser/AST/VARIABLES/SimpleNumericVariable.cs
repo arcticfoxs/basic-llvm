@@ -17,7 +17,7 @@ namespace BASICLLVM.AST
 			if (Parser.variables.numbers.ContainsKey(name)) alloc = Parser.variables.numbers[name];
 			else
 			{
-				CompileException ex = new CompileException(Parser.counter,"Undefined numeric variable");
+				CompileException ex = new CompileException("Undefined numeric variable");
 				ex.message = name + " is undefined";
 				throw ex;
 			}

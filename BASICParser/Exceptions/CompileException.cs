@@ -9,16 +9,10 @@ namespace BASICLLVM
 
 		public string name = "Unknown Error";
 
-		public CompileException(int _lineNumber, string _errorText)
+		public CompileException(string _errorText)
 		{
-			lineNumber = _lineNumber+1;
+			lineNumber = Parser.counter+1;
 			name = _errorText;
-			getCodeLineNumber();
-		}
-
-		public CompileException(int _lineNumber)
-		{
-			lineNumber = _lineNumber + 1;
 			getCodeLineNumber();
 		}
 
@@ -32,9 +26,15 @@ namespace BASICLLVM
 
 		public void print()
 		{
-			Console.WriteLine(name + " at input line " + lineNumber.ToString());
-			if (codeLineNumber > 0) Console.WriteLine("Labelled line " + codeLineNumber.ToString());
-			if (message != null) Console.WriteLine(message);
+			Console.Write("- " + name);
+
+			if(lineNumber > 0)
+				Console.Write(" at source file line " + lineNumber.ToString());
+
+			if (codeLineNumber > 0) Console.WriteLine(" (label " + codeLineNumber.ToString() + ")");
+			else Console.WriteLine();
+
+			if (message != null) Console.WriteLine(" - "+message);
 		}
 
 		public void print(string errorType)
@@ -43,6 +43,14 @@ namespace BASICLLVM
 			Console.ForegroundColor = ConsoleColor.Red;
 			Console.WriteLine(errorType);
 			print();
+			Console.ForegroundColor = originalColor;
+		}
+
+		public static void printColour(string output,ConsoleColor colour)
+		{
+			ConsoleColor originalColor = Console.ForegroundColor;
+			Console.ForegroundColor = colour;
+			Console.WriteLine(output);
 			Console.ForegroundColor = originalColor;
 		}
 	}

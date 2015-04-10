@@ -21,6 +21,13 @@ namespace BASICLLVM.AST
 
 			Constant valLength = new Constant(Parser.context, 8, 50L);
 
+			if (vars.Count == 0)
+			{
+				CompileException ex = new CompileException("Expected input variable");
+				ex.message = "INPUT statements require at least one input variable";
+				throw ex;
+			}
+
 			bool isNumeric = !(vars[0] is StringVariable);
 
 			if (!isNumeric)

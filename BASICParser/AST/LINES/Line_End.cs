@@ -4,7 +4,12 @@ namespace BASICLLVM.AST
 {
 	class Line_End : Line
 	{
+		public static bool existsEnd = false;
 
+		public Line_End()
+		{
+			existsEnd = true;
+		}
 		public override BasicBlock code()
 		{
 			BasicBlock block = bb();

@@ -30,6 +30,12 @@ namespace BASICLLVM.AST
 
 		public override void processGoto()
 		{
+			if (!Parser.variables.lines.ContainsKey(gotoTarget))
+			{
+				CompileException ex = new CompileException("Unknown GOTO target");
+				ex.message = "The target of this GOTO statement does not exist";
+				throw ex;
+			}
 			Line target = Parser.variables.lines[gotoTarget];
 			this.addJump(target);
 		}

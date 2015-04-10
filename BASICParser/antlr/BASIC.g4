@@ -89,7 +89,7 @@ nextstatement : 'NEXT' controlvariable;
 // print statement
 
 printstatement : 'PRINT' printlist?;
-printlist : (printitem? printseparator)* printitem+;
+printlist : (printitem? printseparator)+ printitem? | printitem;
 printitem : expression | tabcall;
 tabcall : 'TAB' LEFTPARENTHESIS numericexpression RIGHTPARENTHESIS;
 printseparator : COMMA | SEMICOLON;
