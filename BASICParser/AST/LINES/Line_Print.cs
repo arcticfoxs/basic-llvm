@@ -88,7 +88,7 @@ namespace BASICLLVM
 		public void printNumericExpression(NumericExpression expr)
 		{
 			Value expressionValue = expr.code(builder);
-			Constant stringFormat = new Constant(Parser.context, "%f");
+			Constant stringFormat = new Constant(Parser.context, "%g");
 
 			GlobalVariable global = new GlobalVariable(
 				Parser.module,
