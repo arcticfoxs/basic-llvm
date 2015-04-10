@@ -16,6 +16,7 @@ namespace BASICLLVM
 		public Dictionary<string, AST.Line_GoSub> gosubLines;
 		public Dictionary<int, AST.Line> lines;
 		public List<LLVM.BasicBlock> returnBlocks;
+		public Dictionary<string, LLVM.AllocaInstruction> stringLiterals;
 
 		public VariableStore()
 		{
@@ -30,6 +31,7 @@ namespace BASICLLVM
 			lines = new Dictionary<int, AST.Line>();
 			returnAddresses = new Stack<LLVM.AllocaInstruction>();
 			returnBlocks = new List<LLVM.BasicBlock>();
+			stringLiterals = new Dictionary<string, LLVM.AllocaInstruction>();
 		}
 	}
 }

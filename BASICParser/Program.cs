@@ -65,8 +65,11 @@ namespace BASICLLVM
 
 		public static void debug(string info)
 		{
-			if (amDebug) Console.WriteLine(info);
-			Console.WriteLine();
+			if (amDebug)
+			{
+				Console.WriteLine(info);
+				Console.WriteLine();
+			}			
 		}
     }
 }
