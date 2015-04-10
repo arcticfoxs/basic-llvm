@@ -72,20 +72,14 @@ namespace BASICLLVM
 			}
 		}
 
-		public void EnterLinenumber(BASICParser.LinenumberContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterLinenumber(BASICParser.LinenumberContext context){}
 
 		public void ExitLinenumber(BASICParser.LinenumberContext context)
 		{
 			currentLineNumber = Convert.ToInt32(context.GetText());
 		}
 
-		public void EnterEndline(BASICParser.EndlineContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterEndline(BASICParser.EndlineContext context){}
 
 		public void ExitEndline(BASICParser.EndlineContext context)
 		{
@@ -97,25 +91,16 @@ namespace BASICLLVM
 			thisLineNumber = currentLineNumber;
 		}
 
-		public void ExitEndstatement(BASICParser.EndstatementContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void ExitEndstatement(BASICParser.EndstatementContext context) {}
 
 		public void EnterStatement(BASICParser.StatementContext context)
 		{
 			thisLineNumber = currentLineNumber;
 		}
 
-		public void ExitStatement(BASICParser.StatementContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void ExitStatement(BASICParser.StatementContext context) {}
 
-		public void EnterSign(BASICParser.SignContext context)
-		{
-			
-		}
+		public void EnterSign(BASICParser.SignContext context) {}
 
 		public void ExitSign(BASICParser.SignContext context)
 		{
@@ -163,25 +148,17 @@ namespace BASICLLVM
 		public void ExitInteger(BASICParser.IntegerContext context)
 		{
 			int payload = Convert.ToInt32(context.GetText());
-			currentInteger = payload;
-			// throw new NotImplementedException();
-			
+			currentInteger = payload;			
 		}
 
-		public void EnterFraction(BASICParser.FractionContext context)
-		{
-			
-		}
+		public void EnterFraction(BASICParser.FractionContext context){}
 
 		public void ExitFraction(BASICParser.FractionContext context)
 		{
 			currentFraction = new Fraction(context.GetText());
 		}
 
-		public void EnterExrad(BASICParser.ExradContext context)
-		{
-			throw new NotImplementedException();
-		}
+		public void EnterExrad(BASICParser.ExradContext context){}
 
 		public void ExitExrad(BASICParser.ExradContext context)
 		{
@@ -930,10 +907,7 @@ namespace BASICLLVM
 			throw new NotImplementedException();
 		}
 
-		public void EnterRemarkstatement(BASICParser.RemarkstatementContext context)
-		{
-			
-		}
+		public void EnterRemarkstatement(BASICParser.RemarkstatementContext context) { }
 
 		public void ExitRemarkstatement(BASICParser.RemarkstatementContext context)
 		{
@@ -950,66 +924,29 @@ namespace BASICLLVM
 			throw new NotImplementedException();
 		}
 
-		public void EnterStringcharacter(BASICParser.StringcharacterContext context)
-		{
-			
-		}
+		public void EnterStringcharacter(BASICParser.StringcharacterContext context) {}
 
-		public void ExitStringcharacter(BASICParser.StringcharacterContext context)
-		{
-			
-		}
+		public void ExitStringcharacter(BASICParser.StringcharacterContext context) {}
 
-		public void EnterQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context){}
 
-		public void ExitQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void ExitQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context) {}
 
-		public void EnterUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context) {}
 
-		public void ExitUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void ExitUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context) {}
 
-		public void EnterPlainstringcharacter(BASICParser.PlainstringcharacterContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterPlainstringcharacter(BASICParser.PlainstringcharacterContext context) {}
 
-		public void ExitPlainstringcharacter(BASICParser.PlainstringcharacterContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void ExitPlainstringcharacter(BASICParser.PlainstringcharacterContext context) {}
 
-		public void EnterRemarkstring(BASICParser.RemarkstringContext context)
-		{
-			
-		}
+		public void EnterRemarkstring(BASICParser.RemarkstringContext context) {}
 
-		public void ExitRemarkstring(BASICParser.RemarkstringContext context)
-		{
-			
-		}
+		public void ExitRemarkstring(BASICParser.RemarkstringContext context) {}
 
-		public void EnterQuotedstring(BASICParser.QuotedstringContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterQuotedstring(BASICParser.QuotedstringContext context) {}
 
-		public void ExitQuotedstring(BASICParser.QuotedstringContext context)
-		{
-
-			// throw new NotImplementedException();
-		}
+		public void ExitQuotedstring(BASICParser.QuotedstringContext context) {}
 
 		public void EnterUnquotedstring(BASICParser.UnquotedstringContext context)
 		{
@@ -1021,24 +958,15 @@ namespace BASICLLVM
 			throw new NotImplementedException();
 		}
 
-		public void EnterEveryRule(Antlr4.Runtime.ParserRuleContext ctx)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterEveryRule(Antlr4.Runtime.ParserRuleContext ctx){}
 
-		public void ExitEveryRule(Antlr4.Runtime.ParserRuleContext ctx)
-		{
-			// throw new NotImplementedException();
-		}
+		public void ExitEveryRule(Antlr4.Runtime.ParserRuleContext ctx){}
 
 		public void VisitErrorNode(Antlr4.Runtime.Tree.IErrorNode node)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode node)
-		{
-			// throw new NotImplementedException();
-		}
+		public void VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode node) {}
 	}
 }

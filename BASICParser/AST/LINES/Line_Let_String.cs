@@ -18,67 +18,36 @@ namespace BASICLLVM.AST
 			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
 			IRBuilder builder = new IRBuilder(block);
 
+			Constant zero = new Constant(context, 32, 0);
+			Type i8p = Type.GetInteger8PointerType(context);
+
+			AllocaInstruction alloc;
+			Value stringVal = expr.code(context, module, builder); // get value of RHS
+
+
 			if (expr is StringConstant)
 			{
-				string strConst = ((StringConstant)expr).value;
-				Constant valConst = new Constant(context, strConst);
-
-				GlobalVariable global = new GlobalVariable(
-					module,
-				  valConst.GetType(),
-				  true, // constant
-				  LinkageType.PrivateLinkage, // only visible in this module
-				  valConst,
-				  ".str"); // the name of the global constant
-
-				
-				Constant valLength = new Constant(context,8,(ulong) strConst.Length+1);
-				Type i8Type = Type.GetInteger8PointerType(context);
-				Type i8 = Type.GetInteger8Type(context);
-				Type i8p = Type.GetInteger8PointerType(context);
-
-				AllocaInstruction alloc;
-
 				if (Parser.variables.stringPointers.ContainsKey(var.name))
 					alloc = Parser.variables.stringPointers[var.name]; // already allocated
 				else
 				{
-					// new allocation
-					alloc = builder.CreateAlloca(i8p, valLength, var.name);
-					// remember allocation
-					Parser.variables.stringPointers[var.name] = alloc;
+					alloc = builder.CreateAlloca(i8p, zero, var.name); // new allocation
+					Parser.variables.stringPointers[var.name] = alloc; // remember allocation
 				}
 				Parser.variables.stringIsPointer[var.name] = true;
-				
-				Constant zero = new Constant(context, 32, 0);
-				Value stringVal = ConstantExpr.GEP(global,zero,zero);
-				builder.CreateStore(stringVal, alloc);
-
 			}
 			else
 			{
-				StringVariable loadVariable = (StringVariable)expr;
-
-				AllocaInstruction loadAlloc = Parser.variables.strings[loadVariable.name];
-				Value loadValue = builder.CreateLoad(loadAlloc, "temp");
-
-				AllocaInstruction alloc;
-
-				Type i8Type = Type.GetInteger8PointerType(context);
-				Constant zero = new Constant(context, 32, 0);
-
 				if (Parser.variables.strings.ContainsKey(var.name))
 					alloc = Parser.variables.strings[var.name]; // already allocated
 				else
 				{
-					// new allocation
-					alloc = builder.CreateAlloca(i8Type, zero, var.name);
-					// remember allocation
-					 Parser.variables.strings[var.name] = alloc;
+					alloc = builder.CreateAlloca(i8p, zero, var.name); // new allocation
+					Parser.variables.strings[var.name] = alloc; // remember allocation
 				}
-
-				 builder.CreateStore(loadValue, alloc);
 			}
+
+			builder.CreateStore(stringVal, alloc);
 
 			firstBlock = block;
 			lastBlock = block;
