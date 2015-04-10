@@ -26,6 +26,8 @@ namespace BASICLLVM
 			StreamReader file =  new System.IO.StreamReader(inputFile);
 			while ((line = file.ReadLine()) != null)
 			{
+				Program.debug("Parsing line " + counter.ToString());
+				Program.debug(line);
 				AntlrInputStream stream = new AntlrInputStream(line);
 				ITokenSource lexer = new BASICLexer(stream);
 				ITokenStream tokens = new CommonTokenStream(lexer);

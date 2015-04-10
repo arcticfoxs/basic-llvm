@@ -116,7 +116,6 @@ namespace BASICLLVM
 		public void printVariable(string variableName)
 		{
 			Type stringType = Type.GetInteger8PointerType(context);
-			// stringType = PointerType.Get(stringType, 0);
 
 			AllocaInstruction loadAlloc;
 			if (Parser.variables.stringIsPointer[variableName])
@@ -126,7 +125,6 @@ namespace BASICLLVM
 
 			Value loadValue = builder.CreateLoad(loadAlloc, "temp");
 			Constant zero = new Constant(context, 32, 0L);
-			loadValue.Dump();
 
 			if (!Parser.variables.stringIsPointer[variableName])
 			{

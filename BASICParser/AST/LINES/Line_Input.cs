@@ -77,13 +77,9 @@ namespace BASICLLVM.AST
 
 			Value hop = (Value)alloc;
 
-			scanf.Dump();
-			formatValue.Dump();
-			gep.Dump();
 
 			Value outputs = builder.CreateCall(scanf, args);
 
-			outputs.Dump();
 
 			firstBlock = block;
 			lastBlock = block;

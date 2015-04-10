@@ -9,16 +9,28 @@ namespace BASICLLVM
 {
     class Program
     {
+		public static bool dump = false;
+		public static bool block = false;
+		public static bool amDebug = false;
         static void Main(string[] args)
         {
-			string inputFile = "D:\\Project\\basictest.txt"; // TODO: Read from parameter
+			string inputFile = args[0];
+			string outputFile = inputFile.Substring(0, inputFile.LastIndexOf("."))+".ll";
+			bool outNext = false;
+			foreach (string arg in args)
+			{
+				if (outNext) outputFile = arg;
+				if (arg == "-dump") dump = true;
+				if (arg == "-block") block = true;
+				if (arg == "-o") outNext = true;
+				if (arg == "-debug") amDebug = true;
+			}
 
 			LLVMContext context = new LLVMContext();
 			Parser.context = context;
-			// VariableStore.init();
 			List<Line> lines = Parser.parseFile(inputFile);
 
-			Console.WriteLine("Done Parsing");
+			if(dump) Console.WriteLine("Done Parsing");
 
 	
 			Module module = new Module(context, "SourceFile");
@@ -45,13 +57,16 @@ namespace BASICLLVM
 			for (int i = 0; i < lines.Count; i++)
 				lines[i].processGoto();
 
-			Console.WriteLine("");
-			Console.WriteLine("-----");
-			Console.WriteLine("");
-			module.Dump();
-			module.WriteToFile("D:\\Project\\out.ll");
-			Console.WriteLine("Compile Successful");
-			Console.ReadLine();
+			if(dump) module.Dump();
+			module.WriteToFile(outputFile);
+			if(dump) Console.WriteLine("Compile Successful");
+			if(block) Console.ReadLine();
         }
+
+		public static void debug(string info)
+		{
+			if (amDebug) Console.WriteLine(info);
+			Console.WriteLine();
+		}
     }
 }

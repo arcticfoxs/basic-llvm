@@ -31,7 +31,7 @@ namespace BASICLLVM.AST
 			functionNames[NumericSuppliedFunction.RND] = "rand";
 			functionNames[NumericSuppliedFunction.SGN] = "copysign";
 			functionNames[NumericSuppliedFunction.SIN] = "sin";
-			functionNames[NumericSuppliedFunction.SQR] = "log";
+			functionNames[NumericSuppliedFunction.SQR] = "sqrt";
 			functionNames[NumericSuppliedFunction.TAN] = "tan";
 
 			LLVM.Type[] argDouble = new LLVM.Type[] { LLVM.Type.GetDoubleType(context) };
