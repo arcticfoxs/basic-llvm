@@ -12,19 +12,14 @@ namespace BASICLLVM.AST
 			vars = new List<Variable>();
 		}
 
-		public override BasicBlock code(LLVMContext context, Module module, Function mainFn)
+		public override BasicBlock code()
 		{
-			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
+			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
 			IRBuilder builder = new IRBuilder(block);
 
 			AllocaInstruction alloc;
 
-			LLVM.Type i8p = LLVM.Type.GetInteger8PointerType(context);
-			LLVM.Type i8Type = LLVM.Type.GetInteger8Type(context);
-			LLVM.Type i32Type = LLVM.Type.GetInteger32Type(context);
-			LLVM.Type doubleType = LLVM.Type.GetDoubleType(context);
-			LLVM.Type dp = LLVM.Type.GetDoublePointerType(context);
-			Constant valLength = new Constant(context, 8, 50L);
+			Constant valLength = new Constant(Parser.context, 8, 50L);
 
 			bool isNumeric = !(vars[0] is StringVariable);
 
@@ -36,7 +31,7 @@ namespace BASICLLVM.AST
 					alloc = Parser.variables.strings[var.name]; // already allocated
 				else
 				{
-					alloc = builder.CreateAlloca(i8Type, valLength, var.name); // new allocation
+					alloc = builder.CreateAlloca(Parser.i8, valLength, var.name); // new allocation
 					Parser.variables.strings[var.name] = alloc; // remember allocation
 				}
 				Parser.variables.stringIsPointer[var.name] = false;
@@ -48,28 +43,23 @@ namespace BASICLLVM.AST
 				if (Parser.variables.numbers.ContainsKey(var.name)) alloc = Parser.variables.numbers[var.name];
 				else
 				{
-					alloc = builder.CreateAlloca(doubleType, var.name);
+					alloc = builder.CreateAlloca(Parser.dbl, var.name);
 					Parser.variables.numbers[var.name] = alloc;
 				}
 			}
 
 
 			// Import scanf function
-			PointerType i8pp = PointerType.GetUnqualified(i8p);
-			
+			LLVM.Type[] argTypes = isNumeric ? new LLVM.Type[] { Parser.i8p, Parser.dblp } : new LLVM.Type[] { Parser.i8p, Parser.i8p };
 
-			LLVM.Type[] argTypes = isNumeric ? new LLVM.Type[] { i8p, dp } : new LLVM.Type[] { i8p, i8p };
-
-			FunctionType stringToInt = new FunctionType(LLVM.Type.GetVoidType(context), argTypes);
-			Constant scanf = module.GetOrInsertFunction("scanf", stringToInt);
+			FunctionType stringToInt = new FunctionType(Parser.vd, argTypes);
+			Constant scanf = Parser.module.GetOrInsertFunction("scanf", stringToInt);
 
 			string formatString = isNumeric ? "%lf" : "%79s";
 			StringConstant format = new StringConstant(formatString);
-			Value formatValue = format.code(context, module, builder);
+			Value formatValue = format.code(builder);
 
-			Constant zero = new Constant(context, 8, 0);
-
-			Value gep = builder.CreateGEP(alloc, zero, "gepTest");
+			Value gep = builder.CreateGEP(alloc, Parser.zero, "gepTest");
 			
 			Value[] args = {formatValue,gep};
 

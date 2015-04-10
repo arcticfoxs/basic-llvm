@@ -15,9 +15,9 @@ namespace BASICLLVM.AST
 			gotoTarget = _gotoLineNumber;
 		}
 
-		public override BasicBlock code(LLVM.LLVMContext context, LLVM.Module module, LLVM.Function mainFn)
+		public override BasicBlock code()
 		{
-			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
+			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
 
 			IRBuilder builder = new IRBuilder(block);
 

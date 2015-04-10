@@ -8,8 +8,9 @@ namespace BASICLLVM.AST
 		public enum EqualityRelation { EQUAL, NOTEQUAL }
 		public enum Relation { EQUAL, NOTEQUAL, LESSTHAN, GREATERTHAN, NOTLESS, NOTGREATER }
 
-		public virtual Value code(LLVMContext context, Module module, IRBuilder builder)
+		public virtual Value code(IRBuilder builder)
 		{
+			// abstract
 			throw new NotImplementedException();
 		}
 	}

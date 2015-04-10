@@ -9,15 +9,13 @@ namespace BASICLLVM.AST
 
 		public SimpleNumericVariable(string _name)
 		{
-			name = _name;
+			name = _name.ToUpper();
 		}
-		public override Value code(LLVMContext context, Module module, IRBuilder builder)
+		public override Value code(IRBuilder builder)
 		{
 			AllocaInstruction alloc;
 			if (Parser.variables.numbers.ContainsKey(name)) alloc = Parser.variables.numbers[name];
 			else throw new NotImplementedException();
-
-			LLVM.Type fpType = LLVM.Type.GetDoubleType(context);
 			return builder.CreateLoad(alloc, "temp");
 		}
 	}

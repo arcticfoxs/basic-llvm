@@ -6,7 +6,7 @@ namespace BASICLLVM.AST
 	class StringExpression
 	{
 		// abstract
-		public virtual Value code(LLVMContext context, Module module, IRBuilder builder)
+		public virtual Value code(IRBuilder builder)
 		{
 			throw new NotImplementedException();
 		}

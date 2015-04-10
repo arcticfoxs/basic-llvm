@@ -11,10 +11,21 @@ namespace BASICLLVM
 	{
 		public static LLVMContext context;
 		public static Module module;
-		public static VariableStore variables;
 		public static Function function;
+		public static VariableStore variables;
+		public static LLVM.Type i8, i8p, i8pp, i32, dbl,dblp,vd;
+		public static Constant zero;
 		public static List<Line> parseFile(string inputFile)
 		{
+			i8 = LLVM.Type.GetInteger8Type(context);
+			i8p = LLVM.Type.GetInteger8PointerType(context);
+			i8pp = LLVM.PointerType.GetUnqualified(i8p);
+			i32 = LLVM.Type.GetInteger32Type(context);
+			dbl = LLVM.Type.GetDoubleType(context);
+			dblp = LLVM.Type.GetDoublePointerType(context);
+			vd = LLVM.Type.GetVoidType(context);
+			zero = new Constant(context, 8, 0);
+
 			int counter = 0;
 			string line;
 

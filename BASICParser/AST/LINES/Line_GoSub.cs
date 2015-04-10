@@ -7,7 +7,6 @@ namespace BASICLLVM.AST
 		int gotoTarget;
 		BasicBlock nextBlock;
 		IRBuilder builder;
-		LLVMContext keepContext;
 
 		public Line_GoSub(int target)
 		{
@@ -17,17 +16,16 @@ namespace BASICLLVM.AST
 		public override void jumpToNext(Line nextLine)
 		{
 			nextBlock = nextLine.firstBlock;
-			AllocaInstruction alloc = builder.CreateAlloca(Type.GetInteger8PointerType(keepContext),"returnAddress");
+			AllocaInstruction alloc = builder.CreateAlloca(Parser.i8p, "returnAddress");
 			BlockAddress addr = BlockAddress.Get(Parser.function,nextBlock);
 			builder.CreateStore(addr, alloc);
 			Parser.variables.returnAddresses.Push(alloc);
 			Parser.variables.returnBlocks.Add(nextLine.firstBlock);
 		}
 
-		public override BasicBlock code(LLVM.LLVMContext context, LLVM.Module module, LLVM.Function mainFn)
+		public override BasicBlock code()
 		{
-			keepContext = context;
-			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
+			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
 
 			builder = new IRBuilder(block);
 

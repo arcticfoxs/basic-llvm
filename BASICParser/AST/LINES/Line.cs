@@ -24,9 +24,9 @@ namespace BASICLLVM.AST
 			addJump(nextLine);
 		}
 
-		public virtual BasicBlock code(LLVMContext context, Module module, Function mainFn)
+		public virtual BasicBlock code()
 		{
-			BasicBlock block = new BasicBlock(context, mainFn, "remark"+lineNumber.ToString());
+			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "remark"+lineNumber.ToString());
 			firstBlock = block;
 			lastBlock = block;
 			return block;

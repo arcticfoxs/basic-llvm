@@ -29,12 +29,10 @@ namespace BASICLLVM.AST
 			return ne;			
 		}
 
-		public override BasicBlock code(LLVMContext context, Module module, Function mainFn)
+		public override BasicBlock code()
 		{
-			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
+			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
 			IRBuilder builder = new IRBuilder(block);
-
-			Type fpType = Type.GetDoubleType(context);
 
 			AllocaInstruction alloc;
 
@@ -43,30 +41,30 @@ namespace BASICLLVM.AST
 			if (Parser.variables.numbers.ContainsKey(varName)) alloc = Parser.variables.numbers[varName];
 			else
 			{
-				alloc = builder.CreateAlloca(fpType, varName);
+				alloc = builder.CreateAlloca(Parser.dbl, varName);
 				Parser.variables.numbers[varName] = alloc;
 			}
-			Value exprVal = initialvalue.code(context, module, builder);
+			Value exprVal = initialvalue.code(builder);
 			builder.CreateStore(exprVal, alloc);
 
 			// store limit
 			if (Parser.variables.limits.ContainsKey(varName)) alloc = Parser.variables.limits[varName];
 			else
 			{
-				alloc = builder.CreateAlloca(fpType, "limit_"+varName);
+				alloc = builder.CreateAlloca(Parser.dbl, "limit_"+varName);
 				Parser.variables.limits[varName] = alloc;
 			}
-			exprVal = limit.code(context, module, builder);
+			exprVal = limit.code(builder);
 			builder.CreateStore(exprVal, alloc);
 
 			// store increment
 			if (Parser.variables.increments.ContainsKey(varName)) alloc = Parser.variables.increments[varName];
 			else
 			{
-				alloc = builder.CreateAlloca(fpType, "increment_"+varName);
+				alloc = builder.CreateAlloca(Parser.dbl, "increment_"+varName);
 				Parser.variables.increments[varName] = alloc;
 			}
-			exprVal = increment.code(context, module, builder);
+			exprVal = increment.code(builder);
 			builder.CreateStore(exprVal, alloc);
 
 			// store the FOR statement so the NEXT statement can find it

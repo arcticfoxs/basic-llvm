@@ -35,8 +35,8 @@ namespace BASICLLVM
 	
 			Module module = new Module(context, "SourceFile");
 			Parser.module = module;
-			LLVM.Type[] mainArgs = new LLVM.Type[] { LLVM.Type.GetInteger32Type(context), LLVM.PointerType.GetUnqualified(LLVM.Type.GetInteger8PointerType(context)) };
-			FunctionType mainType = new FunctionType(LLVM.Type.GetInteger32Type(context),mainArgs);
+			LLVM.Type[] mainArgs = new LLVM.Type[] { Parser.i32, Parser.i8pp};
+			FunctionType mainType = new FunctionType(Parser.i32,mainArgs);
 			
 			Function mainFunction = new Function(module,"main",mainType);
 
@@ -47,7 +47,7 @@ namespace BASICLLVM
 
 			for (int i = 0; i < lines.Count; i++)
 			{
-				newLine = lines[i].code(context, module, mainFunction);
+				newLine = lines[i].code();
 				if(lines[i].hasLineNumber) Parser.variables.lines.Add(lines[i].lineNumber, lines[i]);
 			}
 

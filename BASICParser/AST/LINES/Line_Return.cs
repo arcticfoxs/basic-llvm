@@ -6,9 +6,9 @@ namespace BASICLLVM.AST
 	{
 		BasicBlock block;
 		IRBuilder builder;
-		public override LLVM.BasicBlock code(LLVM.LLVMContext context, LLVM.Module module, LLVM.Function mainFn)
+		public override LLVM.BasicBlock code()
 		{
-			block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
+			block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
 			builder = new IRBuilder(block);
 
 			firstBlock = block;

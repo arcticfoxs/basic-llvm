@@ -13,17 +13,15 @@ namespace BASICLLVM.AST
 			RHS = _rhs;
 			relation = _rel;
 		}
-		public override Value code(LLVMContext context, Module module, IRBuilder builder)
+		public override Value code(IRBuilder builder)
 		{
-			Value L = LHS.code(context, module, builder);
-			Value R = RHS.code(context, module, builder);
-
-			Constant zero = new Constant(context, 8, 0);
+			Value L = LHS.code(builder);
+			Value R = RHS.code(builder);
 
 			// import strcmp function
-			LLVM.Type[] argTypes = new LLVM.Type[] { LLVM.Type.GetInteger8PointerType(context), LLVM.Type.GetInteger8PointerType(context) };
-			FunctionType stringStringToInt = new FunctionType(LLVM.Type.GetInteger8Type(context), argTypes);
-			Value strcmp = module.GetOrInsertFunction("strcmp", stringStringToInt);
+			LLVM.Type[] argTypes = new LLVM.Type[] { Parser.i8p, Parser.i8p };
+			FunctionType stringStringToInt = new FunctionType(Parser.i8, argTypes);
+			Value strcmp = Parser.module.GetOrInsertFunction("strcmp", stringStringToInt);
 
 			LLVM.Value[] args = new LLVM.Value[] { L, R };
 
@@ -31,8 +29,7 @@ namespace BASICLLVM.AST
 
 			Predicate comparison = (relation == EqualityRelation.EQUAL) ? Predicate.Equal : Predicate.NotEqual;
 
-			Value output = builder.CreateFCmp(comparison, strCmpResult, zero, "tempStrEqExp");
-			output.Dump();
+			Value output = builder.CreateFCmp(comparison, strCmpResult, Parser.zero, "tempStrEqExp");
 			return output;
 		}
 	}

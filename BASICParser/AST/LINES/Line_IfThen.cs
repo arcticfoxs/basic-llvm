@@ -17,12 +17,12 @@ namespace BASICLLVM.AST
 			target = _goto;
 		}
 
-		public override BasicBlock code(LLVM.LLVMContext context, LLVM.Module module, LLVM.Function mainFn)
+		public override BasicBlock code()
 		{
-			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
+			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
 			builder = new IRBuilder(block);
 
-			resultOfExpression = expression.code(context,module,builder);
+			resultOfExpression = expression.code(builder);
 
 			firstBlock = block;
 			lastBlock = block;

@@ -13,17 +13,13 @@ namespace BASICLLVM.AST
 			expr = _expr;
 		}
 
-		public override BasicBlock code(LLVMContext context, Module module, Function mainFn)
+		public override BasicBlock code()
 		{
-			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
+			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
 			IRBuilder builder = new IRBuilder(block);
 
-			Constant zero = new Constant(context, 32, 0);
-			Type i8p = Type.GetInteger8PointerType(context);
-			Type i8 = Type.GetInteger8Type(context);
-
 			AllocaInstruction alloc;
-			Value stringVal = expr.code(context, module, builder); // get value of RHS
+			Value stringVal = expr.code(builder); // get value of RHS
 
 
 			if (expr is StringConstant)
@@ -32,7 +28,7 @@ namespace BASICLLVM.AST
 					alloc = Parser.variables.stringPointers[var.name]; // already allocated
 				else
 				{
-					alloc = builder.CreateAlloca(i8p, zero, var.name); // new allocation
+					alloc = builder.CreateAlloca(Parser.i8p, Parser.zero, var.name); // new allocation
 					Parser.variables.stringPointers[var.name] = alloc; // remember allocation
 				}
 				Parser.variables.stringIsPointer[var.name] = true;
@@ -43,13 +39,12 @@ namespace BASICLLVM.AST
 					alloc = Parser.variables.stringPointers[var.name]; // already allocated
 				else
 				{
-					alloc = builder.CreateAlloca(i8p, zero, var.name); // new allocation
+					alloc = builder.CreateAlloca(Parser.i8p, Parser.zero, var.name); // new allocation
 					Parser.variables.stringPointers[var.name] = alloc; // remember allocation
 				}
 				Parser.variables.stringIsPointer[var.name] = true;
 			}
 
-			stringVal.Dump();
 			builder.CreateStore(stringVal, alloc);
 
 			firstBlock = block;

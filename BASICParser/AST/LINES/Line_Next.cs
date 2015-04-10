@@ -14,9 +14,9 @@ namespace BASICLLVM.AST
 			controlVariable = v;
 		}
 
-		public override LLVM.BasicBlock code(LLVM.LLVMContext context, LLVM.Module module, LLVM.Function mainFn)
+		public override LLVM.BasicBlock code()
 		{
-			block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
+			block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
 			builder = new IRBuilder(block);
 
 			AllocaInstruction limitAlloc = Parser.variables.limits[controlVariable.name];

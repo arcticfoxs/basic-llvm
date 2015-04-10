@@ -5,8 +5,9 @@ namespace BASICLLVM.AST
 	class Primary
 	{
 		// override this!
-		public virtual Value code(LLVMContext context, Module module, IRBuilder builder)
+		public virtual Value code(IRBuilder builder)
 		{
+			// abstract
 			throw new NotImplementedException();
 		}
 	}

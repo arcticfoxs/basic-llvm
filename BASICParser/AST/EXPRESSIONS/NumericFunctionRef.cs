@@ -17,7 +17,7 @@ namespace BASICLLVM.AST
 		public NumericSuppliedFunction numericSuppliedFunctionName;
 		public NumericExpression argument;
 
-		public void setupFunctions(LLVMContext context)
+		public void setupFunctions()
 		{
 			functionNames = new Dictionary<NumericSuppliedFunction, string>();
 			functionTypes = new Dictionary<NumericSuppliedFunction, FunctionType>();
@@ -34,13 +34,13 @@ namespace BASICLLVM.AST
 			functionNames[NumericSuppliedFunction.SQR] = "sqrt";
 			functionNames[NumericSuppliedFunction.TAN] = "tan";
 
-			LLVM.Type[] argDouble = new LLVM.Type[] { LLVM.Type.GetDoubleType(context) };
+			LLVM.Type[] argDouble = new LLVM.Type[] { Parser.dbl };
 			LLVM.Type[] argVoid = new LLVM.Type[] { };
-			LLVM.Type[] argDoublePair = new LLVM.Type[] { LLVM.Type.GetDoubleType(context), LLVM.Type.GetDoubleType(context) };
+			LLVM.Type[] argDoublePair = new LLVM.Type[] { Parser.dbl, Parser.dbl };
 
-			FunctionType doubleToDouble = new FunctionType(LLVM.Type.GetDoubleType(context), argDouble);
-			FunctionType doublePairToDouble = new FunctionType(LLVM.Type.GetDoubleType(context), argDoublePair);
-			FunctionType voidToDouble = new FunctionType(LLVM.Type.GetDoubleType(context), argVoid);
+			FunctionType doubleToDouble = new FunctionType(Parser.dbl, argDouble);
+			FunctionType doublePairToDouble = new FunctionType(Parser.dbl, argDoublePair);
+			FunctionType voidToDouble = new FunctionType(Parser.dbl, argVoid);
 
 			functionTypes[NumericSuppliedFunction.ABS] = doubleToDouble;
 			functionTypes[NumericSuppliedFunction.ATN] = doubleToDouble;
@@ -55,11 +55,11 @@ namespace BASICLLVM.AST
 			functionTypes[NumericSuppliedFunction.TAN] = doubleToDouble;
 		}
 
-		public Constant getSuppliedFunction(NumericSuppliedFunction fn, Module module)
+		public Constant getSuppliedFunction(NumericSuppliedFunction fn)
 		{
 			string functionName = functionNames[fn];
 			FunctionType type = functionTypes[fn];
-			return module.GetOrInsertFunction(functionName, type);
+			return Parser.module.GetOrInsertFunction(functionName, type);
 		}
 
 		public NumericFunctionRef(string _numericdefinedfunctionname)
@@ -86,12 +86,12 @@ namespace BASICLLVM.AST
 			refType = FunctionRefType.NUMERICSUPPLIEDFUNCTION;
 		}
 
-		public override Value code(LLVMContext context, Module module, IRBuilder builder)
+		public override Value code(IRBuilder builder)
 		{
-			setupFunctions(context);
+			setupFunctions();
 			if (refType == FunctionRefType.NUMERICSUPPLIEDFUNCTION)
 			{
-				Constant suppliedFunction = getSuppliedFunction(numericSuppliedFunctionName,module);
+				Constant suppliedFunction = getSuppliedFunction(numericSuppliedFunctionName);
 				Value[] args = {};
 				Value input;
 				switch (numericSuppliedFunctionName)
@@ -100,12 +100,12 @@ namespace BASICLLVM.AST
 						// Do something
 						break;
 					case NumericSuppliedFunction.SGN:
-						Value one = ConstantFP.Get(context, new APFloat(1.0));
-						input = argument.code(context,module,builder);
+						Value one = ConstantFP.Get(Parser.context, new APFloat(1.0));
+						input = argument.code(builder);
 						args = new Value[] {one, input};
 						break;
 					default:
-						input = argument.code(context,module,builder);
+						input = argument.code(builder);
 						args = new Value[] {input};
 						break;
 				}

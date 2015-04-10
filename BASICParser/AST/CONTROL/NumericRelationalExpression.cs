@@ -16,10 +16,10 @@ namespace BASICLLVM.AST
 			rel = _rel;
 		}
 
-		public override Value code(LLVMContext context, Module module, IRBuilder builder)
+		public override Value code(IRBuilder builder)
 		{
-			Value L = LHS.code(context,module,builder);
-			Value R = RHS.code(context,module,builder);
+			Value L = LHS.code(builder);
+			Value R = RHS.code(builder);
 			Predicate fcmpPredicate;
 
 			switch (rel)

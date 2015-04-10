@@ -13,7 +13,7 @@ namespace BASICLLVM.AST
 			subscript = _subscript;
 		}
 
-		public override Value code(LLVMContext context, Module module, IRBuilder builder)
+		public override Value code(IRBuilder builder)
 		{
 			throw new NotImplementedException();
 		}

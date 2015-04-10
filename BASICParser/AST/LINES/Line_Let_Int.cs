@@ -14,23 +14,21 @@ namespace BASICLLVM
 
 		}
 
-		public override BasicBlock code(LLVMContext context, Module module, Function mainFn)
+		public override BasicBlock code()
 		{
-			BasicBlock block = new BasicBlock(context, mainFn, "line" + lineNumber.ToString());
+			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
 			IRBuilder builder = new IRBuilder(block);
-
-			Type fpType = Type.GetDoubleType(context);
 
 			AllocaInstruction alloc;
 			if (Parser.variables.numbers.ContainsKey(varName)) alloc = Parser.variables.numbers[varName];
 			else
 			{
-				alloc = builder.CreateAlloca(fpType, varName);
+				alloc = builder.CreateAlloca(Parser.dbl, varName);
 				Parser.variables.numbers[varName] = alloc;
 			}
 
 
-			Value exprVal = value.code(context, module, builder);
+			Value exprVal = value.code(builder);
 			
 			builder.CreateStore(exprVal, alloc);
 

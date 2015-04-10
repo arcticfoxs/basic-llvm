@@ -17,7 +17,6 @@ namespace BASICLLVM
 		bool isTabCall = false;
 		bool isInt = false;
 		bool wasArray = false;
-		bool inPrimary = false;
 		PrintItem currentPrintItem;
 		PrintList currentPrintList;
 		PrintList.printseparator currentPrintSeparator = PrintList.printseparator.NULL;

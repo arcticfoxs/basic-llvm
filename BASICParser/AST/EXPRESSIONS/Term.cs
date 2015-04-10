@@ -37,13 +37,13 @@ namespace BASICLLVM.AST
 			factors.Add(factor);
 		}
 
-		public Value code(LLVMContext context,Module module,IRBuilder builder)
+		public Value code(IRBuilder builder)
 		{
-			Value L = factors[0].code(context,module,builder);
+			Value L = factors[0].code(builder);
 			factors.RemoveAt(0);
 			while (factors.Count > 0)
 			{
-				Value R = factors[0].code(context, module,builder);
+				Value R = factors[0].code(builder);
 				if (multipliers[0] == Multiplier.ASTERISK) L = builder.CreateFMul(L, R, "multmp");
 				else L = builder.CreateFDiv(L, R, "divtmp");
 				factors.RemoveAt(0);

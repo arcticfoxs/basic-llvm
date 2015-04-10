@@ -10,22 +10,21 @@ namespace BASICLLVM.AST
 		{
 			value = _value;
 		}
-		public override Value code(LLVMContext context, Module module, IRBuilder builder)
+		public override Value code(IRBuilder builder)
 		{
 			if (Parser.variables.stringLiterals.ContainsKey(value))
 				return Parser.variables.stringLiterals[value];
 
-			Constant toPrint = new Constant(context, value);
+			Constant toPrint = new Constant(Parser.context, value);
 			GlobalVariable global = new GlobalVariable(
-				module,
+				Parser.module,
 			  toPrint.GetType(),
 			  true, // constant
 			  LinkageType.PrivateLinkage, // only visible in this module
 			  toPrint,
 			  ".str"); // the name of the global constant
 
-			Constant zero = new Constant(context, 32, 0);
-			Value output = ConstantExpr.GEP(global, zero, zero);
+			Value output = ConstantExpr.GEP(global, Parser.zero, Parser.zero);
 			Parser.variables.stringLiterals[value] = output;
 			return output;
 		}

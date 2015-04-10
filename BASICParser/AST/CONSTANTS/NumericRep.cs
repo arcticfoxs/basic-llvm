@@ -36,9 +36,9 @@ namespace BASICLLVM.AST
 			return Int32.TryParse(this.value().ToString(),out intVersion);
 		}
 
-		public override Value code(LLVMContext context, Module module, IRBuilder builder)
+		public override Value code(IRBuilder builder)
 		{
-			return ConstantFP.Get(context, new APFloat(value()));
+			return ConstantFP.Get(Parser.context, new APFloat(value()));
 		}
 
 	}
