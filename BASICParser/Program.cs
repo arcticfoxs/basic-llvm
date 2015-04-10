@@ -51,8 +51,8 @@ namespace BASICLLVM
 			Module module = new Module(context, "SourceFile");
 			Parser.module = module;
 			// Setup LLVM function
-			LLVM.Type[] mainArgs = new LLVM.Type[] { Parser.i32, Parser.i8pp};
-			FunctionType mainType = new FunctionType(Parser.i32,mainArgs);
+			LLVM.Type[] mainArgs = new LLVM.Type[] { Parser.i8, Parser.i8pp};
+			FunctionType mainType = new FunctionType(Parser.i8,mainArgs);
 			Function mainFunction = new Function(module,"main",mainType);
 			Parser.function = mainFunction;
 			

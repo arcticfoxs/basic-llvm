@@ -26,15 +26,17 @@ namespace BASICLLVM
 
 		public void print()
 		{
-			Console.Write("- " + name);
+			if (lineNumber > 0)
+			{
+				Console.Write("at source file line " + lineNumber.ToString());
+				if (codeLineNumber > 0) Console.WriteLine(" (label " + codeLineNumber.ToString() + ")");
+				else Console.WriteLine();
+			}
 
-			if(lineNumber > 0)
-				Console.Write(" at source file line " + lineNumber.ToString());
+			Console.WriteLine("- " + name);
 
-			if (codeLineNumber > 0) Console.WriteLine(" (label " + codeLineNumber.ToString() + ")");
-			else Console.WriteLine();
 
-			if (message != null) Console.WriteLine(" - "+message);
+			if (message != null) Console.WriteLine("  - "+message);
 		}
 
 		public void print(string errorType)

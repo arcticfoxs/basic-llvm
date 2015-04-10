@@ -19,6 +19,9 @@ namespace BASICLLVM.AST
 			block = bb();
 			builder = new IRBuilder(block);
 
+			if (!Parser.variables.limits.ContainsKey(controlVariable.name))
+				throw new CompileException("NEXT statement has no matching FOR statement");
+
 			AllocaInstruction limitAlloc = Parser.variables.limits[controlVariable.name];
 			limit = builder.CreateLoad(limitAlloc, "limit_"+controlVariable.name);
 
