@@ -8,7 +8,7 @@ namespace BASICLLVM.AST
 		IRBuilder builder;
 		public override LLVM.BasicBlock code()
 		{
-			block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
+			block = bb();
 			builder = new IRBuilder(block);
 
 			firstBlock = block;

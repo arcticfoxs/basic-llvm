@@ -31,10 +31,12 @@ namespace BASICLLVM
 		Stack<Factor> currentFactor = new Stack<Factor>();
 		Stack<Primary> currentPrimary = new Stack<Primary>();
 		NumericRep currentNumericRep;
+		NumericConstant currentNumericConstant;
 		Significand currentSignificand;
 		Fraction currentFraction;
 		Exrad currentExrad;
 		NumericConstant.Sign currentSign;
+		NumericConstant.Sign currentNumericConstantSign;
 		Term.Multiplier currentMultiplier;
 		Line_Let_Int currentLineLetInt;
 
@@ -51,10 +53,12 @@ namespace BASICLLVM
 		NumericFunctionRef.NumericSuppliedFunction currentNumericSuppliedFunction;
 		NumericExpression currentArgument;
 		NumericFunctionRef currentNumericFunctionRef;
-		enum PrimaryOptions {VAR,REP,FN,EXP};
+		enum PrimaryOptions {VAR,CONST,FN,EXP};
 		PrimaryOptions primaryOp;
 
 		Line_Input currentInputLine;
+		bool haveSign;
+		bool seekingSign;
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
@@ -68,6 +72,12 @@ namespace BASICLLVM
 			{
 				finishedLine.lineNumber = thisLineNumber;
 				finishedLine.hasLineNumber = true;
+			}
+			else
+			{
+				finishedLine.lineNumber = Parser.unlabeledLines;
+				finishedLine.hasLineNumber = false;
+				Parser.unlabeledLines++;
 			}
 		}
 
@@ -99,16 +109,32 @@ namespace BASICLLVM
 
 		public void ExitStatement(BASICParser.StatementContext context) {}
 
+		public void EnterNumericconstant(BASICParser.NumericconstantContext context) {
+			haveSign = false;
+			seekingSign = true;
+		}
+		public void ExitNumericconstant(BASICParser.NumericconstantContext context) {
+			currentNumericConstant = haveSign ? new NumericConstant(currentSign,currentNumericRep) : new NumericConstant(currentNumericRep);
+			primaryOp = PrimaryOptions.CONST;		
+		}
+
 		public void EnterSign(BASICParser.SignContext context) {}
 
 		public void ExitSign(BASICParser.SignContext context)
 		{
 			currentSign = context.GetText().Equals("-") ? NumericConstant.Sign.MINUSSIGN : NumericConstant.Sign.PLUSSIGN;
+			if (seekingSign)
+			{
+				currentNumericConstantSign = currentSign;
+				haveSign = true;
+				seekingSign = false;
+			}
 		}
 
 		public void EnterNumericrep(BASICParser.NumericrepContext context)
 		{
-
+			if (seekingSign) haveSign = false;
+			seekingSign = false;
 		}
 
 		public void ExitNumericrep(BASICParser.NumericrepContext context)
@@ -119,8 +145,6 @@ namespace BASICLLVM
 				currentNumericRep = new NumericRep(currentSignificand, currentExrad);
 				currentExrad = null;
 			}
-
-			primaryOp = PrimaryOptions.REP;
 		}
 
 		public void EnterSignificand(BASICParser.SignificandContext context)
@@ -316,8 +340,8 @@ namespace BASICLLVM
 				case PrimaryOptions.FN:
 					currentPrimary.Push(currentNumericFunctionRef);
 					break;
-				case PrimaryOptions.REP:
-					currentPrimary.Push(currentNumericRep);
+				case PrimaryOptions.CONST:
+					currentPrimary.Push(currentNumericConstant);
 					break;
 				case PrimaryOptions.VAR:
 					currentPrimary.Push(currentNumericVariable);
@@ -963,7 +987,11 @@ namespace BASICLLVM
 
 		public void VisitErrorNode(Antlr4.Runtime.Tree.IErrorNode node)
 		{
-			throw new NotImplementedException();
+			if (thisLineNumber > 0)
+				throw new SyntaxErrorException(Parser.counter, node.GetText());
+			else
+				throw new SyntaxErrorException(Parser.counter, thisLineNumber, node.GetText());
+
 		}
 
 		public void VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode node) {}

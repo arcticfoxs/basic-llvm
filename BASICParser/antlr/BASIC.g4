@@ -12,6 +12,7 @@ statement : datastatement | defstatement | dimensionstatement | gosubstatement |
 
 // CONSTANTS
 
+numericconstant : sign? numericrep;
 sign : PLUSSIGN | MINUSSIGN;
 numericrep : significand exrad?;
 significand : integer FULLSTOP? | integer? fraction;
@@ -37,7 +38,7 @@ numericexpression : sign? term (sign term)*;
 term : factor (multiplier factor)*;
 factor : primary (CIRCUMFLEXACCENT primary)*;
 multiplier : ASTERISK | SOLIDUS;
-primary : numericvariable | numericrep | numericfunctionref | LEFTPARENTHESIS numericexpression RIGHTPARENTHESIS;
+primary : numericvariable | numericconstant | numericfunctionref | LEFTPARENTHESIS numericexpression RIGHTPARENTHESIS;
 numericfunctionref : numericfunctionname argumentlist?;
 numericfunctionname : numericdefinedfunction | numericsuppliedfunction;
 argumentlist : LEFTPARENTHESIS argument RIGHTPARENTHESIS;

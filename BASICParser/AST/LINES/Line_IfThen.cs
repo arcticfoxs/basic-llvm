@@ -19,7 +19,7 @@ namespace BASICLLVM.AST
 
 		public override BasicBlock code()
 		{
-			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
+			BasicBlock block = bb();
 			builder = new IRBuilder(block);
 
 			resultOfExpression = expression.code(builder);

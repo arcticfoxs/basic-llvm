@@ -30,6 +30,7 @@ namespace BASICLLVM.AST
 		public override LLVM.Value code(IRBuilder builder)
 		{
 			Value L = terms[0].code(builder);
+			if (leadingSign == NumericConstant.Sign.MINUSSIGN) L = builder.CreateFSub(Parser.zeroFP, L, "tempNeg");
 			terms.RemoveAt(0);
 			while (terms.Count > 0)
 			{

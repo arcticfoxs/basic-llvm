@@ -21,7 +21,7 @@ namespace BASICLLVM.AST
 		{
 			NumericRep rep_one = new NumericRep(new Significand(new Fraction("1")));
 			Factor factor = new Factor();
-			factor.add(rep_one);
+			factor.add(new NumericConstant(rep_one));
 			Term term = new Term();
 			term.add(factor);
 			NumericExpression ne = new NumericExpression();

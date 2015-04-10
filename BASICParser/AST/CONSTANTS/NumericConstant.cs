@@ -1,15 +1,14 @@
 ﻿/*
- * NumericConstant is weirdly never referenced in the specification, so I don't know what this is for
+ * NumericConstant is never referenced in the specification
+ * This is probably a mistake
+ * I have replaced NumericRep with NumericConstant in the list of non-terminals for Primary
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using LLVM;
 
 namespace BASICLLVM.AST
 {
-	class NumericConstant
+	class NumericConstant : Primary
 	{
 		public enum Sign { PLUSSIGN, MINUSSIGN };
 
@@ -29,7 +28,12 @@ namespace BASICLLVM.AST
 
         public double value()
         {
-            return sign == Sign.PLUSSIGN ? numericrep.value() : -numericrep.value();
+            return (sign == Sign.PLUSSIGN) ? numericrep.value() : -numericrep.value();
         }
+
+		public override Value code(IRBuilder builder)
+		{
+			return ConstantFP.Get(Parser.context, new APFloat(value()));
+		}
 	}
 }

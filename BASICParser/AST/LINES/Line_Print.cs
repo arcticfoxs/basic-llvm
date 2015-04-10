@@ -55,7 +55,7 @@ namespace BASICLLVM
 		}
 		public override BasicBlock code()
 		{
-			block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
+			block = bb();
 			builder = new IRBuilder(block);
 			
 			// Import printf function

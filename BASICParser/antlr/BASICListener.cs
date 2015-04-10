@@ -79,6 +79,16 @@ public interface IBASICListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitStatement([NotNull] BASICParser.StatementContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.numericconstant"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNumericconstant([NotNull] BASICParser.NumericconstantContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.numericconstant"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNumericconstant([NotNull] BASICParser.NumericconstantContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.sign"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

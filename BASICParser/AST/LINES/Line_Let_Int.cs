@@ -16,7 +16,7 @@ namespace BASICLLVM
 
 		public override BasicBlock code()
 		{
-			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
+			BasicBlock block = bb();
 			IRBuilder builder = new IRBuilder(block);
 
 			AllocaInstruction alloc;

@@ -37,5 +37,11 @@ namespace BASICLLVM.AST
 			// most lines don't need to process GOTOs so this is blank
 		}
 
+		public BasicBlock bb()
+		{
+			string lineLabel = hasLineNumber ? "line" + lineNumber.ToString() : "_" + lineNumber.ToString() + "_";
+			return new BasicBlock(Parser.context, Parser.function, lineLabel);
+		}
+
 	}
 }

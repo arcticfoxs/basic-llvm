@@ -29,6 +29,12 @@ namespace BASICLLVM
 			LLVMContext context = new LLVMContext();
 			Parser.context = context;
 			List<Line> lines = Parser.parseFile(inputFile);
+			if (lines == null)
+			{
+				// there was a syntax error
+				if (block) Console.ReadLine();
+				return;
+			}
 
 			if(dump) Console.WriteLine("Done Parsing");
 

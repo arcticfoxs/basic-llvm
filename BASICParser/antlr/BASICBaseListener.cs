@@ -93,6 +93,18 @@ public partial class BASICBaseListener : IBASICListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitStatement([NotNull] BASICParser.StatementContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.numericconstant"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNumericconstant([NotNull] BASICParser.NumericconstantContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.numericconstant"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNumericconstant([NotNull] BASICParser.NumericconstantContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.sign"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

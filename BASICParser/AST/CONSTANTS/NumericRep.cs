@@ -3,7 +3,7 @@ using LLVM;
 
 namespace BASICLLVM.AST
 {
-	class NumericRep : Primary
+	class NumericRep
 	{
 		Significand significand;
 		Exrad exrad;
@@ -34,11 +34,6 @@ namespace BASICLLVM.AST
 		{
 			int intVersion;
 			return Int32.TryParse(this.value().ToString(),out intVersion);
-		}
-
-		public override Value code(IRBuilder builder)
-		{
-			return ConstantFP.Get(Parser.context, new APFloat(value()));
 		}
 
 	}

@@ -16,7 +16,7 @@ namespace BASICLLVM.AST
 
 		public override LLVM.BasicBlock code()
 		{
-			block = new BasicBlock(Parser.context, Parser.function, "line" + lineNumber.ToString());
+			block = bb();
 			builder = new IRBuilder(block);
 
 			AllocaInstruction limitAlloc = Parser.variables.limits[controlVariable.name];

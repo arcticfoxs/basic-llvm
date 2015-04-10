@@ -15,6 +15,9 @@ namespace BASICLLVM
 		public static VariableStore variables;
 		public static LLVM.Type i8, i8p, i8pp, i32, dbl,dblp,vd;
 		public static Constant zero;
+		public static ConstantFP zeroFP;
+		public static int unlabeledLines;
+		public static int counter;
 		public static List<Line> parseFile(string inputFile)
 		{
 			i8 = LLVM.Type.GetInteger8Type(context);
@@ -25,8 +28,10 @@ namespace BASICLLVM
 			dblp = LLVM.Type.GetDoublePointerType(context);
 			vd = LLVM.Type.GetVoidType(context);
 			zero = new Constant(context, 8, 0);
+			zeroFP = ConstantFP.Get(context, new APFloat((double)0));
+			unlabeledLines = 0;
 
-			int counter = 0;
+			counter = 0;
 			string line;
 
 			variables = new VariableStore();
@@ -46,7 +51,14 @@ namespace BASICLLVM
 				Listener lis = new Listener();
 				parser.BuildParseTree = true;
 				parser.AddParseListener(lis);
-				RuleContext tree = parser.line();
+
+				try {
+					RuleContext tree = parser.line();
+				} catch(SyntaxErrorException ex) {
+					Console.WriteLine("Syntax Error at input line " + ex.lineNumber.ToString());
+					if(ex.codeLineNumber > 2) Console.WriteLine("Labelled line" + ex.codeLineNumber.ToString());
+					return null;
+				}
 				parsedLines.Add(lis.finishedLine);
 				counter++;
 			}
