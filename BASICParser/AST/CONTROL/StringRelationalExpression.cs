@@ -29,7 +29,9 @@ namespace BASICLLVM.AST
 
 			Value strCmpResult = builder.CreateCall(strcmp, args);
 
-			Value output = builder.CreateFCmp(Predicate.Equal, strCmpResult, zero, "tempStrEqExp");
+			Predicate comparison = (relation == EqualityRelation.EQUAL) ? Predicate.Equal : Predicate.NotEqual;
+
+			Value output = builder.CreateFCmp(comparison, strCmpResult, zero, "tempStrEqExp");
 			output.Dump();
 			return output;
 		}
