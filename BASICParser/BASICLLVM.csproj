@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="Antlr4.Runtime">
       <HintPath>D:\Project\antlr\Antlr4.Runtime.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="LLVMSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
