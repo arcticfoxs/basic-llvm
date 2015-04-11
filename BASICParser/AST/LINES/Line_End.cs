@@ -16,7 +16,7 @@ namespace BASICLLVM.AST
 			
 			IRBuilder builder = new IRBuilder(block);
 
-			builder.CreateReturn(Parser.zero);
+			builder.CreateReturn(Parser.zero32);
 
 			firstBlock = block;
 			lastBlock = block;

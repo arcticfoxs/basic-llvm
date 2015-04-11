@@ -14,7 +14,7 @@ namespace BASICLLVM
 		public static Function function;
 		public static VariableStore variables;
 		public static LLVM.Type i8, i8p, i8pp, i32, dbl,dblp,vd;
-		public static Constant zero;
+		public static Constant zero,zero32;
 		public static ConstantFP zeroFP;
 		public static int unlabeledLines;
 		public static int counter;
@@ -29,6 +29,7 @@ namespace BASICLLVM
 				dblp = LLVM.Type.GetDoublePointerType(context);
 				vd = LLVM.Type.GetVoidType(context);
 				zero = new Constant(context, 8, 0);
+				zero32 = new Constant(context, 32, 0);
 				zeroFP = ConstantFP.Get(context, new APFloat((double)0));
 				unlabeledLines = 0;
 
