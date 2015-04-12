@@ -29,6 +29,16 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IBASICListener : IParseTreeListener {
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.remarkstatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterRemarkstatement([NotNull] BASICParser.RemarkstatementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.remarkstatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitRemarkstatement([NotNull] BASICParser.RemarkstatementContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.line"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -629,16 +639,6 @@ public interface IBASICListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitPrintitem([NotNull] BASICParser.PrintitemContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.tabcall"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterTabcall([NotNull] BASICParser.TabcallContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.tabcall"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitTabcall([NotNull] BASICParser.TabcallContext context);
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.printseparator"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -659,106 +659,6 @@ public interface IBASICListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitInputstatement([NotNull] BASICParser.InputstatementContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.variablelist"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterVariablelist([NotNull] BASICParser.VariablelistContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.variablelist"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitVariablelist([NotNull] BASICParser.VariablelistContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.inputprompt"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterInputprompt([NotNull] BASICParser.InputpromptContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.inputprompt"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitInputprompt([NotNull] BASICParser.InputpromptContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.inputreply"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterInputreply([NotNull] BASICParser.InputreplyContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.inputreply"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitInputreply([NotNull] BASICParser.InputreplyContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.inputlist"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterInputlist([NotNull] BASICParser.InputlistContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.inputlist"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitInputlist([NotNull] BASICParser.InputlistContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.paddeddatum"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterPaddeddatum([NotNull] BASICParser.PaddeddatumContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.paddeddatum"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitPaddeddatum([NotNull] BASICParser.PaddeddatumContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.datum"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterDatum([NotNull] BASICParser.DatumContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.datum"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitDatum([NotNull] BASICParser.DatumContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.readstatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterReadstatement([NotNull] BASICParser.ReadstatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.readstatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitReadstatement([NotNull] BASICParser.ReadstatementContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.restorestatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterRestorestatement([NotNull] BASICParser.RestorestatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.restorestatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitRestorestatement([NotNull] BASICParser.RestorestatementContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.datastatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterDatastatement([NotNull] BASICParser.DatastatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.datastatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitDatastatement([NotNull] BASICParser.DatastatementContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.datalist"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterDatalist([NotNull] BASICParser.DatalistContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.datalist"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitDatalist([NotNull] BASICParser.DatalistContext context);
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.dimensionstatement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -768,16 +668,6 @@ public interface IBASICListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitDimensionstatement([NotNull] BASICParser.DimensionstatementContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.arraydeclaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterArraydeclaration([NotNull] BASICParser.ArraydeclarationContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.arraydeclaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitArraydeclaration([NotNull] BASICParser.ArraydeclarationContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.bounds"/>.
 	/// </summary>
@@ -789,15 +679,35 @@ public interface IBASICListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitBounds([NotNull] BASICParser.BoundsContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.remarkstatement"/>.
+	/// Enter a parse tree produced by <see cref="BASICParser.readstatement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterRemarkstatement([NotNull] BASICParser.RemarkstatementContext context);
+	void EnterReadstatement([NotNull] BASICParser.ReadstatementContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.remarkstatement"/>.
+	/// Exit a parse tree produced by <see cref="BASICParser.readstatement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitRemarkstatement([NotNull] BASICParser.RemarkstatementContext context);
+	void ExitReadstatement([NotNull] BASICParser.ReadstatementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.writestatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterWritestatement([NotNull] BASICParser.WritestatementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.writestatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitWritestatement([NotNull] BASICParser.WritestatementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.filename"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFilename([NotNull] BASICParser.FilenameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.filename"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFilename([NotNull] BASICParser.FilenameContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.randomizestatement"/>.
 	/// </summary>

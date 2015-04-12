@@ -58,6 +58,7 @@ namespace BASICLLVM
 						RuleContext tree = parser.line();
 					} catch(CompileException ex) {
 						ex.print("INNER PARSE ERROR");
+						file.Close();
 						return null;
 					}
 					parsedLines.Add(lis.finishedLine);

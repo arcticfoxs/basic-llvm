@@ -7,7 +7,7 @@ namespace BASICLLVM.AST
 	class NumericFunctionRef : Primary
 	{
 		public enum FunctionRefType { NUMERICDEFINEDFUNCTION, NUMERICSUPPLIEDFUNCTION };
-		public enum NumericSuppliedFunction { ABS, ATN, COS, EXP, INT, LOG, RND, SGN, SIN, SQR, TAN };
+		public enum NumericSuppliedFunction { ABS, ATN, COS, EXP, INT, LOG, RND, SGN, SIN, SQR, TAN, PI, MOD2 };
 
 		public static Dictionary<NumericSuppliedFunction,string> functionNames;
 		public static Dictionary<NumericSuppliedFunction, FunctionType> functionTypes;
@@ -33,6 +33,7 @@ namespace BASICLLVM.AST
 			functionNames[NumericSuppliedFunction.SIN] = "sin";
 			functionNames[NumericSuppliedFunction.SQR] = "sqrt";
 			functionNames[NumericSuppliedFunction.TAN] = "tan";
+			functionNames[NumericSuppliedFunction.MOD2] = "fmod";
 
 			LLVM.Type[] argDouble = new LLVM.Type[] { Parser.dbl };
 			LLVM.Type[] argVoid = new LLVM.Type[] { };
@@ -53,6 +54,7 @@ namespace BASICLLVM.AST
 			functionTypes[NumericSuppliedFunction.SIN] = doubleToDouble;
 			functionTypes[NumericSuppliedFunction.SQR] = doubleToDouble;
 			functionTypes[NumericSuppliedFunction.TAN] = doubleToDouble;
+			functionTypes[NumericSuppliedFunction.MOD2] = doublePairToDouble;
 		}
 
 		public Constant getSuppliedFunction(NumericSuppliedFunction fn)
@@ -60,6 +62,13 @@ namespace BASICLLVM.AST
 			string functionName = functionNames[fn];
 			FunctionType type = functionTypes[fn];
 			return Parser.module.GetOrInsertFunction(functionName, type);
+		}
+
+		public Constant getConstantAbs()
+		{
+			LLVM.Type[] args = new LLVM.Type[] {Parser.i8p};
+			FunctionType type = new FunctionType(Parser.dbl, args);
+			return Parser.module.GetOrInsertFunction("abs", type);
 		}
 
 		public NumericFunctionRef(string _numericdefinedfunctionname)
@@ -88,6 +97,7 @@ namespace BASICLLVM.AST
 
 		public override Value code(IRBuilder builder)
 		{
+			if(numericSuppliedFunctionName == NumericSuppliedFunction.PI) return Parser.variables.definedConstants["CONST_PI"];
 			setupFunctions();
 			if (refType == FunctionRefType.NUMERICSUPPLIEDFUNCTION)
 			{
@@ -103,6 +113,11 @@ namespace BASICLLVM.AST
 						Value one = ConstantFP.Get(Parser.context, new APFloat(1.0));
 						input = argument.code(builder);
 						args = new Value[] {one, input};
+						break;
+					case NumericSuppliedFunction.MOD2:
+						Value two = ConstantFP.Get(Parser.context, new APFloat(2.0));
+						input = argument.code(builder);
+						args = new Value[] { input, two };
 						break;
 					default:
 						input = argument.code(builder);

@@ -6,16 +6,18 @@ namespace BASICLLVM.AST
 	class NumericArrayElement : NumericVariable
 	{
 		public string numericarrayname;
-		public Subscript subscript;
-		public NumericArrayElement(string _name, Subscript _subscript)
+		public NumericExpression index;
+		public NumericArrayElement(string _name, NumericExpression _index)
 		{
 			numericarrayname = _name;
-			subscript = _subscript;
+			index = _index;
 		}
 
 		public override Value code(IRBuilder builder)
 		{
-			throw new NotImplementedException();
+			Value alloc = Parser.variables.arrayItem(builder, numericarrayname, index.code(builder));
+			return builder.CreateLoad(alloc, "tempArrayLoad");
 		}
+
 	}
 }

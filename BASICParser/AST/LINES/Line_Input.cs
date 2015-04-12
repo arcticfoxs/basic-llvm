@@ -17,7 +17,7 @@ namespace BASICLLVM.AST
 			BasicBlock block = bb();
 			IRBuilder builder = new IRBuilder(block);
 
-			AllocaInstruction alloc;
+			Value alloc;
 
 			Constant valLength = new Constant(Parser.context, 8, 50L);
 
@@ -38,20 +38,28 @@ namespace BASICLLVM.AST
 					alloc = Parser.variables.strings[var.name]; // already allocated
 				else
 				{
-					alloc = builder.CreateAlloca(Parser.i8, valLength, var.name); // new allocation
-					Parser.variables.strings[var.name] = alloc; // remember allocation
+					Parser.variables.strings[var.name] = builder.CreateAlloca(Parser.i8, valLength, var.name); // new allocation
+					alloc = Parser.variables.strings[var.name]; // remember allocation
 				}
 				Parser.variables.stringIsPointer[var.name] = false;
 			}
 			else
 			{
-				SimpleNumericVariable var = (SimpleNumericVariable)vars[0];
+				if (vars[0] is SimpleNumericVariable)
+				{
+					SimpleNumericVariable var = (SimpleNumericVariable)vars[0];
 
-				if (Parser.variables.numbers.ContainsKey(var.name)) alloc = Parser.variables.numbers[var.name];
+					if (Parser.variables.numbers.ContainsKey(var.name)) alloc = Parser.variables.numbers[var.name];
+					else
+					{
+						Parser.variables.numbers[var.name] = builder.CreateAlloca(Parser.dbl, var.name);
+						alloc = Parser.variables.numbers[var.name];
+					}
+				}
 				else
 				{
-					alloc = builder.CreateAlloca(Parser.dbl, var.name);
-					Parser.variables.numbers[var.name] = alloc;
+					NumericArrayElement var = (NumericArrayElement)vars[0];
+					alloc = Parser.variables.arrayItem(builder, var.numericarrayname, var.index.code(builder));
 				}
 			}
 

@@ -39,15 +39,26 @@ namespace BASICLLVM.AST
 
 		public Value code(IRBuilder builder)
 		{
-			Value L = factors[0].code(builder);
-			factors.RemoveAt(0);
-			while (factors.Count > 0)
+			List<Factor> tempFactors = new List<Factor>();
+			List<Multiplier> tempMultipliers = new List<Multiplier>();
+
+			// do shallow copy
+			foreach (Factor item in factors)
+				tempFactors.Add(item);
+
+			foreach (Multiplier item in multipliers)
+				tempMultipliers.Add(item);
+
+
+			Value L = tempFactors[0].code(builder);
+			tempFactors.RemoveAt(0);
+			while (tempFactors.Count > 0)
 			{
-				Value R = factors[0].code(builder);
-				if (multipliers[0] == Multiplier.ASTERISK) L = builder.CreateFMul(L, R, "multmp");
+				Value R = tempFactors[0].code(builder);
+				if (tempMultipliers[0] == Multiplier.ASTERISK) L = builder.CreateFMul(L, R, "multmp");
 				else L = builder.CreateFDiv(L, R, "divtmp");
-				factors.RemoveAt(0);
-				multipliers.RemoveAt(0);
+				tempFactors.RemoveAt(0);
+				tempMultipliers.RemoveAt(0);
 			}
 			return L;
 		}

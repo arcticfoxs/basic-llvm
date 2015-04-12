@@ -33,6 +33,18 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class BASICBaseListener : IBASICListener {
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.remarkstatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterRemarkstatement([NotNull] BASICParser.RemarkstatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.remarkstatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitRemarkstatement([NotNull] BASICParser.RemarkstatementContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.line"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -753,18 +765,6 @@ public partial class BASICBaseListener : IBASICListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitPrintitem([NotNull] BASICParser.PrintitemContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.tabcall"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterTabcall([NotNull] BASICParser.TabcallContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.tabcall"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitTabcall([NotNull] BASICParser.TabcallContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.printseparator"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -789,126 +789,6 @@ public partial class BASICBaseListener : IBASICListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitInputstatement([NotNull] BASICParser.InputstatementContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.variablelist"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterVariablelist([NotNull] BASICParser.VariablelistContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.variablelist"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitVariablelist([NotNull] BASICParser.VariablelistContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.inputprompt"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterInputprompt([NotNull] BASICParser.InputpromptContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.inputprompt"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitInputprompt([NotNull] BASICParser.InputpromptContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.inputreply"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterInputreply([NotNull] BASICParser.InputreplyContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.inputreply"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitInputreply([NotNull] BASICParser.InputreplyContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.inputlist"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterInputlist([NotNull] BASICParser.InputlistContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.inputlist"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitInputlist([NotNull] BASICParser.InputlistContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.paddeddatum"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterPaddeddatum([NotNull] BASICParser.PaddeddatumContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.paddeddatum"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitPaddeddatum([NotNull] BASICParser.PaddeddatumContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.datum"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterDatum([NotNull] BASICParser.DatumContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.datum"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitDatum([NotNull] BASICParser.DatumContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.readstatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterReadstatement([NotNull] BASICParser.ReadstatementContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.readstatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitReadstatement([NotNull] BASICParser.ReadstatementContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.restorestatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterRestorestatement([NotNull] BASICParser.RestorestatementContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.restorestatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitRestorestatement([NotNull] BASICParser.RestorestatementContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.datastatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterDatastatement([NotNull] BASICParser.DatastatementContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.datastatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitDatastatement([NotNull] BASICParser.DatastatementContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.datalist"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterDatalist([NotNull] BASICParser.DatalistContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.datalist"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitDatalist([NotNull] BASICParser.DatalistContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.dimensionstatement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -920,18 +800,6 @@ public partial class BASICBaseListener : IBASICListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitDimensionstatement([NotNull] BASICParser.DimensionstatementContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.arraydeclaration"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterArraydeclaration([NotNull] BASICParser.ArraydeclarationContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.arraydeclaration"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitArraydeclaration([NotNull] BASICParser.ArraydeclarationContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.bounds"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -945,17 +813,41 @@ public partial class BASICBaseListener : IBASICListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitBounds([NotNull] BASICParser.BoundsContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.remarkstatement"/>.
+	/// Enter a parse tree produced by <see cref="BASICParser.readstatement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterRemarkstatement([NotNull] BASICParser.RemarkstatementContext context) { }
+	public virtual void EnterReadstatement([NotNull] BASICParser.ReadstatementContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.remarkstatement"/>.
+	/// Exit a parse tree produced by <see cref="BASICParser.readstatement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitRemarkstatement([NotNull] BASICParser.RemarkstatementContext context) { }
+	public virtual void ExitReadstatement([NotNull] BASICParser.ReadstatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.writestatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterWritestatement([NotNull] BASICParser.WritestatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.writestatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitWritestatement([NotNull] BASICParser.WritestatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="BASICParser.filename"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFilename([NotNull] BASICParser.FilenameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="BASICParser.filename"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFilename([NotNull] BASICParser.FilenameContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.randomizestatement"/>.
 	/// <para>The default implementation does nothing.</para>

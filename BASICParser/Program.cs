@@ -94,7 +94,10 @@ namespace BASICLLVM
 			FunctionType mainType = new FunctionType(Parser.i32,mainArgs);
 			Function mainFunction = new Function(module,"main",mainType);
 			Parser.function = mainFunction;
-			
+
+			// BasicBlock initBlock = new BasicBlock(context, mainFunction, "init");
+
+
 			try {
 				for (int i = 0; i < lines.Count; i++)
 				{
@@ -131,6 +134,7 @@ namespace BASICLLVM
 				if (block) Console.ReadLine();
 				return;
 			}
+			// Parser.variables.fillInitBlock(initBlock, lines[0].firstBlock);
 			if(debug) Console.WriteLine("Done");
 			if (debug)
 			{

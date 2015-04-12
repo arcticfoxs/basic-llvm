@@ -1,6 +1,9 @@
 // BASIC Parser Grammar
 grammar BASIC;
 
+// remark statement
+
+remarkstatement : 'REM' remarkstring;
 
 // LINES
 line : linenumber? statement | endline;
@@ -8,7 +11,7 @@ linenumber : integer;
 endline : linenumber? endstatement;
 endstatement : 'END';
 // don't forget to reinsert optionstatement
-statement : datastatement | defstatement | dimensionstatement | gosubstatement | gotostatement | ifthenstatement | inputstatement | letstatement | ongotostatement | printstatement | randomizestatement | readstatement | remarkstatement | restorestatement | returnstatement | stopstatement | forstatement | nextstatement;
+statement : defstatement | dimensionstatement | gosubstatement | gotostatement | ifthenstatement | inputstatement | letstatement | ongotostatement | printstatement | randomizestatement | remarkstatement | returnstatement | stopstatement | forstatement | nextstatement | readstatement | writestatement;
 
 // CONSTANTS
 
@@ -28,7 +31,7 @@ numericvariable : simplenumericvariable | numericarrayelement;
 simplenumericvariable : LETTER DIGIT? | LETTERE DIGIT?;
 numericarrayelement : numericarrayname subscript;
 numericarrayname : LETTERE | LETTER;
-subscript : LEFTPARENTHESIS numericexpression (COMMA numericexpression)? RIGHTPARENTHESIS;
+subscript : LEFTPARENTHESIS numericexpression RIGHTPARENTHESIS;
 stringvariable : LETTERE DOLLARSIGN | LETTER DOLLARSIGN;
 
 // expressions
@@ -47,7 +50,7 @@ stringexpression : stringvariable | stringconstant;
 
 // implementation supplied functions
 
-numericsuppliedfunction : 'ABS' | 'ATN' | 'COS' | 'EXP' | 'INT' | 'LOG' | 'RND' | 'SGN' | 'SIN' | 'SQR' | 'TAN';
+numericsuppliedfunction : 'ABS' | 'ATN' | 'COS' | 'EXP' | 'INT' | 'LOG' | 'RND' | 'SGN' | 'SIN' | 'SQR' | 'TAN' | 'MOD2' | 'PI';
 
 // user defined functions
 
@@ -90,41 +93,25 @@ nextstatement : 'NEXT' controlvariable;
 
 printstatement : 'PRINT' printlist?;
 printlist : (printitem? printseparator)+ printitem? | printitem;
-printitem : expression | tabcall;
-tabcall : 'TAB' LEFTPARENTHESIS numericexpression RIGHTPARENTHESIS;
+printitem : expression;
 printseparator : COMMA | SEMICOLON;
 
 // input statement
 
-inputstatement : 'INPUT' variablelist;
-variablelist : variable (COMMA variable)*;
-inputprompt : 'INPUT?'; // implementationdefined
-inputreply : inputlist;
-inputlist : paddeddatum (COMMA paddeddatum)*;
-paddeddatum : SPACE* datum SPACE*;
-datum : quotedstring | unquotedstring;
-
-// read and restore statements
-
-readstatement : 'READ' variablelist;
-restorestatement : 'restore';
-
-// data statement
-
-datastatement : 'DATA' datalist;
-datalist : datum (COMMA datum)*;
+inputstatement : 'INPUT' variable;
 
 // array declarations
 
-dimensionstatement : 'DIM' arraydeclaration (COMMA arraydeclaration)*;
-arraydeclaration : numericarrayname LEFTPARENTHESIS bounds RIGHTPARENTHESIS;
-bounds : integer (COMMA integer)?;
+dimensionstatement : 'DIM' numericarrayname LEFTPARENTHESIS bounds RIGHTPARENTHESIS;
+bounds : numericexpression;
 // this is totally causing problems!
 // optionstatement : 'OPTION BASE' ('0'|'1');
 
-// remark statement
+// I/O
 
-remarkstatement : 'REM' remarkstring;
+readstatement : 'READ' numericarrayname filename;
+writestatement : 'WRITE' numericarrayname filename;
+filename : stringexpression;
 
 // randomize statement
 

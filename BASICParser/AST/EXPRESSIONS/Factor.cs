@@ -25,20 +25,26 @@ namespace BASICLLVM.AST
 			if (primarys.Count == 1)
 				return primarys[0].code(builder);
 
+			List<Primary> tempPrimaries = new List<Primary>();
+
+			// do shallow copy
+			foreach (Primary item in primarys)
+				tempPrimaries.Add(item);
+
 			// Import pow function
 			LLVM.Type[] argTypes = new LLVM.Type[] {Parser.dbl, Parser.dbl };
 			FunctionType powType = new FunctionType(Parser.dbl, argTypes);
 			Constant pow = Parser.module.GetOrInsertFunction("pow", powType);
+			
 
-
-			Value L = primarys[0].code(builder);
-			primarys.RemoveAt(0);
-			while (primarys.Count > 0)
+			Value L = tempPrimaries[0].code(builder);
+			tempPrimaries.RemoveAt(0);
+			while (tempPrimaries.Count > 0)
 			{
-				Value R = primarys[0].code(builder);
+				Value R = tempPrimaries[0].code(builder);
 				Value[] args = {L,R};
 				L = builder.CreateCall(pow, args);
-				primarys.RemoveAt(0);
+				tempPrimaries.RemoveAt(0);
 			}
 			return L;
 		}

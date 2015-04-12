@@ -22,18 +22,11 @@ namespace BASICLLVM
 			for (int i = 0; i < printList.items.Count; i++ )
 			{
 				PrintItem thisItem = printList.items[i];
-				if (thisItem.is_tabcall)
-				{
-					// TODO: handle tabcall
-				}
-				else
-				{
-					if (thisItem.stringExpr == null)
-						printNumericExpression(thisItem.numExpr);
-					else
-						printStringExpression(thisItem.stringExpr);
 
-				}
+				if (thisItem.stringExpr == null)
+					printNumericExpression(thisItem.numExpr);
+				else
+					printStringExpression(thisItem.stringExpr);
 
 				if (i < printList.separators.Count)
 				{

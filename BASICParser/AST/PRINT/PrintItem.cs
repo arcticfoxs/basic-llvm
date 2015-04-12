@@ -10,20 +10,14 @@ namespace BASICLLVM.AST
 	{
 		public StringExpression stringExpr;
 		public NumericExpression numExpr;
-		public bool is_tabcall;
-		public PrintItem()
-		{
-			is_tabcall = true;
-		}
+
 		public PrintItem(StringExpression payload)
 		{
 			stringExpr = payload;
-			is_tabcall = false;
 		}
 		public PrintItem(NumericExpression payload)
 		{
 			numExpr = payload;
-			is_tabcall = false;
 		}
 	}
 }

@@ -14,9 +14,11 @@ namespace BASICLLVM
 		int thisLineNumber;
 		StringConstant currentStringConstant;
 		Stack<StringExpression> currentStringExpression = new Stack<StringExpression>();
-		bool isTabCall = false;
 		bool isInt = false;
 		bool wasArray = false;
+		bool isArray = false;
+		bool varFound = false;
+		NumericVariable letNumericVar;
 		PrintItem currentPrintItem;
 		PrintList currentPrintList;
 		PrintList.printseparator currentPrintSeparator = PrintList.printseparator.NULL;
@@ -59,6 +61,11 @@ namespace BASICLLVM
 		Line_Input currentInputLine;
 		bool haveSign;
 		bool seekingSign;
+		string currentNumericArrayElementName;
+		NumericExpression currentSubscriptExpression;
+		bool varHunt = false;
+		Line_Dim currentLineDim;
+		StringExpression currentFilename;
 
 		public void EnterLine(BASICParser.LineContext context)
 		{
@@ -86,8 +93,8 @@ namespace BASICLLVM
 			{
 				finishedLine.lineNumber = Parser.unlabeledLines;
 				finishedLine.hasLineNumber = false;
-				Parser.unlabeledLines++;
 			}
+			Parser.unlabeledLines++;
 		}
 
 		public void EnterLinenumber(BASICParser.LinenumberContext context){}
@@ -204,10 +211,7 @@ namespace BASICLLVM
 			currentExrad = new Exrad(currentInteger);
 		}
 
-		public void EnterStringconstant(BASICParser.StringconstantContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterStringconstant(BASICParser.StringconstantContext context){}
 
 		public void ExitStringconstant(BASICParser.StringconstantContext context)
 		{
@@ -227,59 +231,58 @@ namespace BASICLLVM
 		{
 			currentNumericVariable = wasArray ? (NumericVariable)currentNumericArrayElement : (NumericVariable)currentSimpleNumericVariable;
 
-			if (currentLineLetInt != null && currentLineLetInt.varName == null)
-				currentLineLetInt.varName = context.GetText();
-
 			primaryOp = PrimaryOptions.VAR;
 			if (currentInputLine != null) currentInputLine.vars.Add(currentNumericVariable);
 		}
 
-		public void EnterSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
-		{
-		
+		public void EnterSimplenumericvariable(BASICParser.SimplenumericvariableContext context){
+			if (varHunt && currentNumericExpression.Count == 0)
+			{
+				isArray = false;
+				varHunt = false;
+			}
 		}
 
 		public void ExitSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
 		{
 			currentSimpleNumericVariable = new SimpleNumericVariable(context.GetText());
 			wasArray = false;
+			if (!varFound)
+			{
+				letNumericVar = currentSimpleNumericVariable;
+				varFound = true;
+			}
 		}
 
-		public void EnterNumericarrayelement(BASICParser.NumericarrayelementContext context)
-		{
-			throw new NotImplementedException();
+		public void EnterNumericarrayelement(BASICParser.NumericarrayelementContext context){
+			if (varHunt)
+			{
+				isArray = true;
+				varHunt = false;
+			}
 		}
 
 		public void ExitNumericarrayelement(BASICParser.NumericarrayelementContext context)
 		{
 			wasArray = true;
-			throw new NotImplementedException();
+			currentNumericArrayElement = new NumericArrayElement(currentNumericArrayElementName, currentSubscriptExpression);
 		}
 
-		public void EnterNumericarrayname(BASICParser.NumericarraynameContext context)
-		{
-			throw new NotImplementedException();
-		}
+		public void EnterNumericarrayname(BASICParser.NumericarraynameContext context){}
 
 		public void ExitNumericarrayname(BASICParser.NumericarraynameContext context)
 		{
-			throw new NotImplementedException();
+			currentNumericArrayElementName = context.GetText();
 		}
 
-		public void EnterSubscript(BASICParser.SubscriptContext context)
-		{
-			throw new NotImplementedException();
-		}
+		public void EnterSubscript(BASICParser.SubscriptContext context){}
 
 		public void ExitSubscript(BASICParser.SubscriptContext context)
 		{
-			throw new NotImplementedException();
+			currentSubscriptExpression = currentNumericExpression.Pop();
 		}
 
-		public void EnterStringvariable(BASICParser.StringvariableContext context)
-		{
-			
-		}
+		public void EnterStringvariable(BASICParser.StringvariableContext context){}
 
 		public void ExitStringvariable(BASICParser.StringvariableContext context)
 		{
@@ -510,10 +513,17 @@ namespace BASICLLVM
 		public void EnterNumericletstatement(BASICParser.NumericletstatementContext context)
 		{
 			currentLineLetInt = new Line_Let_Int();
+			varHunt = true;
 		}
 
 		public void ExitNumericletstatement(BASICParser.NumericletstatementContext context)
 		{
+			if(isArray)
+				currentLineLetInt.var =  currentNumericArrayElement;
+			else
+				currentLineLetInt.var = letNumericVar;
+
+
 			currentLineLetInt.value = currentNumericExpression.Pop();
 			finishedLine = currentLineLetInt;
 			finishedLine.lineNumber = currentLineNumber;
@@ -783,14 +793,12 @@ namespace BASICLLVM
 		public void ExitPrintitem(BASICParser.PrintitemContext context)
 		{
 			if (currentStringExpression == null)
-				currentPrintItem = isTabCall ? new PrintItem() : new PrintItem(currentNumericExpression.Pop());
+				currentPrintItem = new PrintItem(currentNumericExpression.Pop());
 			else
-				currentPrintItem = isTabCall ? new PrintItem() : new PrintItem(currentStringExpression.Pop());
+				currentPrintItem = new PrintItem(currentStringExpression.Pop());
 
 			if (currentPrintSeparator == PrintList.printseparator.NULL)
-			{
 				currentPrintList.add(currentPrintItem);
-			}
 			else
 			{
 				currentPrintList.add(currentPrintItem, currentPrintSeparator);
@@ -798,20 +806,7 @@ namespace BASICLLVM
 			}
 		}
 
-		public void EnterTabcall(BASICParser.TabcallContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitTabcall(BASICParser.TabcallContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterPrintseparator(BASICParser.PrintseparatorContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterPrintseparator(BASICParser.PrintseparatorContext context){}
 
 		public void ExitPrintseparator(BASICParser.PrintseparatorContext context)
 		{
@@ -828,129 +823,50 @@ namespace BASICLLVM
 			finishedLine = currentInputLine;
 		}
 
-		public void EnterVariablelist(BASICParser.VariablelistContext context) {}
-
-		public void ExitVariablelist(BASICParser.VariablelistContext context) {}
-
-		public void EnterInputprompt(BASICParser.InputpromptContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitInputprompt(BASICParser.InputpromptContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterInputreply(BASICParser.InputreplyContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitInputreply(BASICParser.InputreplyContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterInputlist(BASICParser.InputlistContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitInputlist(BASICParser.InputlistContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterPaddeddatum(BASICParser.PaddeddatumContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitPaddeddatum(BASICParser.PaddeddatumContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterDatum(BASICParser.DatumContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitDatum(BASICParser.DatumContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterReadstatement(BASICParser.ReadstatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitReadstatement(BASICParser.ReadstatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterRestorestatement(BASICParser.RestorestatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitRestorestatement(BASICParser.RestorestatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterDatastatement(BASICParser.DatastatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitDatastatement(BASICParser.DatastatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterDatalist(BASICParser.DatalistContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitDatalist(BASICParser.DatalistContext context)
-		{
-			throw new NotImplementedException();
-		}
-
 		public void EnterDimensionstatement(BASICParser.DimensionstatementContext context)
 		{
-			throw new NotImplementedException();
+			currentLineDim = new Line_Dim();
 		}
 
 		public void ExitDimensionstatement(BASICParser.DimensionstatementContext context)
 		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterArraydeclaration(BASICParser.ArraydeclarationContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitArraydeclaration(BASICParser.ArraydeclarationContext context)
-		{
-			throw new NotImplementedException();
+			finishedLine = currentLineDim;
 		}
 
 		public void EnterBounds(BASICParser.BoundsContext context)
 		{
-			throw new NotImplementedException();
+			currentLineDim.arrayName = currentNumericArrayElementName;
 		}
 
 		public void ExitBounds(BASICParser.BoundsContext context)
 		{
-			throw new NotImplementedException();
+			currentLineDim.bounds = currentNumericExpression.Pop();
 		}
+
+		public void EnterFilename(BASICParser.FilenameContext context) { }
+
+		public void ExitFilename(BASICParser.FilenameContext context) {
+			currentFilename = currentStringExpression.Pop();
+		}
+
+		public void EnterWritestatement(BASICParser.WritestatementContext context) { }
+
+		public void ExitWritestatement(BASICParser.WritestatementContext context) {
+			Line_Write writeLine = new Line_Write();
+			writeLine.arrayName = currentNumericArrayElementName;
+			writeLine.fileName = currentFilename;
+			finishedLine = writeLine;
+		}
+
+		public void EnterReadstatement(BASICParser.ReadstatementContext context) { }
+
+		public void ExitReadstatement(BASICParser.ReadstatementContext context) {
+			Line_Read readLine = new Line_Read();
+			readLine.arrayName = currentNumericArrayElementName;
+			readLine.fileName = currentFilename;
+			finishedLine = readLine;
+		}
+
 
 		public void EnterRemarkstatement(BASICParser.RemarkstatementContext context) { }
 

@@ -40,7 +40,6 @@
     <Reference Include="LLVMSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\Project\LLVMSharp\src\Release\LLVMSharp.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,12 +68,15 @@
     <Compile Include="AST\EXPRESSIONS\Term.cs" />
     <Compile Include="AST\FUNCTIONS\NumericDefinedFunction.cs" />
     <Compile Include="AST\LINES\Line_Def.cs" />
+    <Compile Include="AST\LINES\Line_Dim.cs" />
     <Compile Include="AST\LINES\Line_For.cs" />
     <Compile Include="AST\LINES\Line_GoSub.cs" />
     <Compile Include="AST\LINES\Line_IfThen.cs" />
     <Compile Include="AST\LINES\Line_Input.cs" />
     <Compile Include="AST\LINES\Line_Let_String.cs" />
     <Compile Include="AST\LINES\Line_Next.cs" />
+    <Compile Include="AST\LINES\Line_Write.cs" />
+    <Compile Include="AST\LINES\Line_Read.cs" />
     <Compile Include="AST\LINES\Line_Return.cs" />
     <Compile Include="AST\VARIABLES\SimpleNumericVariable.cs" />
     <Compile Include="AST\VARIABLES\StringVariable.cs" />
@@ -96,7 +98,6 @@
     <Compile Include="AST\PRINT\PrintList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AST\VARIABLES\Subscript.cs" />
     <Compile Include="VariableStore.cs" />
   </ItemGroup>
   <ItemGroup>

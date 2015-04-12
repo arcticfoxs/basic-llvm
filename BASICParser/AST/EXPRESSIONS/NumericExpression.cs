@@ -29,16 +29,26 @@ namespace BASICLLVM.AST
 
 		public override LLVM.Value code(IRBuilder builder)
 		{
-			Value L = terms[0].code(builder);
+			List<Term> tempTerms = new List<Term>();
+			List<NumericConstant.Sign> tempSigns = new List<NumericConstant.Sign>();
+
+			// perform shallow copy
+			foreach (Term item in terms)
+				tempTerms.Add(item);
+
+			foreach (NumericConstant.Sign item in subsequentSigns)
+				tempSigns.Add(item);
+
+			Value L = tempTerms[0].code(builder);
 			if (leadingSign == NumericConstant.Sign.MINUSSIGN) L = builder.CreateFSub(Parser.zeroFP, L, "tempNeg");
-			terms.RemoveAt(0);
-			while (terms.Count > 0)
+			tempTerms.RemoveAt(0);
+			while (tempTerms.Count > 0)
 			{
-				Value R = terms[0].code(builder);
-				if (subsequentSigns[0] == NumericConstant.Sign.PLUSSIGN) L = builder.CreateFAdd(L, R, "addtmp");
+				Value R = tempTerms[0].code(builder);
+				if (tempSigns[0] == NumericConstant.Sign.PLUSSIGN) L = builder.CreateFAdd(L, R, "addtmp");
 				else L = builder.CreateFSub(L, R, "subtmp");
-				terms.RemoveAt(0);
-				subsequentSigns.RemoveAt(0);
+				tempTerms.RemoveAt(0);
+				tempSigns.RemoveAt(0);
 			}
 			return L;
 		}
