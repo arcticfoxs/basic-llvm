@@ -22,8 +22,6 @@ namespace BASICLLVM.AST
 
 			Value arrayPointer2 = builder.CreateGEP(arrayPointer, Parser.zero, "arrayGEP");
 
-			arrayPointer.Dump();
-			arrayPointer2.Dump();
 
 			Value[] args = {fileNamePointer,arrayPointer2,arraySize};
 
