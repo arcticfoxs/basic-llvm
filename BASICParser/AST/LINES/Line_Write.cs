@@ -18,7 +18,15 @@ namespace BASICLLVM.AST
 			Value arrayPointer = Parser.variables.arrayItem(builder, arrayName, Parser.zero);
 			Value fileNamePointer = fileName.code(builder);
 
-			Value[] args = {fileNamePointer,arrayPointer,Parser.variables.arraySizes[arrayName]};
+			Value arraySize = Parser.variables.arraySizes[arrayName];
+
+			Value arrayPointer2 = builder.CreateGEP(arrayPointer, Parser.zero, "arrayGEP");
+
+			arrayPointer.Dump();
+			arrayPointer2.Dump();
+
+			Value[] args = {fileNamePointer,arrayPointer2,arraySize};
+
 			builder.CreateCall(writeArrayToFile, args);
 
 			firstBlock = block;
