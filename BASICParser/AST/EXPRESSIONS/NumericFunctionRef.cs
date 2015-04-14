@@ -94,7 +94,6 @@ namespace BASICLLVM.AST
 
 		public override Value code(IRBuilder builder)
 		{
-			if (numericSuppliedFunctionName == NumericSuppliedFunction.PI) return Parser.variables.definedConstants["CONST_PI"];
 
 			setupFunctions();
 

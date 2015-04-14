@@ -26,10 +26,10 @@ namespace BASICLLVM
 				Console.WriteLine("-output LL/S/EXE specifies desired output format");
 				return;
 			}
+			// Interpret arguments
 			string inputFile = args[0];
 			string defaultOutputFile = inputFile.Substring(0, inputFile.LastIndexOf("."));
 			outputFile = defaultOutputFile;
-
 
 			bool outNext = false;
 			bool formatNext = false;
@@ -96,8 +96,6 @@ namespace BASICLLVM
 			Function mainFunction = new Function(module, "main", mainType);
 			Parser.function = mainFunction;
 
-			// BasicBlock initBlock = new BasicBlock(context, mainFunction, "init");
-
 
 			try
 			{
@@ -136,7 +134,7 @@ namespace BASICLLVM
 				if (block) Console.ReadLine();
 				return;
 			}
-			// Parser.variables.fillInitBlock(initBlock, lines[0].firstBlock);
+
 			if (debug) Console.WriteLine("Done");
 			if (debug)
 			{
@@ -146,16 +144,15 @@ namespace BASICLLVM
 				// Compile is complete
 				ConsoleColor prevColor = Console.ForegroundColor;
 				Console.ForegroundColor = ConsoleColor.Magenta;
-				module.Dump();
+				module.Dump(); // Dump LLVM IR for debug purposes
 				Console.ForegroundColor = prevColor;
+				Console.WriteLine();
+				Console.WriteLine("---");
+				Console.WriteLine();
+				Console.WriteLine("3 - Output");
 			}
 
-
-			if (debug) Console.WriteLine();
-			if (debug) Console.WriteLine("---");
-			if (debug) Console.WriteLine();
-			if (debug) Console.WriteLine("3 - Output");
-			// Write out LLVM module
+			// Write out LLVM module to file
 			try
 			{
 				module.WriteToFile("ll.tmp");

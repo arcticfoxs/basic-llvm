@@ -13,14 +13,15 @@ namespace BASICLLVM
 		public static Module module;
 		public static Function function;
 		public static VariableStore variables;
-		public static LLVM.Type i8, i8p, i8pp, i32, dbl,dblp,vd;
-		public static Constant zero,zero32;
+		public static LLVM.Type i8, i8p, i8pp, i32, dbl, dblp, vd;
+		public static Constant zero, zero32;
 		public static ConstantFP zeroFP;
-		public static int unlabeledLines;
 		public static int counter;
 		public static List<Line> parseFile(string inputFile)
 		{
-			try {
+			try
+			{
+				// setup global static variables
 				i8 = LLVM.Type.GetInteger8Type(context);
 				i8p = LLVM.Type.GetInteger8PointerType(context);
 				i8pp = LLVM.PointerType.GetUnqualified(i8p);
@@ -31,32 +32,35 @@ namespace BASICLLVM
 				zero = new Constant(context, 8, 0);
 				zero32 = new Constant(context, 32, 0);
 				zeroFP = ConstantFP.Get(context, new APFloat((double)0));
-				unlabeledLines = 0;
-
-				counter = 0;
-				string line;
-
 				variables = new VariableStore();
+				counter = 0;
+
+				string line;
 
 				List<Line> parsedLines = new List<Line>();
 
-				// Read the file and display it line by line.
-				StreamReader file =  new System.IO.StreamReader(inputFile);
+				// Read the file and parse it line by line
+				StreamReader file = new System.IO.StreamReader(inputFile);
 				while ((line = file.ReadLine()) != null)
 				{
+					// Do ANTLR stuff
 					AntlrInputStream stream = new AntlrInputStream(line);
 					ITokenSource lexer = new BASICLexer(stream);
 					ITokenStream tokens = new CommonTokenStream(lexer);
 					BASICParser parser = new BASICParser(tokens);
+
 					parser.RemoveErrorListeners();
 					parser.AddErrorListener(new AntlrErrorListener());
 					Listener lis = new Listener();
 					parser.BuildParseTree = true;
 					parser.AddParseListener(lis);
 
-					try {
+					try
+					{
 						RuleContext tree = parser.line();
-					} catch(CompileException ex) {
+					}
+					catch (CompileException ex)
+					{
 						ex.print("INNER PARSE ERROR");
 						file.Close();
 						return null;
@@ -75,7 +79,7 @@ namespace BASICLLVM
 				}
 
 				return parsedLines;
-				}
+			}
 			catch (CompileException ex)
 			{
 				ex.print("OUTER PARSE ERROR");

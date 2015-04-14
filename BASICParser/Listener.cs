@@ -90,10 +90,9 @@ namespace BASICLLVM
 			}
 			else
 			{
-				finishedLine.lineNumber = Parser.unlabeledLines;
+				finishedLine.lineNumber = Parser.counter;
 				finishedLine.hasLineNumber = false;
 			}
-			Parser.unlabeledLines++;
 		}
 
 		public void EnterLinenumber(BASICParser.LinenumberContext context) { }
