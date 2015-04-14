@@ -454,20 +454,6 @@ namespace BASICLLVM
 			Enum.TryParse<NumericFunctionRef.NumericSuppliedFunction>(context.GetText(), out currentNumericSuppliedFunction);
 		}
 
-		public void EnterDefstatement(BASICParser.DefstatementContext context)
-		{
-
-		}
-
-		public void ExitDefstatement(BASICParser.DefstatementContext context)
-		{
-			if (currentParameter == null)
-				finishedLine = new Line_Def(currentNumericDefinedFunction, currentNumericExpression.Pop());
-			else
-				finishedLine = new Line_Def(currentNumericDefinedFunction, currentParameter, currentNumericExpression.Pop());
-			currentParameter = null;
-		}
-
 		public void EnterNumericdefinedfunction(BASICParser.NumericdefinedfunctionContext context)
 		{
 
@@ -475,27 +461,7 @@ namespace BASICLLVM
 
 		public void ExitNumericdefinedfunction(BASICParser.NumericdefinedfunctionContext context)
 		{
-			currentNumericDefinedFunction = context.GetText().Substring(context.GetText().Length - 1);
-		}
-
-		public void EnterParameterlist(BASICParser.ParameterlistContext context)
-		{
-
-		}
-
-		public void ExitParameterlist(BASICParser.ParameterlistContext context)
-		{
-
-		}
-
-		public void EnterParameter(BASICParser.ParameterContext context)
-		{
-
-		}
-
-		public void ExitParameter(BASICParser.ParameterContext context)
-		{
-			currentParameter = currentSimpleNumericVariable;
+			currentNumericDefinedFunction = context.GetText();
 		}
 
 		public void EnterLetstatement(BASICParser.LetstatementContext context) { }
@@ -538,7 +504,10 @@ namespace BASICLLVM
 
 		public void EnterGotostatement(BASICParser.GotostatementContext context) { }
 
-		public void ExitGotostatement(BASICParser.GotostatementContext context) { }
+		public void ExitGotostatement(BASICParser.GotostatementContext context)
+		{
+			finishedLine = new Line_Goto(currentLineNumber, currentInteger);
+		}
 
 		public void EnterIfthenstatement(BASICParser.IfthenstatementContext context) { }
 
@@ -626,10 +595,6 @@ namespace BASICLLVM
 		{
 			finishedLine = new Line_Return();
 		}
-
-		public void EnterOngotostatement(BASICParser.OngotostatementContext context) { }
-
-		public void ExitOngotostatement(BASICParser.OngotostatementContext context) { }
 
 		public void EnterStopstatement(BASICParser.StopstatementContext context) { }
 
@@ -794,16 +759,6 @@ namespace BASICLLVM
 		public void ExitRemarkstatement(BASICParser.RemarkstatementContext context)
 		{
 			finishedLine = new Line();
-		}
-
-		public void EnterRandomizestatement(BASICParser.RandomizestatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitRandomizestatement(BASICParser.RandomizestatementContext context)
-		{
-			throw new NotImplementedException();
 		}
 
 		public void EnterStringcharacter(BASICParser.StringcharacterContext context) { }

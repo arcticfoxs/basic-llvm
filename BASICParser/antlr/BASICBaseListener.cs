@@ -21,6 +21,7 @@
 using Antlr4.Runtime.Misc;
 using IErrorNode = Antlr4.Runtime.Tree.IErrorNode;
 using ITerminalNode = Antlr4.Runtime.Tree.ITerminalNode;
+using IToken = Antlr4.Runtime.IToken;
 using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 
 /// <summary>
@@ -428,18 +429,6 @@ public partial class BASICBaseListener : IBASICListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitNumericsuppliedfunction([NotNull] BASICParser.NumericsuppliedfunctionContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.defstatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterDefstatement([NotNull] BASICParser.DefstatementContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.defstatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitDefstatement([NotNull] BASICParser.DefstatementContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.numericdefinedfunction"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -451,30 +440,6 @@ public partial class BASICBaseListener : IBASICListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitNumericdefinedfunction([NotNull] BASICParser.NumericdefinedfunctionContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.parameterlist"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterParameterlist([NotNull] BASICParser.ParameterlistContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.parameterlist"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitParameterlist([NotNull] BASICParser.ParameterlistContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.parameter"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterParameter([NotNull] BASICParser.ParameterContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.parameter"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitParameter([NotNull] BASICParser.ParameterContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.letstatement"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -631,18 +596,6 @@ public partial class BASICBaseListener : IBASICListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitReturnstatement([NotNull] BASICParser.ReturnstatementContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.ongotostatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterOngotostatement([NotNull] BASICParser.OngotostatementContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.ongotostatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitOngotostatement([NotNull] BASICParser.OngotostatementContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.stopstatement"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -847,18 +800,6 @@ public partial class BASICBaseListener : IBASICListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitFilename([NotNull] BASICParser.FilenameContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.randomizestatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterRandomizestatement([NotNull] BASICParser.RandomizestatementContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.randomizestatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitRandomizestatement([NotNull] BASICParser.RandomizestatementContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.stringcharacter"/>.
 	/// <para>The default implementation does nothing.</para>

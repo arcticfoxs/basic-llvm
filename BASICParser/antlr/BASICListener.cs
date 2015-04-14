@@ -19,6 +19,7 @@
 
 using Antlr4.Runtime.Misc;
 using IParseTreeListener = Antlr4.Runtime.Tree.IParseTreeListener;
+using IToken = Antlr4.Runtime.IToken;
 
 /// <summary>
 /// This interface defines a complete listener for a parse tree produced by
@@ -358,16 +359,6 @@ public interface IBASICListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitNumericsuppliedfunction([NotNull] BASICParser.NumericsuppliedfunctionContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.defstatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterDefstatement([NotNull] BASICParser.DefstatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.defstatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitDefstatement([NotNull] BASICParser.DefstatementContext context);
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.numericdefinedfunction"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -377,26 +368,6 @@ public interface IBASICListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitNumericdefinedfunction([NotNull] BASICParser.NumericdefinedfunctionContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.parameterlist"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterParameterlist([NotNull] BASICParser.ParameterlistContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.parameterlist"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitParameterlist([NotNull] BASICParser.ParameterlistContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.parameter"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterParameter([NotNull] BASICParser.ParameterContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.parameter"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitParameter([NotNull] BASICParser.ParameterContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.letstatement"/>.
 	/// </summary>
@@ -527,16 +498,6 @@ public interface IBASICListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitReturnstatement([NotNull] BASICParser.ReturnstatementContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.ongotostatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterOngotostatement([NotNull] BASICParser.OngotostatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.ongotostatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitOngotostatement([NotNull] BASICParser.OngotostatementContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.stopstatement"/>.
 	/// </summary>
@@ -707,16 +668,6 @@ public interface IBASICListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitFilename([NotNull] BASICParser.FilenameContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="BASICParser.randomizestatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterRandomizestatement([NotNull] BASICParser.RandomizestatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="BASICParser.randomizestatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitRandomizestatement([NotNull] BASICParser.RandomizestatementContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="BASICParser.stringcharacter"/>.
 	/// </summary>

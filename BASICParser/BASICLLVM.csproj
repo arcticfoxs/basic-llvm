@@ -67,7 +67,6 @@
     <Compile Include="AST\EXPRESSIONS\StringExpression.cs" />
     <Compile Include="AST\EXPRESSIONS\Term.cs" />
     <Compile Include="AST\FUNCTIONS\NumericDefinedFunction.cs" />
-    <Compile Include="AST\LINES\Line_Def.cs" />
     <Compile Include="AST\LINES\Line_Dim.cs" />
     <Compile Include="AST\LINES\Line_For.cs" />
     <Compile Include="AST\LINES\Line_GoSub.cs" />

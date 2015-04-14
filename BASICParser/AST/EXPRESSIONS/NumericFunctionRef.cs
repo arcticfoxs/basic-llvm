@@ -32,7 +32,6 @@ namespace BASICLLVM.AST
 			functionNames[NumericSuppliedFunction.SIN] = "sin";
 			functionNames[NumericSuppliedFunction.SQR] = "sqrt";
 			functionNames[NumericSuppliedFunction.TAN] = "tan";
-			functionNames[NumericSuppliedFunction.MOD2] = "fmod";
 
 			LLVM.Type[] argDouble = new LLVM.Type[] { Parser.dbl };
 			LLVM.Type[] argVoid = new LLVM.Type[] { };
@@ -53,7 +52,6 @@ namespace BASICLLVM.AST
 			functionTypes[NumericSuppliedFunction.SIN] = doubleToDouble;
 			functionTypes[NumericSuppliedFunction.SQR] = doubleToDouble;
 			functionTypes[NumericSuppliedFunction.TAN] = doubleToDouble;
-			functionTypes[NumericSuppliedFunction.MOD2] = doublePairToDouble;
 		}
 
 		public Constant getSuppliedFunction(NumericSuppliedFunction fn)
@@ -97,7 +95,9 @@ namespace BASICLLVM.AST
 		public override Value code(IRBuilder builder)
 		{
 			if (numericSuppliedFunctionName == NumericSuppliedFunction.PI) return Parser.variables.definedConstants["CONST_PI"];
+
 			setupFunctions();
+
 			if (refType == FunctionRefType.NUMERICSUPPLIEDFUNCTION)
 			{
 				Constant suppliedFunction = getSuppliedFunction(numericSuppliedFunctionName);
@@ -126,7 +126,21 @@ namespace BASICLLVM.AST
 
 				return builder.CreateCall(suppliedFunction, args);
 			}
-			throw new CompileException("TODO: Used defined function");
+			else
+			{
+				// Arbitrary function;
+				LLVM.Type[] argDouble = new LLVM.Type[] { Parser.dbl };
+				LLVM.Type[] argVoid = new LLVM.Type[] { };
+
+				LLVM.Type[] argType = (argument == null) ? argVoid : argDouble;
+				LLVM.Type returnType = Parser.dbl;
+
+				FunctionType fnType = new FunctionType(returnType, argType);
+				Constant fn = Parser.module.GetOrInsertFunction(numericDefinedFunctionName, fnType);
+
+				Value[] args = (argument == null) ? new Value[] { } : new Value[] { argument.code(builder) };
+				return builder.CreateCall(fn, args);
+			}
 		}
 	}
 }
