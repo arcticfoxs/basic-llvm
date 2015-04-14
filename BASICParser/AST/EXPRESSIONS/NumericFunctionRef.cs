@@ -1,5 +1,4 @@
 ﻿using LLVM;
-using System;
 using System.Collections.Generic;
 
 namespace BASICLLVM.AST
@@ -9,7 +8,7 @@ namespace BASICLLVM.AST
 		public enum FunctionRefType { NUMERICDEFINEDFUNCTION, NUMERICSUPPLIEDFUNCTION };
 		public enum NumericSuppliedFunction { ABS, ATN, COS, EXP, INT, LOG, RND, SGN, SIN, SQR, TAN, PI, MOD2 };
 
-		public static Dictionary<NumericSuppliedFunction,string> functionNames;
+		public static Dictionary<NumericSuppliedFunction, string> functionNames;
 		public static Dictionary<NumericSuppliedFunction, FunctionType> functionTypes;
 
 		public FunctionRefType refType;
@@ -66,7 +65,7 @@ namespace BASICLLVM.AST
 
 		public Constant getConstantAbs()
 		{
-			LLVM.Type[] args = new LLVM.Type[] {Parser.i8p};
+			LLVM.Type[] args = new LLVM.Type[] { Parser.i8p };
 			FunctionType type = new FunctionType(Parser.dbl, args);
 			return Parser.module.GetOrInsertFunction("abs", type);
 		}
@@ -97,12 +96,12 @@ namespace BASICLLVM.AST
 
 		public override Value code(IRBuilder builder)
 		{
-			if(numericSuppliedFunctionName == NumericSuppliedFunction.PI) return Parser.variables.definedConstants["CONST_PI"];
+			if (numericSuppliedFunctionName == NumericSuppliedFunction.PI) return Parser.variables.definedConstants["CONST_PI"];
 			setupFunctions();
 			if (refType == FunctionRefType.NUMERICSUPPLIEDFUNCTION)
 			{
 				Constant suppliedFunction = getSuppliedFunction(numericSuppliedFunctionName);
-				Value[] args = {};
+				Value[] args = { };
 				Value input;
 				switch (numericSuppliedFunctionName)
 				{
@@ -112,7 +111,7 @@ namespace BASICLLVM.AST
 					case NumericSuppliedFunction.SGN:
 						Value one = ConstantFP.Get(Parser.context, new APFloat(1.0));
 						input = argument.code(builder);
-						args = new Value[] {one, input};
+						args = new Value[] { one, input };
 						break;
 					case NumericSuppliedFunction.MOD2:
 						Value two = ConstantFP.Get(Parser.context, new APFloat(2.0));
@@ -121,13 +120,13 @@ namespace BASICLLVM.AST
 						break;
 					default:
 						input = argument.code(builder);
-						args = new Value[] {input};
+						args = new Value[] { input };
 						break;
 				}
 
 				return builder.CreateCall(suppliedFunction, args);
 			}
-			throw new NotImplementedException();
+			throw new CompileException("TODO: Used defined function");
 		}
 	}
 }

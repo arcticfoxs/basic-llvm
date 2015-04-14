@@ -1,5 +1,4 @@
 ﻿using LLVM;
-using System;
 namespace BASICLLVM.AST
 {
 	class Primary
@@ -8,7 +7,7 @@ namespace BASICLLVM.AST
 		public virtual Value code(IRBuilder builder)
 		{
 			// abstract
-			throw new NotImplementedException();
+			throw new CompileException("Can't code Primary directly");
 		}
 	}
 }
