@@ -17,11 +17,9 @@
 // Missing XML comment for publicly visible type or member '...'
 #pragma warning disable 1591
 
-using System;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
-using DFA = Antlr4.Runtime.Dfa.DFA;
 
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
 [System.CLSCompliant(false)]

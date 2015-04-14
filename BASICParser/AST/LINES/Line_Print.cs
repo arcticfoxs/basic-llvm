@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BASICLLVM.AST;
 using LLVM;
-using BASICLLVM.AST;
 
 namespace BASICLLVM
 {

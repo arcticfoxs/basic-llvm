@@ -1,5 +1,5 @@
-﻿using System;
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
+using System;
 
 namespace BASICLLVM
 {

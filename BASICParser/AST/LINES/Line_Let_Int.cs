@@ -1,5 +1,4 @@
-﻿using System;
-using BASICLLVM.AST;
+﻿using BASICLLVM.AST;
 using LLVM;
 
 namespace BASICLLVM
