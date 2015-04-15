@@ -16,7 +16,7 @@ namespace BASICLLVM
 		public static LLVM.Type i8, i8p, i8pp, i32, dbl, dblp, vd;
 		public static Constant zero, zero32;
 		public static ConstantFP zeroFP;
-		public static int counter;
+		public static int currentLine;
 		public static List<Line> parseFile(string inputFile)
 		{
 			try
@@ -33,7 +33,7 @@ namespace BASICLLVM
 				zero32 = new Constant(context, 32, 0);
 				zeroFP = ConstantFP.Get(context, new APFloat((double)0));
 				variables = new VariableStore();
-				counter = 0;
+				currentLine = 0;
 
 				string line;
 
@@ -66,11 +66,11 @@ namespace BASICLLVM
 						return null;
 					}
 					parsedLines.Add(lis.finishedLine);
-					counter++;
+					currentLine++;
 				}
 
 				file.Close();
-				counter = -1;
+				currentLine = -1;
 				if (!Line_End.existsEnd)
 				{
 					CompileException ex = new CompileException("No END line");

@@ -86,11 +86,11 @@ namespace BASICLLVM
 			{
 				finishedLine.lineNumber = thisLineNumber;
 				finishedLine.hasLineNumber = true;
-				Parser.variables.codeLineNumbers[Parser.counter] = thisLineNumber;
+				Parser.variables.codeLineNumbers[Parser.currentLine] = thisLineNumber;
 			}
 			else
 			{
-				finishedLine.lineNumber = Parser.counter;
+				finishedLine.lineNumber = Parser.currentLine;
 				finishedLine.hasLineNumber = false;
 			}
 		}

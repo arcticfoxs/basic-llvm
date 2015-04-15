@@ -101,7 +101,7 @@ namespace BASICLLVM
 			{
 				for (int i = 0; i < lines.Count; i++)
 				{
-					Parser.counter = i;
+					Parser.currentLine = i;
 					// Compile Line
 					lines[i].code();
 

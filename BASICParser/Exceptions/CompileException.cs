@@ -11,7 +11,7 @@ namespace BASICLLVM
 
 		public CompileException(string _errorText)
 		{
-			lineNumber = Parser.counter+1;
+			lineNumber = Parser.currentLine+1;
 			name = _errorText;
 			getCodeLineNumber();
 		}
