@@ -18,20 +18,18 @@ namespace BASICLLVM.AST
 
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 			builder = new IRBuilder(block);
 
 			resultOfExpression = expression.code(builder);
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 
 		public override void processGoto()
 		{
 			Line trueLine = Parser.variables.lines[target];
-			builder.CreateCondBranch(resultOfExpression, trueLine.firstBlock, falseLine.firstBlock);
+			builder.CreateCondBranch(resultOfExpression, trueLine.block, falseLine.block);
 		}
 
 		public override void jumpToNext(Line nextLine)

@@ -6,16 +6,16 @@ namespace BASICLLVM.AST
 	{
 		public int lineNumber;
 		public bool hasLineNumber = false;
-		public BasicBlock firstBlock, lastBlock;
+		public BasicBlock block;
 
 		public Line()
 		{
-			
+
 		}
 		public void addJump(Line jumpTo)
 		{
-			IRBuilder builder = new IRBuilder(lastBlock);
-			builder.CreateBranch(jumpTo.firstBlock);
+			IRBuilder builder = new IRBuilder(block);
+			builder.CreateBranch(jumpTo.block);
 		}
 
 		public virtual void jumpToNext(Line nextLine)
@@ -25,9 +25,7 @@ namespace BASICLLVM.AST
 
 		public virtual BasicBlock code()
 		{
-			BasicBlock block = new BasicBlock(Parser.context, Parser.function, "remark"+lineNumber.ToString());
-			firstBlock = block;
-			lastBlock = block;
+			block = new BasicBlock(Parser.context, Parser.function, "remark" + lineNumber.ToString());
 			return block;
 		}
 

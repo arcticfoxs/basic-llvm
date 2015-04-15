@@ -8,7 +8,7 @@ namespace BASICLLVM.AST
 		public StringExpression fileName;
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 			IRBuilder builder = new IRBuilder(block);
 			LLVM.Type[] argTypes = new LLVM.Type[] { Parser.i8p, Parser.dblp };
 
@@ -21,8 +21,6 @@ namespace BASICLLVM.AST
 			Value[] args = {fileNamePointer,arrayPointer};
 			builder.CreateCall(readFileToArray, args);
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 	}

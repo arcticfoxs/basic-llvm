@@ -4,15 +4,12 @@ namespace BASICLLVM.AST
 {
 	class Line_Return : Line
 	{
-		BasicBlock block;
 		IRBuilder builder;
 		public override LLVM.BasicBlock code()
 		{
 			block = bb();
 			builder = new IRBuilder(block);
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 

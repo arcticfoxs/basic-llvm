@@ -15,7 +15,7 @@ namespace BASICLLVM.AST
 
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 			IRBuilder builder = new IRBuilder(block);
 
 			AllocaInstruction alloc;
@@ -47,8 +47,6 @@ namespace BASICLLVM.AST
 
 			builder.CreateStore(stringVal, alloc);
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 	}

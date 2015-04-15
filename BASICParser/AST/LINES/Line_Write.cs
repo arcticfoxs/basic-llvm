@@ -8,7 +8,7 @@ namespace BASICLLVM.AST
 		public StringExpression fileName;
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 			IRBuilder builder = new IRBuilder(block);
 			LLVM.Type[] argTypes = new LLVM.Type[] { Parser.i8p, Parser.dblp, Parser.i8 };
 
@@ -23,12 +23,10 @@ namespace BASICLLVM.AST
 			Value arrayPointer2 = builder.CreateGEP(arrayPointer, Parser.zero, "arrayGEP");
 
 
-			Value[] args = {fileNamePointer,arrayPointer2,arraySize};
+			Value[] args = { fileNamePointer, arrayPointer2, arraySize };
 
 			builder.CreateCall(writeArrayToFile, args);
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 	}
