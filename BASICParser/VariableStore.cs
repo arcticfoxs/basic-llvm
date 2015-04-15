@@ -45,19 +45,16 @@ namespace BASICLLVM
 		public void intialiseArray(IRBuilder builder, Value arraySize, string name)
 		{
 			// size must be cast to int
-			Value index = builder.CreateFPToUI(arraySize, Parser.i8, "arrayIndex");
-			arrays[name] = builder.CreateAlloca(Parser.dbl, index, name);
-			arraySizes[name] = index;
+			Value size = builder.CreateFPToUI(arraySize, Parser.i8, "arraySize");
+			arrays[name] = builder.CreateAlloca(Parser.dbl, size, name);
+			arraySizes[name] = size;
 		}
 
 		public Value arrayItem(IRBuilder builder, string name, Value position)
 		{
 			// array implicitly defined
 			if (!arrays.ContainsKey(name))
-			{
 				this.intialiseArray(builder, new Constant(Parser.context, 8, 11), name);
-				arraySizes[name] = builder.CreateFPToUI(new Constant(Parser.context, 8, 11), Parser.i8, "intArraySize");
-			}
 
 			// position must be cast to int
 			Value index = builder.CreateFPToUI(position, Parser.i8, "arrayIndex");
