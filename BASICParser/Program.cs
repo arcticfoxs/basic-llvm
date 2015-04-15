@@ -42,7 +42,7 @@ namespace BASICLLVM
 				}
 				if (formatNext)
 				{
-					outputFormat = (arg == "LL") ? outputFormats.LL : ((arg == "S") ? outputFormats.S : outputFormats.EXE);
+					outputFormat = (arg == "EXE") ? outputFormats.EXE : ((arg == "S") ? outputFormats.S : outputFormats.LL);
 					formatNext = false;
 				}
 				if (arg == "-debug") debug = true;
