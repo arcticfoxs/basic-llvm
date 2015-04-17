@@ -26,12 +26,12 @@ namespace BASICLLVM.AST
 			term.add(factor);
 			NumericExpression ne = new NumericExpression();
 			ne.add(term);
-			return ne;			
+			return ne;
 		}
 
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 			IRBuilder builder = new IRBuilder(block);
 
 			AllocaInstruction alloc;
@@ -51,7 +51,7 @@ namespace BASICLLVM.AST
 			if (Parser.variables.limits.ContainsKey(varName)) alloc = Parser.variables.limits[varName];
 			else
 			{
-				alloc = builder.CreateAlloca(Parser.dbl, "limit_"+varName);
+				alloc = builder.CreateAlloca(Parser.dbl, "limit_" + varName);
 				Parser.variables.limits[varName] = alloc;
 			}
 			exprVal = limit.code(builder);
@@ -61,7 +61,7 @@ namespace BASICLLVM.AST
 			if (Parser.variables.increments.ContainsKey(varName)) alloc = Parser.variables.increments[varName];
 			else
 			{
-				alloc = builder.CreateAlloca(Parser.dbl, "increment_"+varName);
+				alloc = builder.CreateAlloca(Parser.dbl, "increment_" + varName);
 				Parser.variables.increments[varName] = alloc;
 			}
 			exprVal = increment.code(builder);
@@ -70,14 +70,12 @@ namespace BASICLLVM.AST
 			// store the FOR statement so the NEXT statement can find it
 			Parser.variables.forLines[varName] = this;
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 
 		public override void jumpToNext(Line nextLine)
 		{
-			nextBlock = nextLine.firstBlock;
+			nextBlock = nextLine.block;
 			addJump(nextLine);
 		}
 	}

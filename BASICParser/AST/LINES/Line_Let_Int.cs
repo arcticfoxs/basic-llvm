@@ -1,5 +1,4 @@
-﻿using System;
-using BASICLLVM.AST;
+﻿using BASICLLVM.AST;
 using LLVM;
 
 namespace BASICLLVM
@@ -17,7 +16,7 @@ namespace BASICLLVM
 
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 			IRBuilder builder = new IRBuilder(block);
 			Value alloc;
 
@@ -31,7 +30,8 @@ namespace BASICLLVM
 					alloc = Parser.variables.numbers[simpleVar.name];
 				}
 			}
-			else {
+			else
+			{
 				NumericArrayElement arrayElement = (NumericArrayElement)var;
 				alloc = Parser.variables.arrayItem(builder, arrayElement.numericarrayname, arrayElement.index.code(builder));
 			}
@@ -40,8 +40,6 @@ namespace BASICLLVM
 
 			builder.CreateStore(exprVal, alloc);
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LLVM;
+﻿using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -17,12 +13,10 @@ namespace BASICLLVM.AST
 
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 
 			IRBuilder builder = new IRBuilder(block);
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 
 			// This is just an empty block, but we can't process gotos until all lines are created!

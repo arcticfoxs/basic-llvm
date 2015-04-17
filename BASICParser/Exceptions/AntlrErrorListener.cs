@@ -1,5 +1,5 @@
-﻿using System;
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
+using System;
 
 namespace BASICLLVM
 {
@@ -12,8 +12,8 @@ namespace BASICLLVM
 			if (!Program.debug)
 				return;
 
-			string position = String.Format("{0}:{1}: ", line, charPositionInLine);
-			CompileException.printColour(position + msg,ConsoleColor.Cyan);
+			string position = String.Format("{0}:{1}: ", Parser.currentLine, charPositionInLine);
+			CompileException.printColour(position + msg, ConsoleColor.Cyan);
 		}
 	}
 }

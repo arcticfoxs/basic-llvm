@@ -8,13 +8,11 @@ namespace BASICLLVM.AST
 		public NumericExpression bounds;
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 			IRBuilder builder = new IRBuilder(block);
 
 			Parser.variables.intialiseArray(builder, bounds.code(builder), arrayName);
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 	}

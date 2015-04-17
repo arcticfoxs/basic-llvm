@@ -1,6 +1,5 @@
-﻿using System;
+﻿using LLVM;
 using System.Collections.Generic;
-using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -14,7 +13,7 @@ namespace BASICLLVM.AST
 
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 			IRBuilder builder = new IRBuilder(block);
 
 			Value alloc;
@@ -75,17 +74,14 @@ namespace BASICLLVM.AST
 			Value formatValue = format.code(builder);
 
 			Value gep = builder.CreateGEP(alloc, Parser.zero, "gepTest");
-			
-			Value[] args = {formatValue,gep};
+
+			Value[] args = { formatValue, gep };
 
 			Value hop = (Value)alloc;
 
 
 			Value outputs = builder.CreateCall(scanf, args);
 
-
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 	}

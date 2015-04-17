@@ -12,14 +12,12 @@ namespace BASICLLVM.AST
 		}
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 			
 			IRBuilder builder = new IRBuilder(block);
 
 			builder.CreateReturn(Parser.zero32);
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 

@@ -1,5 +1,4 @@
-﻿using System;
-using LLVM;
+﻿using LLVM;
 
 namespace BASICLLVM.AST
 {
@@ -8,7 +7,7 @@ namespace BASICLLVM.AST
 		// abstract
 		public virtual Value code(IRBuilder builder)
 		{
-			throw new NotImplementedException();
+			throw new CompileException("Can't code StringExpression directly");
 		}
 	}
 }

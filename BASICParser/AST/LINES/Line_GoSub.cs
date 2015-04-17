@@ -15,22 +15,20 @@ namespace BASICLLVM.AST
 
 		public override void jumpToNext(Line nextLine)
 		{
-			nextBlock = nextLine.firstBlock;
+			nextBlock = nextLine.block;
 			AllocaInstruction alloc = builder.CreateAlloca(Parser.i8p, "returnAddress");
-			BlockAddress addr = BlockAddress.Get(Parser.function,nextBlock);
+			BlockAddress addr = BlockAddress.Get(Parser.function, nextBlock);
 			builder.CreateStore(addr, alloc);
 			Parser.variables.returnAddresses.Push(alloc);
-			Parser.variables.returnBlocks.Add(nextLine.firstBlock);
+			Parser.variables.returnBlocks.Add(nextLine.block);
 		}
 
 		public override BasicBlock code()
 		{
-			BasicBlock block = bb();
+			block = bb();
 
 			builder = new IRBuilder(block);
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 
 			// This is just an empty block, but we can't process gotos until all lines are created!

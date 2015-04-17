@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using BASICLLVM.AST;
 using LLVM;
-using Antlr4.Runtime;
-using BASICLLVM.AST;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 
 namespace BASICLLVM
 {
-    class Program
-    {
+	class Program
+	{
 		public static bool debug = false;
 		public static bool block = false;
-		public enum outputFormats {LL,S,EXE};
+		public enum outputFormats { LL, S, EXE };
 		public static outputFormats outputFormat = outputFormats.LL;
 		public static string outputFile;
-        static void Main(string[] args)
-        {
+		static void Main(string[] args)
+		{
 			if (args.Length < 1)
 			{
 				Console.WriteLine("Usage: BASICLLVM <inputfile> <flags>");
@@ -27,21 +26,23 @@ namespace BASICLLVM
 				Console.WriteLine("-output LL/S/EXE specifies desired output format");
 				return;
 			}
+			// Interpret arguments
 			string inputFile = args[0];
-			string defaultOutputFile = inputFile.Substring(0,inputFile.LastIndexOf("."));
+			string defaultOutputFile = inputFile.Substring(0, inputFile.LastIndexOf("."));
 			outputFile = defaultOutputFile;
-
 
 			bool outNext = false;
 			bool formatNext = false;
 			foreach (string arg in args)
 			{
-				if (outNext) {
+				if (outNext)
+				{
 					outputFile = arg;
 					outNext = false;
 				}
-				if(formatNext) {
-					outputFormat = (arg == "LL") ? outputFormats.LL : ((arg == "S") ? outputFormats.S : outputFormats.EXE);
+				if (formatNext)
+				{
+					outputFormat = (arg == "EXE") ? outputFormats.EXE : ((arg == "S") ? outputFormats.S : outputFormats.LL);
 					formatNext = false;
 				}
 				if (arg == "-debug") debug = true;
@@ -59,7 +60,7 @@ namespace BASICLLVM
 			// Setup LLVM
 			LLVMContext context = new LLVMContext();
 			Parser.context = context;
-			
+
 			/*
 			 * PARSE STAGE
 			 */
@@ -75,7 +76,7 @@ namespace BASICLLVM
 				if (block) Console.ReadLine();
 				return;
 			}
-			if(debug) Console.WriteLine("Done");
+			if (debug) Console.WriteLine("Done");
 
 			if (debug) Console.WriteLine();
 			if (debug) Console.WriteLine("---");
@@ -86,29 +87,28 @@ namespace BASICLLVM
 			 */
 			if (debug) Console.WriteLine("2 - Compiling");
 			// Setup LLVM module
-			
+
 			Module module = new Module(context, "SourceFile");
 			Parser.module = module;
 			// Setup LLVM function
-			LLVM.Type[] mainArgs = new LLVM.Type[] { Parser.i32, Parser.i8pp};
-			FunctionType mainType = new FunctionType(Parser.i32,mainArgs);
-			Function mainFunction = new Function(module,"main",mainType);
+			LLVM.Type[] mainArgs = new LLVM.Type[] { Parser.i32, Parser.i8pp };
+			FunctionType mainType = new FunctionType(Parser.i32, mainArgs);
+			Function mainFunction = new Function(module, "main", mainType);
 			Parser.function = mainFunction;
 
-			// BasicBlock initBlock = new BasicBlock(context, mainFunction, "init");
 
-
-			try {
+			try
+			{
 				for (int i = 0; i < lines.Count; i++)
 				{
-					Parser.counter = i;
+					Parser.currentLine = i;
 					// Compile Line
 					lines[i].code();
-					
+
 					if (lines[i].hasLineNumber)
 					{
 						// add code line number to dictionary
-						if(!Parser.variables.lines.ContainsKey(lines[i].lineNumber))
+						if (!Parser.variables.lines.ContainsKey(lines[i].lineNumber))
 							Parser.variables.lines.Add(lines[i].lineNumber, lines[i]);
 						else
 						{
@@ -127,15 +127,15 @@ namespace BASICLLVM
 				for (int i = 0; i < lines.Count; i++)
 					lines[i].processGoto();
 
-				}
+			}
 			catch (CompileException ex)
 			{
 				ex.print("COMPILE ERROR");
 				if (block) Console.ReadLine();
 				return;
 			}
-			// Parser.variables.fillInitBlock(initBlock, lines[0].firstBlock);
-			if(debug) Console.WriteLine("Done");
+
+			if (debug) Console.WriteLine("Done");
 			if (debug)
 			{
 				Console.WriteLine();
@@ -144,16 +144,15 @@ namespace BASICLLVM
 				// Compile is complete
 				ConsoleColor prevColor = Console.ForegroundColor;
 				Console.ForegroundColor = ConsoleColor.Magenta;
-				module.Dump();
+				module.Dump(); // Dump LLVM IR for debug purposes
 				Console.ForegroundColor = prevColor;
+				Console.WriteLine();
+				Console.WriteLine("---");
+				Console.WriteLine();
+				Console.WriteLine("3 - Output");
 			}
 
-
-			if (debug) Console.WriteLine();
-			if (debug) Console.WriteLine("---");
-			if (debug) Console.WriteLine();
-			if (debug) Console.WriteLine("3 - Output");
- 			// Write out LLVM module
+			// Write out LLVM module to file
 			try
 			{
 				module.WriteToFile("ll.tmp");
@@ -163,7 +162,7 @@ namespace BASICLLVM
 				CompileException.printColour("Failed to write to output file", ConsoleColor.Red);
 				Console.WriteLine(e.Message);
 			}
-			
+
 
 			// Call llc and gcc as well if we were asked to do that
 			switch (outputFormat)
@@ -185,7 +184,7 @@ namespace BASICLLVM
 
 			if (debug) Console.WriteLine("Compile complete");
 			if (block) Console.ReadLine();
-        }
+		}
 
 		static void do_llc()
 		{
@@ -207,7 +206,7 @@ namespace BASICLLVM
 		{
 			do_fix_chkstk();
 			if (debug) Console.Write("> GCC");
-			ProcessStartInfo psi = new ProcessStartInfo("gcc", "ll.tmp.s -o "+outputFile);
+			ProcessStartInfo psi = new ProcessStartInfo("gcc", "ll.tmp.s -o " + outputFile);
 			psi.UseShellExecute = false;
 			psi.RedirectStandardOutput = true;
 
@@ -215,7 +214,7 @@ namespace BASICLLVM
 			string gccOutput = gccProcess.StandardOutput.ReadToEnd();
 			gccProcess.WaitForExit();
 
-			if(gccOutput.Length > 0) Console.WriteLine(gccOutput);
+			if (gccOutput.Length > 0) Console.WriteLine(gccOutput);
 			if (debug) Console.WriteLine(" ...done");
 			File.Delete("ll.tmp.s");
 		}
@@ -234,5 +233,5 @@ namespace BASICLLVM
 			if (fixOutput.Length > 0) Console.WriteLine(fixOutput);
 			if (debug) Console.WriteLine(" ...done");
 		}
-    }
+	}
 }

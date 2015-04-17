@@ -4,7 +4,6 @@ namespace BASICLLVM.AST
 	class Line_Next : Line
 	{
 		public SimpleNumericVariable controlVariable;
-		BasicBlock block;
 		Value limit, increment;
 		BasicBlock nextBlock;
 		IRBuilder builder;
@@ -23,21 +22,19 @@ namespace BASICLLVM.AST
 				throw new CompileException("NEXT statement has no matching FOR statement");
 
 			AllocaInstruction limitAlloc = Parser.variables.limits[controlVariable.name];
-			limit = builder.CreateLoad(limitAlloc, "limit_"+controlVariable.name);
+			limit = builder.CreateLoad(limitAlloc, "limit_" + controlVariable.name);
 
 			AllocaInstruction incrementAlloc = Parser.variables.increments[controlVariable.name];
 			increment = builder.CreateLoad(incrementAlloc, "increment_" + controlVariable.name);
 
 			// Can't do any actual stuff now because we don't know where the FOR statement is!
 
-			firstBlock = block;
-			lastBlock = block;
 			return block;
 		}
 
 		public override void jumpToNext(Line nextLine)
 		{
-			nextBlock = nextLine.firstBlock;
+			nextBlock = nextLine.block;
 		}
 
 		public override void processGoto()

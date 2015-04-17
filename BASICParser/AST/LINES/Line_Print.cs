@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BASICLLVM.AST;
 using LLVM;
-using BASICLLVM.AST;
 
 namespace BASICLLVM
 {
@@ -8,9 +7,8 @@ namespace BASICLLVM
 	{
 
 		public PrintList printList;
-		BasicBlock block;
 		IRBuilder builder;
-		Constant printf,doubleprintf;
+		Constant printf, doubleprintf;
 
 		public Line_Print(PrintList _printList)
 		{
@@ -19,7 +17,7 @@ namespace BASICLLVM
 
 		public void compileString()
 		{
-			for (int i = 0; i < printList.items.Count; i++ )
+			for (int i = 0; i < printList.items.Count; i++)
 			{
 				PrintItem thisItem = printList.items[i];
 
@@ -50,7 +48,7 @@ namespace BASICLLVM
 		{
 			block = bb();
 			builder = new IRBuilder(block);
-			
+
 			// Import printf function
 			LLVM.Type[] argTypes = new LLVM.Type[] { Parser.i8p };
 			FunctionType stringToVoid = new FunctionType(Parser.vd, argTypes);
@@ -63,13 +61,9 @@ namespace BASICLLVM
 
 			// do it
 			this.compileString();
-			
-
-			firstBlock = block;
-			lastBlock = block;
 
 			return block;
-			
+
 		}
 
 		public void printLiteral(string strToPrint)

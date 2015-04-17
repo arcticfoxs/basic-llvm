@@ -10,8 +10,7 @@ line : linenumber? statement | endline;
 linenumber : integer;
 endline : linenumber? endstatement;
 endstatement : 'END';
-// don't forget to reinsert optionstatement
-statement : defstatement | dimensionstatement | gosubstatement | gotostatement | ifthenstatement | inputstatement | letstatement | ongotostatement | printstatement | randomizestatement | remarkstatement | returnstatement | stopstatement | forstatement | nextstatement | readstatement | writestatement;
+statement : dimensionstatement | gosubstatement | gotostatement | ifthenstatement | inputstatement | letstatement | printstatement | remarkstatement | returnstatement | stopstatement | forstatement | nextstatement | readstatement | writestatement;
 
 // CONSTANTS
 
@@ -42,7 +41,7 @@ term : factor (multiplier factor)*;
 factor : primary (CIRCUMFLEXACCENT primary)*;
 multiplier : ASTERISK | SOLIDUS;
 primary : numericvariable | numericconstant | numericfunctionref | LEFTPARENTHESIS numericexpression RIGHTPARENTHESIS;
-numericfunctionref : numericfunctionname argumentlist?;
+numericfunctionref : numericfunctionname (argumentlist|LEFTPARENTHESIS RIGHTPARENTHESIS);
 numericfunctionname : numericdefinedfunction | numericsuppliedfunction;
 argumentlist : LEFTPARENTHESIS argument RIGHTPARENTHESIS;
 argument : numericexpression;
@@ -50,14 +49,11 @@ stringexpression : stringvariable | stringconstant;
 
 // implementation supplied functions
 
-numericsuppliedfunction : 'ABS' | 'ATN' | 'COS' | 'EXP' | 'INT' | 'LOG' | 'RND' | 'SGN' | 'SIN' | 'SQR' | 'TAN' | 'MOD2' | 'PI';
+numericsuppliedfunction : 'ABS' | 'ATN' | 'COS' | 'EXP' | 'INT' | 'LOG' | 'RND' | 'SGN' | 'SIN' | 'SQR' | 'TAN';
 
 // user defined functions
 
-defstatement : 'DEF' numericdefinedfunction parameterlist? EQUALSSIGN numericexpression;
-numericdefinedfunction : 'FN' LETTER;
-parameterlist : LEFTPARENTHESIS parameter RIGHTPARENTHESIS;
-parameter : simplenumericvariable;
+numericdefinedfunction : (LETTER|DIGIT)+;
 
 // let statement
 
@@ -77,7 +73,6 @@ notgreater : LESSTHANSIGN EQUALSSIGN;
 notequals : LESSTHANSIGN GREATERTHANSIGN;
 gosubstatement : 'GO' SPACE* 'SUB' linenumber;
 returnstatement : 'RETURN';
-ongotostatement : 'ON' numericexpression 'GO' SPACE* 'TO' linenumber (COMMA linenumber)*;
 stopstatement : 'STOP';
 
 // for and next statements
@@ -104,18 +99,12 @@ inputstatement : 'INPUT' variable;
 
 dimensionstatement : 'DIM' numericarrayname LEFTPARENTHESIS bounds RIGHTPARENTHESIS;
 bounds : numericexpression;
-// this is totally causing problems!
-// optionstatement : 'OPTION BASE' ('0'|'1');
 
 // I/O
 
 readstatement : 'READ' numericarrayname filename;
 writestatement : 'WRITE' numericarrayname filename;
 filename : stringexpression;
-
-// randomize statement
-
-randomizestatement : 'RANDOMIZE';
 
 // ignore whitespace
 WS : [ \t\r\n]+ -> skip ;

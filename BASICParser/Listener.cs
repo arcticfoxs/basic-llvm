@@ -1,7 +1,6 @@
-﻿using System;
+﻿using BASICLLVM.AST;
+using System;
 using System.Collections.Generic;
-using BASICLLVM.AST;
-using LLVM;
 
 namespace BASICLLVM
 {
@@ -55,7 +54,7 @@ namespace BASICLLVM
 		NumericFunctionRef.NumericSuppliedFunction currentNumericSuppliedFunction;
 		NumericExpression currentArgument;
 		NumericFunctionRef currentNumericFunctionRef;
-		enum PrimaryOptions {VAR,CONST,FN,EXP};
+		enum PrimaryOptions { VAR, CONST, FN, EXP };
 		PrimaryOptions primaryOp;
 
 		Line_Input currentInputLine;
@@ -81,30 +80,29 @@ namespace BASICLLVM
 				CompileException ex = new CompileException("Syntax Error");
 				ex.message = "Expected statement";
 				throw ex;
-			}	
+			}
 
 			if (thisLineNumber > -2)
 			{
 				finishedLine.lineNumber = thisLineNumber;
 				finishedLine.hasLineNumber = true;
-				Parser.variables.codeLineNumbers[Parser.counter] = thisLineNumber;
+				Parser.variables.codeLineNumbers[Parser.currentLine] = thisLineNumber;
 			}
 			else
 			{
-				finishedLine.lineNumber = Parser.unlabeledLines;
+				finishedLine.lineNumber = Parser.currentLine;
 				finishedLine.hasLineNumber = false;
 			}
-			Parser.unlabeledLines++;
 		}
 
-		public void EnterLinenumber(BASICParser.LinenumberContext context){}
+		public void EnterLinenumber(BASICParser.LinenumberContext context) { }
 
 		public void ExitLinenumber(BASICParser.LinenumberContext context)
 		{
 			currentLineNumber = Convert.ToInt32(context.GetText());
 		}
 
-		public void EnterEndline(BASICParser.EndlineContext context){}
+		public void EnterEndline(BASICParser.EndlineContext context) { }
 
 		public void ExitEndline(BASICParser.EndlineContext context)
 		{
@@ -116,25 +114,27 @@ namespace BASICLLVM
 			thisLineNumber = currentLineNumber;
 		}
 
-		public void ExitEndstatement(BASICParser.EndstatementContext context) {}
+		public void ExitEndstatement(BASICParser.EndstatementContext context) { }
 
 		public void EnterStatement(BASICParser.StatementContext context)
 		{
 			thisLineNumber = currentLineNumber;
 		}
 
-		public void ExitStatement(BASICParser.StatementContext context) {}
+		public void ExitStatement(BASICParser.StatementContext context) { }
 
-		public void EnterNumericconstant(BASICParser.NumericconstantContext context) {
+		public void EnterNumericconstant(BASICParser.NumericconstantContext context)
+		{
 			haveSign = false;
 			seekingSign = true;
 		}
-		public void ExitNumericconstant(BASICParser.NumericconstantContext context) {
-			currentNumericConstant = haveSign ? new NumericConstant(currentSign,currentNumericRep) : new NumericConstant(currentNumericRep);
-			primaryOp = PrimaryOptions.CONST;		
+		public void ExitNumericconstant(BASICParser.NumericconstantContext context)
+		{
+			currentNumericConstant = haveSign ? new NumericConstant(currentSign, currentNumericRep) : new NumericConstant(currentNumericRep);
+			primaryOp = PrimaryOptions.CONST;
 		}
 
-		public void EnterSign(BASICParser.SignContext context) {}
+		public void EnterSign(BASICParser.SignContext context) { }
 
 		public void ExitSign(BASICParser.SignContext context)
 		{
@@ -166,7 +166,7 @@ namespace BASICLLVM
 		public void EnterSignificand(BASICParser.SignificandContext context)
 		{
 			isInt = false;
-			
+
 		}
 
 		public void ExitSignificand(BASICParser.SignificandContext context)
@@ -174,7 +174,7 @@ namespace BASICLLVM
 			if (currentFraction == null) currentSignificand = new Significand(currentInteger);
 			else
 			{
-				currentSignificand =  isInt ? new Significand(currentInteger, currentFraction) : new Significand(currentFraction);
+				currentSignificand = isInt ? new Significand(currentInteger, currentFraction) : new Significand(currentFraction);
 				currentFraction = null;
 			}
 		}
@@ -194,24 +194,24 @@ namespace BASICLLVM
 			catch
 			{
 				throw new CompileException("Couldn't parse int literal");
-			}		
+			}
 		}
 
-		public void EnterFraction(BASICParser.FractionContext context){}
+		public void EnterFraction(BASICParser.FractionContext context) { }
 
 		public void ExitFraction(BASICParser.FractionContext context)
 		{
 			currentFraction = new Fraction(context.GetText());
 		}
 
-		public void EnterExrad(BASICParser.ExradContext context){}
+		public void EnterExrad(BASICParser.ExradContext context) { }
 
 		public void ExitExrad(BASICParser.ExradContext context)
 		{
 			currentExrad = new Exrad(currentInteger);
 		}
 
-		public void EnterStringconstant(BASICParser.StringconstantContext context){}
+		public void EnterStringconstant(BASICParser.StringconstantContext context) { }
 
 		public void ExitStringconstant(BASICParser.StringconstantContext context)
 		{
@@ -221,11 +221,11 @@ namespace BASICLLVM
 			currentStringConstant = new StringConstant(theString);
 		}
 
-		public void EnterVariable(BASICParser.VariableContext context) {}
+		public void EnterVariable(BASICParser.VariableContext context) { }
 
-		public void ExitVariable(BASICParser.VariableContext context) {}
+		public void ExitVariable(BASICParser.VariableContext context) { }
 
-		public void EnterNumericvariable(BASICParser.NumericvariableContext context) {}
+		public void EnterNumericvariable(BASICParser.NumericvariableContext context) { }
 
 		public void ExitNumericvariable(BASICParser.NumericvariableContext context)
 		{
@@ -235,7 +235,8 @@ namespace BASICLLVM
 			if (currentInputLine != null) currentInputLine.vars.Add(currentNumericVariable);
 		}
 
-		public void EnterSimplenumericvariable(BASICParser.SimplenumericvariableContext context){
+		public void EnterSimplenumericvariable(BASICParser.SimplenumericvariableContext context)
+		{
 			if (varHunt && currentNumericExpression.Count == 0)
 			{
 				isArray = false;
@@ -254,7 +255,8 @@ namespace BASICLLVM
 			}
 		}
 
-		public void EnterNumericarrayelement(BASICParser.NumericarrayelementContext context){
+		public void EnterNumericarrayelement(BASICParser.NumericarrayelementContext context)
+		{
 			if (varHunt)
 			{
 				isArray = true;
@@ -268,37 +270,31 @@ namespace BASICLLVM
 			currentNumericArrayElement = new NumericArrayElement(currentNumericArrayElementName, currentSubscriptExpression);
 		}
 
-		public void EnterNumericarrayname(BASICParser.NumericarraynameContext context){}
+		public void EnterNumericarrayname(BASICParser.NumericarraynameContext context) { }
 
 		public void ExitNumericarrayname(BASICParser.NumericarraynameContext context)
 		{
 			currentNumericArrayElementName = context.GetText();
 		}
 
-		public void EnterSubscript(BASICParser.SubscriptContext context){}
+		public void EnterSubscript(BASICParser.SubscriptContext context) { }
 
 		public void ExitSubscript(BASICParser.SubscriptContext context)
 		{
 			currentSubscriptExpression = currentNumericExpression.Pop();
 		}
 
-		public void EnterStringvariable(BASICParser.StringvariableContext context){}
+		public void EnterStringvariable(BASICParser.StringvariableContext context) { }
 
 		public void ExitStringvariable(BASICParser.StringvariableContext context)
 		{
 			currentStringVariable.Push(new StringVariable(context.GetText()));
-			if(currentInputLine != null) currentInputLine.vars.Add(currentStringVariable.Pop());
+			if (currentInputLine != null) currentInputLine.vars.Add(currentStringVariable.Pop());
 		}
 
-		public void EnterExpression(BASICParser.ExpressionContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterExpression(BASICParser.ExpressionContext context) { }
 
-		public void ExitExpression(BASICParser.ExpressionContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void ExitExpression(BASICParser.ExpressionContext context) { }
 
 		public void EnterNumericexpression(BASICParser.NumericexpressionContext context)
 		{
@@ -321,7 +317,7 @@ namespace BASICLLVM
 		{
 			// TODO SIGNS!!!!!
 			Term thisTerm = currentTerm.Pop();
-			currentNumericExpression.Peek().add(thisTerm,thisTerm.precedingSign);
+			currentNumericExpression.Peek().add(thisTerm, thisTerm.precedingSign);
 		}
 
 		public void EnterFactor(BASICParser.FactorContext context)
@@ -331,28 +327,29 @@ namespace BASICLLVM
 
 		public void ExitFactor(BASICParser.FactorContext context)
 		{
-			currentTerm.Peek().add(currentFactor.Pop(),currentMultiplier);
+			currentTerm.Peek().add(currentFactor.Pop(), currentMultiplier);
 		}
 
 		public void EnterMultiplier(BASICParser.MultiplierContext context)
 		{
-			
+
 		}
 
 		public void ExitMultiplier(BASICParser.MultiplierContext context)
 		{
-			
+
 			currentMultiplier = context.GetText().Equals("*") ? Term.Multiplier.ASTERISK : Term.Multiplier.SOLIDUS;
 		}
 
 		public void EnterPrimary(BASICParser.PrimaryContext context)
 		{
-			
+
 		}
 
 		public void ExitPrimary(BASICParser.PrimaryContext context)
 		{
-			switch(primaryOp) {
+			switch (primaryOp)
+			{
 				case PrimaryOptions.EXP:
 					currentPrimary.Push(currentNumericExpression.Pop());
 					break;
@@ -371,7 +368,7 @@ namespace BASICLLVM
 
 		public void EnterNumericfunctionref(BASICParser.NumericfunctionrefContext context)
 		{
-			
+
 		}
 
 		public void ExitNumericfunctionref(BASICParser.NumericfunctionrefContext context)
@@ -399,27 +396,27 @@ namespace BASICLLVM
 
 		public void EnterNumericfunctionname(BASICParser.NumericfunctionnameContext context)
 		{
-			
+
 		}
 
 		public void ExitNumericfunctionname(BASICParser.NumericfunctionnameContext context)
 		{
-			
+
 		}
 
 		public void EnterArgumentlist(BASICParser.ArgumentlistContext context)
 		{
-			
+
 		}
 
 		public void ExitArgumentlist(BASICParser.ArgumentlistContext context)
 		{
-			
+
 		}
 
 		public void EnterArgument(BASICParser.ArgumentContext context)
 		{
-			
+
 		}
 
 		public void ExitArgument(BASICParser.ArgumentContext context)
@@ -438,17 +435,17 @@ namespace BASICLLVM
 			{
 				currentStringExpression.Push(currentStringConstant);
 				currentStringConstant = null;
-			} 
+			}
 			else
 			{
 				currentStringExpression.Push(currentStringVariable.Pop());
 			}
-			
+
 		}
 
 		public void EnterNumericsuppliedfunction(BASICParser.NumericsuppliedfunctionContext context)
 		{
-			
+
 		}
 
 		public void ExitNumericsuppliedfunction(BASICParser.NumericsuppliedfunctionContext context)
@@ -456,58 +453,20 @@ namespace BASICLLVM
 			Enum.TryParse<NumericFunctionRef.NumericSuppliedFunction>(context.GetText(), out currentNumericSuppliedFunction);
 		}
 
-		public void EnterDefstatement(BASICParser.DefstatementContext context)
-		{
-			
-		}
-
-		public void ExitDefstatement(BASICParser.DefstatementContext context)
-		{
-			if (currentParameter == null)
-				finishedLine = new Line_Def(currentNumericDefinedFunction, currentNumericExpression.Pop());
-			else
-				finishedLine = new Line_Def(currentNumericDefinedFunction, currentParameter, currentNumericExpression.Pop());
-			currentParameter = null;
-		}
-
 		public void EnterNumericdefinedfunction(BASICParser.NumericdefinedfunctionContext context)
 		{
-			
+
 		}
 
 		public void ExitNumericdefinedfunction(BASICParser.NumericdefinedfunctionContext context)
 		{
-			currentNumericDefinedFunction = context.GetText().Substring(context.GetText().Length - 1);
+			currentNumericDefinedFunction = context.GetText();
 		}
 
-		public void EnterParameterlist(BASICParser.ParameterlistContext context)
-		{
-			
-		}
-
-		public void ExitParameterlist(BASICParser.ParameterlistContext context)
-		{
-			
-		}
-
-		public void EnterParameter(BASICParser.ParameterContext context)
-		{
-			
-		}
-
-		public void ExitParameter(BASICParser.ParameterContext context)
-		{
-			currentParameter = currentSimpleNumericVariable;
-		}
-
-		public void EnterLetstatement(BASICParser.LetstatementContext context)
-		{
-			// throw new NotImplementedException();
-		}
-
+		public void EnterLetstatement(BASICParser.LetstatementContext context) { }
 		public void ExitLetstatement(BASICParser.LetstatementContext context)
 		{
-			
+
 		}
 
 		public void EnterNumericletstatement(BASICParser.NumericletstatementContext context)
@@ -518,8 +477,8 @@ namespace BASICLLVM
 
 		public void ExitNumericletstatement(BASICParser.NumericletstatementContext context)
 		{
-			if(isArray)
-				currentLineLetInt.var =  currentNumericArrayElement;
+			if (isArray)
+				currentLineLetInt.var = currentNumericArrayElement;
 			else
 				currentLineLetInt.var = letNumericVar;
 
@@ -529,47 +488,34 @@ namespace BASICLLVM
 			finishedLine.lineNumber = currentLineNumber;
 		}
 
-		public void EnterStringletstatement(BASICParser.StringletstatementContext context)
-		{
-			
-		}
+		public void EnterStringletstatement(BASICParser.StringletstatementContext context) { }
 
 		public void ExitStringletstatement(BASICParser.StringletstatementContext context)
 		{
-			if (currentStringVariable.Count == 0 || currentStringExpression.Count ==0)
+			if (currentStringVariable.Count == 0 || currentStringExpression.Count == 0)
 			{
 				CompileException ex = new CompileException("Malformed LET statement");
 				ex.message = "Expected: LET <StringVariable> = <StringExpression>";
 				throw ex;
 			}
-			finishedLine = new Line_Let_String(currentStringVariable.Pop(),currentStringExpression.Pop());
+			finishedLine = new Line_Let_String(currentStringVariable.Pop(), currentStringExpression.Pop());
 		}
 
-		public void EnterGotostatement(BASICParser.GotostatementContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterGotostatement(BASICParser.GotostatementContext context) { }
 
 		public void ExitGotostatement(BASICParser.GotostatementContext context)
 		{
 			finishedLine = new Line_Goto(currentLineNumber, currentInteger);
-			// throw new NotImplementedException();
 		}
 
-		public void EnterIfthenstatement(BASICParser.IfthenstatementContext context)
-		{
-			
-		}
+		public void EnterIfthenstatement(BASICParser.IfthenstatementContext context) { }
 
 		public void ExitIfthenstatement(BASICParser.IfthenstatementContext context)
 		{
 			finishedLine = new Line_IfThen(currentRelationalExpression, currentInteger);
 		}
 
-		public void EnterRelationalexpression(BASICParser.RelationalexpressionContext context)
-		{
-			
-		}
+		public void EnterRelationalexpression(BASICParser.RelationalexpressionContext context) { }
 
 		public void ExitRelationalexpression(BASICParser.RelationalexpressionContext context)
 		{
@@ -579,10 +525,7 @@ namespace BASICLLVM
 				currentRelationalExpression = new NumericRelationalExpression(currentNumericExpression.Pop(), currentNumericExpression.Pop(), currentRelation);
 		}
 
-		public void EnterRelation(BASICParser.RelationContext context)
-		{
-			
-		}
+		public void EnterRelation(BASICParser.RelationContext context) { }
 
 		public void ExitRelation(BASICParser.RelationContext context)
 		{
@@ -609,10 +552,7 @@ namespace BASICLLVM
 			}
 		}
 
-		public void EnterEqualityrelation(BASICParser.EqualityrelationContext context)
-		{
-			
-		}
+		public void EnterEqualityrelation(BASICParser.EqualityrelationContext context) { }
 
 		public void ExitEqualityrelation(BASICParser.EqualityrelationContext context)
 		{
@@ -629,140 +569,82 @@ namespace BASICLLVM
 			}
 		}
 
-		public void EnterNotless(BASICParser.NotlessContext context)
-		{
-			
-		}
+		public void EnterNotless(BASICParser.NotlessContext context) { }
 
-		public void ExitNotless(BASICParser.NotlessContext context)
-		{
-			
-		}
+		public void ExitNotless(BASICParser.NotlessContext context) { }
 
-		public void EnterNotgreater(BASICParser.NotgreaterContext context)
-		{
-			
-		}
+		public void EnterNotgreater(BASICParser.NotgreaterContext context) { }
 
-		public void ExitNotgreater(BASICParser.NotgreaterContext context)
-		{
-			
-		}
+		public void ExitNotgreater(BASICParser.NotgreaterContext context) { }
 
-		public void EnterNotequals(BASICParser.NotequalsContext context)
-		{
-			
-		}
+		public void EnterNotequals(BASICParser.NotequalsContext context) { }
 
-		public void ExitNotequals(BASICParser.NotequalsContext context)
-		{
-			
-		}
+		public void ExitNotequals(BASICParser.NotequalsContext context) { }
 
-		public void EnterGosubstatement(BASICParser.GosubstatementContext context)
-		{
-			
-		}
+		public void EnterGosubstatement(BASICParser.GosubstatementContext context) { }
 
 		public void ExitGosubstatement(BASICParser.GosubstatementContext context)
 		{
 			finishedLine = new Line_GoSub(currentInteger);
 		}
 
-		public void EnterReturnstatement(BASICParser.ReturnstatementContext context)
-		{
-			
-		}
+		public void EnterReturnstatement(BASICParser.ReturnstatementContext context) { }
 
 		public void ExitReturnstatement(BASICParser.ReturnstatementContext context)
 		{
 			finishedLine = new Line_Return();
 		}
 
-		public void EnterOngotostatement(BASICParser.OngotostatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ExitOngotostatement(BASICParser.OngotostatementContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterStopstatement(BASICParser.StopstatementContext context)
-		{
-			
-		}
+		public void EnterStopstatement(BASICParser.StopstatementContext context) { }
 
 		public void ExitStopstatement(BASICParser.StopstatementContext context)
 		{
 			finishedLine = new Line_End();
 		}
 
-		public void EnterForstatement(BASICParser.ForstatementContext context)
-		{
-			
-		}
+		public void EnterForstatement(BASICParser.ForstatementContext context) { }
 
 		public void ExitForstatement(BASICParser.ForstatementContext context)
 		{
 			finishedLine = new Line_For(currentControlVariable, currentInitialValue, currentLimit, currentIncrement);
 		}
 
-		public void EnterControlvariable(BASICParser.ControlvariableContext context)
-		{
-			
-		}
+		public void EnterControlvariable(BASICParser.ControlvariableContext context) { }
 
 		public void ExitControlvariable(BASICParser.ControlvariableContext context)
 		{
 			currentControlVariable = currentSimpleNumericVariable;
 		}
 
-		public void EnterInitialvalue(BASICParser.InitialvalueContext context)
-		{
-			
-		}
+		public void EnterInitialvalue(BASICParser.InitialvalueContext context) { }
 
 		public void ExitInitialvalue(BASICParser.InitialvalueContext context)
 		{
 			currentInitialValue = currentNumericExpression.Pop();
 		}
 
-		public void EnterLimit(BASICParser.LimitContext context)
-		{
-			
-		}
+		public void EnterLimit(BASICParser.LimitContext context) { }
 
 		public void ExitLimit(BASICParser.LimitContext context)
 		{
 			currentLimit = currentNumericExpression.Pop();
 		}
 
-		public void EnterIncrement(BASICParser.IncrementContext context)
-		{
-			
-		}
+		public void EnterIncrement(BASICParser.IncrementContext context) { }
 
 		public void ExitIncrement(BASICParser.IncrementContext context)
 		{
 			currentIncrement = currentNumericExpression.Pop();
 		}
 
-		public void EnterNextstatement(BASICParser.NextstatementContext context)
-		{
-			
-		}
+		public void EnterNextstatement(BASICParser.NextstatementContext context) { }
 
 		public void ExitNextstatement(BASICParser.NextstatementContext context)
 		{
 			finishedLine = new Line_Next(currentControlVariable);
 		}
 
-		public void EnterPrintstatement(BASICParser.PrintstatementContext context)
-		{
-			// throw new NotImplementedException();
-		}
+		public void EnterPrintstatement(BASICParser.PrintstatementContext context) { }
 
 		public void ExitPrintstatement(BASICParser.PrintstatementContext context)
 		{
@@ -806,7 +688,7 @@ namespace BASICLLVM
 			}
 		}
 
-		public void EnterPrintseparator(BASICParser.PrintseparatorContext context){}
+		public void EnterPrintseparator(BASICParser.PrintseparatorContext context) { }
 
 		public void ExitPrintseparator(BASICParser.PrintseparatorContext context)
 		{
@@ -845,13 +727,15 @@ namespace BASICLLVM
 
 		public void EnterFilename(BASICParser.FilenameContext context) { }
 
-		public void ExitFilename(BASICParser.FilenameContext context) {
+		public void ExitFilename(BASICParser.FilenameContext context)
+		{
 			currentFilename = currentStringExpression.Pop();
 		}
 
 		public void EnterWritestatement(BASICParser.WritestatementContext context) { }
 
-		public void ExitWritestatement(BASICParser.WritestatementContext context) {
+		public void ExitWritestatement(BASICParser.WritestatementContext context)
+		{
 			Line_Write writeLine = new Line_Write();
 			writeLine.arrayName = currentNumericArrayElementName;
 			writeLine.fileName = currentFilename;
@@ -860,7 +744,8 @@ namespace BASICLLVM
 
 		public void EnterReadstatement(BASICParser.ReadstatementContext context) { }
 
-		public void ExitReadstatement(BASICParser.ReadstatementContext context) {
+		public void ExitReadstatement(BASICParser.ReadstatementContext context)
+		{
 			Line_Read readLine = new Line_Read();
 			readLine.arrayName = currentNumericArrayElementName;
 			readLine.fileName = currentFilename;
@@ -875,59 +760,43 @@ namespace BASICLLVM
 			finishedLine = new Line();
 		}
 
-		public void EnterRandomizestatement(BASICParser.RandomizestatementContext context)
-		{
-			throw new NotImplementedException();
-		}
+		public void EnterStringcharacter(BASICParser.StringcharacterContext context) { }
 
-		public void ExitRandomizestatement(BASICParser.RandomizestatementContext context)
-		{
-			throw new NotImplementedException();
-		}
+		public void ExitStringcharacter(BASICParser.StringcharacterContext context) { }
 
-		public void EnterStringcharacter(BASICParser.StringcharacterContext context) {}
+		public void EnterQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context) { }
 
-		public void ExitStringcharacter(BASICParser.StringcharacterContext context) {}
+		public void ExitQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context) { }
 
-		public void EnterQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context){}
+		public void EnterUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context) { }
 
-		public void ExitQuotedstringcharacter(BASICParser.QuotedstringcharacterContext context) {}
+		public void ExitUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context) { }
 
-		public void EnterUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context) {}
+		public void EnterPlainstringcharacter(BASICParser.PlainstringcharacterContext context) { }
 
-		public void ExitUnquotedstringcharacter(BASICParser.UnquotedstringcharacterContext context) {}
+		public void ExitPlainstringcharacter(BASICParser.PlainstringcharacterContext context) { }
 
-		public void EnterPlainstringcharacter(BASICParser.PlainstringcharacterContext context) {}
+		public void EnterRemarkstring(BASICParser.RemarkstringContext context) { }
 
-		public void ExitPlainstringcharacter(BASICParser.PlainstringcharacterContext context) {}
+		public void ExitRemarkstring(BASICParser.RemarkstringContext context) { }
 
-		public void EnterRemarkstring(BASICParser.RemarkstringContext context) {}
+		public void EnterQuotedstring(BASICParser.QuotedstringContext context) { }
 
-		public void ExitRemarkstring(BASICParser.RemarkstringContext context) {}
+		public void ExitQuotedstring(BASICParser.QuotedstringContext context) { }
 
-		public void EnterQuotedstring(BASICParser.QuotedstringContext context) {}
+		public void EnterUnquotedstring(BASICParser.UnquotedstringContext context) { }
 
-		public void ExitQuotedstring(BASICParser.QuotedstringContext context) {}
+		public void ExitUnquotedstring(BASICParser.UnquotedstringContext context) { }
 
-		public void EnterUnquotedstring(BASICParser.UnquotedstringContext context)
-		{
-			throw new NotImplementedException();
-		}
+		public void EnterEveryRule(Antlr4.Runtime.ParserRuleContext ctx) { }
 
-		public void ExitUnquotedstring(BASICParser.UnquotedstringContext context)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void EnterEveryRule(Antlr4.Runtime.ParserRuleContext ctx){}
-
-		public void ExitEveryRule(Antlr4.Runtime.ParserRuleContext ctx){}
+		public void ExitEveryRule(Antlr4.Runtime.ParserRuleContext ctx) { }
 
 		public void VisitErrorNode(Antlr4.Runtime.Tree.IErrorNode node)
 		{
 			throw new CompileException("Lexical syntax error");
 		}
 
-		public void VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode node) {}
+		public void VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode node) { }
 	}
 }
