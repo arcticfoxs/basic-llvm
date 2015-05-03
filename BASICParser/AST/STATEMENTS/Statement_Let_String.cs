@@ -2,12 +2,12 @@
 
 namespace BASICLLVM.AST
 {
-	class Line_Let_String : Line
+	class Statement_Let_String : Statement
 	{
 		StringVariable var;
 		StringExpression expr;
 
-		public Line_Let_String(StringVariable _var, StringExpression _expr)
+		public Statement_Let_String(StringVariable _var, StringExpression _expr)
 		{
 			var = _var;
 			expr = _expr;

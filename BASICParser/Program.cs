@@ -69,7 +69,7 @@ namespace BASICLLVM
 			if (debug) Console.WriteLine();
 
 			if (debug) Console.WriteLine("1 - Parsing");
-			List<Line> lines = Parser.parseFile(inputFile);
+			List<Statement> lines = Parser.parseFile(inputFile);
 			if (lines == null)
 			{
 				// parsing failed

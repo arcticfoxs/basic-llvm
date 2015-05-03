@@ -2,18 +2,18 @@
 
 namespace BASICLLVM.AST
 {
-	class Line_GoSub : Line
+	class Statement_GoSub : Statement
 	{
 		int gotoTarget;
 		BasicBlock nextBlock;
 		IRBuilder builder;
 
-		public Line_GoSub(int target)
+		public Statement_GoSub(int target)
 		{
 			gotoTarget = target;
 		}
 
-		public override void jumpToNext(Line nextLine)
+		public override void jumpToNext(Statement nextLine)
 		{
 			nextBlock = nextLine.block;
 			AllocaInstruction alloc = builder.CreateAlloca(Parser.i8p, "returnAddress");
@@ -36,7 +36,7 @@ namespace BASICLLVM.AST
 
 		public override void processGoto()
 		{
-			Line target = Parser.variables.lines[gotoTarget];
+			Statement target = Parser.variables.lines[gotoTarget];
 			this.addJump(target);
 		}
 	}

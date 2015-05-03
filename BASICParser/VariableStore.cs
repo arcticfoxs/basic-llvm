@@ -13,9 +13,9 @@ namespace BASICLLVM
 		public Dictionary<string, AllocaInstruction> limits;
 		public Dictionary<string, AllocaInstruction> increments;
 		public Stack<AllocaInstruction> returnAddresses;
-		public Dictionary<string, AST.Line_For> forLines;
-		public Dictionary<string, AST.Line_GoSub> gosubLines;
-		public Dictionary<int, AST.Line> lines;
+		public Dictionary<string, AST.Statement_For> forLines;
+		public Dictionary<string, AST.Statement_GoSub> gosubLines;
+		public Dictionary<int, AST.Statement> lines;
 		public Dictionary<int, int> codeLineNumbers;
 		public List<BasicBlock> returnBlocks;
 		public Dictionary<string, Value> stringLiterals;
@@ -31,9 +31,9 @@ namespace BASICLLVM
 			numbers = new Dictionary<string, AllocaInstruction>();
 			limits = new Dictionary<string, AllocaInstruction>();
 			increments = new Dictionary<string, AllocaInstruction>();
-			forLines = new Dictionary<string, AST.Line_For>();
-			gosubLines = new Dictionary<string, AST.Line_GoSub>();
-			lines = new Dictionary<int, AST.Line>();
+			forLines = new Dictionary<string, AST.Statement_For>();
+			gosubLines = new Dictionary<string, AST.Statement_GoSub>();
+			lines = new Dictionary<int, AST.Statement>();
 			returnAddresses = new Stack<AllocaInstruction>();
 			returnBlocks = new List<BasicBlock>();
 			stringLiterals = new Dictionary<string, Value>();

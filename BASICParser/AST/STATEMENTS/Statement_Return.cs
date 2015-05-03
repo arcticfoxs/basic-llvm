@@ -2,7 +2,7 @@
 
 namespace BASICLLVM.AST
 {
-	class Line_Return : Line
+	class Statement_Return : Statement
 	{
 		IRBuilder builder;
 		public override LLVM.BasicBlock code()
@@ -13,7 +13,7 @@ namespace BASICLLVM.AST
 			return block;
 		}
 
-		public override void jumpToNext(Line nextLine)
+		public override void jumpToNext(Statement nextLine)
 		{
 			AllocaInstruction alloc = Parser.variables.returnAddresses.Pop();
 			Value addr = builder.CreateLoad(alloc, "block2Address");

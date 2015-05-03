@@ -3,14 +3,14 @@ using LLVM;
 
 namespace BASICLLVM
 {
-	class Line_Print : Line
+	class Statement_Print : Statement
 	{
 
 		public PrintList printList;
 		IRBuilder builder;
 		Constant printf, doubleprintf;
 
-		public Line_Print(PrintList _printList)
+		public Statement_Print(PrintList _printList)
 		{
 			printList = _printList;
 		}

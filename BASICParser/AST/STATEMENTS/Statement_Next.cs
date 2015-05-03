@@ -1,14 +1,14 @@
 ﻿using LLVM;
 namespace BASICLLVM.AST
 {
-	class Line_Next : Line
+	class Statement_Next : Statement
 	{
 		public SimpleNumericVariable controlVariable;
 		Value limit, increment;
 		BasicBlock nextBlock;
 		IRBuilder builder;
 
-		public Line_Next(SimpleNumericVariable v)
+		public Statement_Next(SimpleNumericVariable v)
 		{
 			controlVariable = v;
 		}
@@ -32,7 +32,7 @@ namespace BASICLLVM.AST
 			return block;
 		}
 
-		public override void jumpToNext(Line nextLine)
+		public override void jumpToNext(Statement nextLine)
 		{
 			nextBlock = nextLine.block;
 		}

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace BASICLLVM.AST
 {
-	class Line_Input : Line
+	class Statement_Input : Statement
 	{
 		public List<Variable> vars;
-		public Line_Input()
+		public Statement_Input()
 		{
 			vars = new List<Variable>();
 		}

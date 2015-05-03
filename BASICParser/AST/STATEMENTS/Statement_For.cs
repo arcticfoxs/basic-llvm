@@ -2,14 +2,14 @@
 
 namespace BASICLLVM.AST
 {
-	class Line_For : Line
+	class Statement_For : Statement
 	{
 		public SimpleNumericVariable v;
 		public NumericExpression initialvalue, limit;
 		public NumericExpression increment;
 		public BasicBlock nextBlock;
 
-		public Line_For(SimpleNumericVariable _v, NumericExpression _inital, NumericExpression _limit, NumericExpression _increment = null)
+		public Statement_For(SimpleNumericVariable _v, NumericExpression _inital, NumericExpression _limit, NumericExpression _increment = null)
 		{
 			v = _v;
 			initialvalue = _inital;
@@ -73,7 +73,7 @@ namespace BASICLLVM.AST
 			return block;
 		}
 
-		public override void jumpToNext(Line nextLine)
+		public override void jumpToNext(Statement nextLine)
 		{
 			nextBlock = nextLine.block;
 			addJump(nextLine);

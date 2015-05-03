@@ -2,23 +2,23 @@
 
 namespace BASICLLVM.AST
 {
-	class Line
+	class Statement
 	{
 		public int lineNumber;
 		public bool hasLineNumber = false;
 		public BasicBlock block;
 
-		public Line()
+		public Statement()
 		{
 
 		}
-		public void addJump(Line jumpTo)
+		public void addJump(Statement jumpTo)
 		{
 			IRBuilder builder = new IRBuilder(block);
 			builder.CreateBranch(jumpTo.block);
 		}
 
-		public virtual void jumpToNext(Line nextLine)
+		public virtual void jumpToNext(Statement nextLine)
 		{
 			addJump(nextLine);
 		}

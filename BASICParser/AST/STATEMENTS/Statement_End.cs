@@ -2,11 +2,11 @@
 
 namespace BASICLLVM.AST
 {
-	class Line_End : Line
+	class Statement_End : Statement
 	{
 		public static bool existsEnd = false;
 
-		public Line_End()
+		public Statement_End()
 		{
 			existsEnd = true;
 		}
@@ -21,7 +21,7 @@ namespace BASICLLVM.AST
 			return block;
 		}
 
-		public override void jumpToNext(Line nextLine)
+		public override void jumpToNext(Statement nextLine)
 		{
 			// Do nothing! This is an END instruction
 		}

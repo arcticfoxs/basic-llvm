@@ -3,13 +3,13 @@ using LLVM;
 
 namespace BASICLLVM
 {
-	class Line_Let_Int : Line
+	class Statement_Let_Int : Statement
 	{
 		public NumericVariable var;
 
 		public NumericExpression value;
 
-		public Line_Let_Int()
+		public Statement_Let_Int()
 		{
 
 		}

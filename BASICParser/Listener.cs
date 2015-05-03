@@ -6,7 +6,7 @@ namespace BASICLLVM
 {
 	class Listener : IBASICListener
 	{
-		public Line finishedLine; // write to this
+		public Statement finishedLine; // write to this
 
 		// temporary variables
 		int currentInteger, currentLineNumber;
@@ -39,7 +39,7 @@ namespace BASICLLVM
 		NumericConstant.Sign currentSign;
 		NumericConstant.Sign currentNumericConstantSign;
 		Term.Multiplier currentMultiplier;
-		Line_Let_Int currentLineLetInt;
+		Statement_Let_Int currentLineLetInt;
 
 		SimpleNumericVariable currentParameter;
 		string currentNumericDefinedFunction;
@@ -57,13 +57,13 @@ namespace BASICLLVM
 		enum PrimaryOptions { VAR, CONST, FN, EXP };
 		PrimaryOptions primaryOp;
 
-		Line_Input currentInputLine;
+		Statement_Input currentInputLine;
 		bool haveSign;
 		bool seekingSign;
 		string currentNumericArrayElementName;
 		NumericExpression currentSubscriptExpression;
 		bool varHunt = false;
-		Line_Dim currentLineDim;
+		Statement_Dim currentLineDim;
 		StringExpression currentFilename;
 
 		public void EnterLine(BASICParser.LineContext context)
@@ -106,7 +106,7 @@ namespace BASICLLVM
 
 		public void ExitEndline(BASICParser.EndlineContext context)
 		{
-			finishedLine = new Line_End();
+			finishedLine = new Statement_End();
 		}
 
 		public void EnterEndstatement(BASICParser.EndstatementContext context)
@@ -471,7 +471,7 @@ namespace BASICLLVM
 
 		public void EnterNumericletstatement(BASICParser.NumericletstatementContext context)
 		{
-			currentLineLetInt = new Line_Let_Int();
+			currentLineLetInt = new Statement_Let_Int();
 			varHunt = true;
 		}
 
@@ -498,21 +498,21 @@ namespace BASICLLVM
 				ex.message = "Expected: LET <StringVariable> = <StringExpression>";
 				throw ex;
 			}
-			finishedLine = new Line_Let_String(currentStringVariable.Pop(), currentStringExpression.Pop());
+			finishedLine = new Statement_Let_String(currentStringVariable.Pop(), currentStringExpression.Pop());
 		}
 
 		public void EnterGotostatement(BASICParser.GotostatementContext context) { }
 
 		public void ExitGotostatement(BASICParser.GotostatementContext context)
 		{
-			finishedLine = new Line_Goto(currentLineNumber, currentInteger);
+			finishedLine = new Statement_Goto(currentLineNumber, currentInteger);
 		}
 
 		public void EnterIfthenstatement(BASICParser.IfthenstatementContext context) { }
 
 		public void ExitIfthenstatement(BASICParser.IfthenstatementContext context)
 		{
-			finishedLine = new Line_IfThen(currentRelationalExpression, currentInteger);
+			finishedLine = new Statement_IfThen(currentRelationalExpression, currentInteger);
 		}
 
 		public void EnterRelationalexpression(BASICParser.RelationalexpressionContext context) { }
@@ -585,28 +585,28 @@ namespace BASICLLVM
 
 		public void ExitGosubstatement(BASICParser.GosubstatementContext context)
 		{
-			finishedLine = new Line_GoSub(currentInteger);
+			finishedLine = new Statement_GoSub(currentInteger);
 		}
 
 		public void EnterReturnstatement(BASICParser.ReturnstatementContext context) { }
 
 		public void ExitReturnstatement(BASICParser.ReturnstatementContext context)
 		{
-			finishedLine = new Line_Return();
+			finishedLine = new Statement_Return();
 		}
 
 		public void EnterStopstatement(BASICParser.StopstatementContext context) { }
 
 		public void ExitStopstatement(BASICParser.StopstatementContext context)
 		{
-			finishedLine = new Line_End();
+			finishedLine = new Statement_End();
 		}
 
 		public void EnterForstatement(BASICParser.ForstatementContext context) { }
 
 		public void ExitForstatement(BASICParser.ForstatementContext context)
 		{
-			finishedLine = new Line_For(currentControlVariable, currentInitialValue, currentLimit, currentIncrement);
+			finishedLine = new Statement_For(currentControlVariable, currentInitialValue, currentLimit, currentIncrement);
 		}
 
 		public void EnterControlvariable(BASICParser.ControlvariableContext context) { }
@@ -641,7 +641,7 @@ namespace BASICLLVM
 
 		public void ExitNextstatement(BASICParser.NextstatementContext context)
 		{
-			finishedLine = new Line_Next(currentControlVariable);
+			finishedLine = new Statement_Next(currentControlVariable);
 		}
 
 		public void EnterPrintstatement(BASICParser.PrintstatementContext context) { }
@@ -653,7 +653,7 @@ namespace BASICLLVM
 				CompileException ex = new CompileException("Malformed print statement");
 				throw ex;
 			}
-			finishedLine = new Line_Print(currentPrintList);
+			finishedLine = new Statement_Print(currentPrintList);
 		}
 
 		public void EnterPrintlist(BASICParser.PrintlistContext context)
@@ -697,7 +697,7 @@ namespace BASICLLVM
 
 		public void EnterInputstatement(BASICParser.InputstatementContext context)
 		{
-			currentInputLine = new Line_Input();
+			currentInputLine = new Statement_Input();
 		}
 
 		public void ExitInputstatement(BASICParser.InputstatementContext context)
@@ -707,7 +707,7 @@ namespace BASICLLVM
 
 		public void EnterDimensionstatement(BASICParser.DimensionstatementContext context)
 		{
-			currentLineDim = new Line_Dim();
+			currentLineDim = new Statement_Dim();
 		}
 
 		public void ExitDimensionstatement(BASICParser.DimensionstatementContext context)
@@ -736,7 +736,7 @@ namespace BASICLLVM
 
 		public void ExitWritestatement(BASICParser.WritestatementContext context)
 		{
-			Line_Write writeLine = new Line_Write();
+			Statement_Write writeLine = new Statement_Write();
 			writeLine.arrayName = currentNumericArrayElementName;
 			writeLine.fileName = currentFilename;
 			finishedLine = writeLine;
@@ -746,7 +746,7 @@ namespace BASICLLVM
 
 		public void ExitReadstatement(BASICParser.ReadstatementContext context)
 		{
-			Line_Read readLine = new Line_Read();
+			Statement_Read readLine = new Statement_Read();
 			readLine.arrayName = currentNumericArrayElementName;
 			readLine.fileName = currentFilename;
 			finishedLine = readLine;
@@ -757,7 +757,7 @@ namespace BASICLLVM
 
 		public void ExitRemarkstatement(BASICParser.RemarkstatementContext context)
 		{
-			finishedLine = new Line();
+			finishedLine = new Statement();
 		}
 
 		public void EnterStringcharacter(BASICParser.StringcharacterContext context) { }

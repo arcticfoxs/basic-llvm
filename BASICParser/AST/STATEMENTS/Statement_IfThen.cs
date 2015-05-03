@@ -2,15 +2,15 @@
 
 namespace BASICLLVM.AST
 {
-	class Line_IfThen : Line
+	class Statement_IfThen : Statement
 	{
 		public RelationalExpression expression;
 		public int target;
 		Value resultOfExpression;
-		Line falseLine;
+		Statement falseLine;
 		IRBuilder builder;
 
-		public Line_IfThen(RelationalExpression _expr, int _goto)
+		public Statement_IfThen(RelationalExpression _expr, int _goto)
 		{
 			expression = _expr;
 			target = _goto;
@@ -28,11 +28,11 @@ namespace BASICLLVM.AST
 
 		public override void processGoto()
 		{
-			Line trueLine = Parser.variables.lines[target];
+			Statement trueLine = Parser.variables.lines[target];
 			builder.CreateCondBranch(resultOfExpression, trueLine.block, falseLine.block);
 		}
 
-		public override void jumpToNext(Line nextLine)
+		public override void jumpToNext(Statement nextLine)
 		{
 			// Don't add a jump to the next line (this is an IF statement)
 			// but now we know what the next line is :)

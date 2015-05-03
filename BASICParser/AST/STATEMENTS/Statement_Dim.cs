@@ -2,7 +2,7 @@
 
 namespace BASICLLVM.AST
 {
-	class Line_Dim : Line
+	class Statement_Dim : Statement
 	{
 		public string arrayName;
 		public NumericExpression bounds;

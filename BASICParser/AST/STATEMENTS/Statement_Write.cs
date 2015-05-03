@@ -2,7 +2,7 @@
 
 namespace BASICLLVM.AST
 {
-	class Line_Write : Line
+	class Statement_Write : Statement
 	{
 		public string arrayName;
 		public StringExpression fileName;

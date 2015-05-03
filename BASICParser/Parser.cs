@@ -17,7 +17,7 @@ namespace BASICLLVM
 		public static Constant zero, zero32;
 		public static ConstantFP zeroFP;
 		public static int currentLine;
-		public static List<Line> parseFile(string inputFile)
+		public static List<Statement> parseFile(string inputFile)
 		{
 			try
 			{
@@ -37,7 +37,7 @@ namespace BASICLLVM
 
 				string line;
 
-				List<Line> parsedLines = new List<Line>();
+				List<Statement> parsedLines = new List<Statement>();
 
 				// Read the file and parse it line by line
 				StreamReader file = new System.IO.StreamReader(inputFile);
@@ -71,7 +71,7 @@ namespace BASICLLVM
 
 				file.Close();
 				currentLine = -1;
-				if (!Line_End.existsEnd)
+				if (!Statement_End.existsEnd)
 				{
 					CompileException ex = new CompileException("No END line");
 					ex.message = "An END line is required";

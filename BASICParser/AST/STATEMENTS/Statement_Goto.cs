@@ -2,10 +2,10 @@
 
 namespace BASICLLVM.AST
 {
-	class Line_Goto : Line
+	class Statement_Goto : Statement
 	{
 		public int gotoTarget;
-		public Line_Goto(int _lineNumber, int _gotoLineNumber)
+		public Statement_Goto(int _lineNumber, int _gotoLineNumber)
 		{
 			lineNumber = _lineNumber;
 			gotoTarget = _gotoLineNumber;
@@ -30,11 +30,11 @@ namespace BASICLLVM.AST
 				ex.message = "The target of this GOTO statement does not exist";
 				throw ex;
 			}
-			Line target = Parser.variables.lines[gotoTarget];
+			Statement target = Parser.variables.lines[gotoTarget];
 			this.addJump(target);
 		}
 
-		public override void jumpToNext(Line nextLine)
+		public override void jumpToNext(Statement nextLine)
 		{
 			// Don't add a jump to the next line (this is a GOTO)
 		}
