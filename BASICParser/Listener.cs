@@ -794,7 +794,7 @@ namespace BASICLLVM
 
 		public void VisitErrorNode(Antlr4.Runtime.Tree.IErrorNode node)
 		{
-			throw new CompileException("Lexical syntax error");
+			throw new CompileException("Parser syntax error");
 		}
 
 		public void VisitTerminal(Antlr4.Runtime.Tree.ITerminalNode node) { }
