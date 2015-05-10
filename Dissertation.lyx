@@ -1,0 +1,4235 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing onehalf
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "basicstyle={\ttfamily}"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\align right
+David Hoare
+\end_layout
+
+\begin_layout Standard
+\align right
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Robinson College
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Computer Science Tripos
+\end_layout
+
+\begin_layout Standard
+\align center
+Part II Dissertation
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\align center
+
+\size giant
+The implementation of a compiler from BASIC 78 to LLVM
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+2015
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size largest
+Proforma
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+David Hoare
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+Robinson College
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+The implementation of a compiler from BASIC 78 to LLVM
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+Computer Science Tripos Part II (2015)
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+<word count>
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+Project Originator: Michael Gale
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+Project Supervisor: Michael Gale
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size large
+Original Aims
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+The aim of the project was to implement a compiler for the ANSI X3.60-1978
+ standard for BASIC.
+ The compiler was to output LLVM bytecode which can then be further compiled
+ and assembled to target one of many instruction sets.
+ The compiler was to be written in C#, and would make use of the LLVM API
+ in the code generation module.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size large
+Work Completed
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+A compiler has been written in C# that efficiently compiles BASIC code to
+ appropriate LLVM bytecode.
+ The compiler adheres to the ANSI X.60-1978 standard for BASIC, with some
+ additions to improve usability.
+ The resultant LLVM bytecode successfully compiles to multiple different
+ architectures, on which the executable files run faster than those generated
+ by similar compilers.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Special Difficulties: None
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+I David Hoare of Robinson College , being a candidate for Part II of the
+ Computer Science Tripos, hereby declare that this dissertation and the
+ work described in it are my own work, unaided except as may be specified
+ below, and that the dissertation does not contain material that has already
+ been used to any substantial extent for a comparable purpose.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+chapter{Introduction}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The BASIC language was an important development in the field of Computer
+ Science in the 60s and 70s.
+ It was the first very human-readable, entry-level programming language
+ aimed at home users, and an interpreter was included on most of the personal
+ computers released at this time, thus introducing a generation to the basics
+ of programming.
+ Although not as widely distributed BASIC is still often used as an introductory
+ programming language for beginners.
+ It has also influenced many modern languages, most notably Visual Basic
+ .NET, one of the primary languages targeting Microsoft’s .NET framework.
+\end_layout
+
+\begin_layout Standard
+LLVM is a framework for compiler construction.
+ The principle is that compilers built with the LLVM framework output LLVM
+ Intermediate Representation, a bytecode assembly language.
+ This bytecode can then be compiled by an LLVM backend to native code for
+ a target architecture.
+ Backends exist for targeting a wide variety of instruction sets.
+ Hence building a compiler with LLVM is an easy way of enabling the compiler
+ to build for multiple platforms.
+\end_layout
+
+\begin_layout Standard
+The LLVM framework also performs code optimisation passes on generated bytecode.
+ This is made easier by the Static Single Assignment form of LLVM bytecode.
+ SSA code produces a simple definition-use tree which simplifies dataflow
+ optimisation optimisations.
+ In particular, data redundancy detection can be performed immediately on
+ SSA code, avoiding expensive reaching definition analysis required for
+ non-SSA code.
+ [REF] LLVM-based compilers are therefore able to produce machine code that
+ often runs faster than that produced by conventional compile pipelines.
+\end_layout
+
+\begin_layout Standard
+The project brief was simple – to develop a compiler targeting LLVM IR for
+ the BASIC programming language.
+ The ANSI X.60-1978 standard was selected as an appropriate starting point
+ for the definition of the language, with new features being added as necessary
+ to update the language.
+ From perusal of the BASIC standard I noted that the ability to read and
+ write files was missing, so I decided this would be a useful extension
+ to implement.
+\end_layout
+
+\begin_layout Standard
+The motivation for the project was to test whether a compiler for BASIC
+ built on the LLVM framework would perform better than an existing compiler
+ built in a more conventional way.
+ The large number of optimisations offered by LLVM suggest that this should
+ be the case.
+ However, the simple and low-level nature of BASIC means the optimisations
+ may not have as much of an effect as with a more complex structural language.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+chapter{Preparation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The BASIC specification contains a full context-free grammar for the language,
+ along with details of how each rule should be compiled and expected behaviour
+ for each statement.
+ The context-free grammar would have to be adapted to fit the format expected
+ by the lexer/parser generator I use.
+ I would have to refer back to the specification when writing the code generatio
+n module of my compiler to ensure the generated code behaved as required
+ by the standard.
+\end_layout
+
+\begin_layout Standard
+I chose to structure my compiler in two parts – a lexer/parser and a code
+ generation module.
+ The parser would take input BASIC code and produce an abstract syntax tree.
+ This would then be passed to my code generation module which produces the
+ LLVM bytecode.
+ The parser would be generated by a parser generator.
+ This would then need to adapted so it produced instances of the classes
+ I had defined for my internal representation.
+\end_layout
+
+\begin_layout Standard
+The first stage in any compiler is the lexer, which converts input code
+ to a stream of lexical tokens to be passed to the parser.
+ To avoid the tedious task of building a lexer from scratch I elected to
+ use a lexer generator to produce this component.
+ I experimented with the lexer generator tool Flex then decided that a complete
+ parser generator would be a better option.
+ I selected the ANTLR 4.5 parser generator for this task.
+ ANTLR takes a standard context-free grammar and has a well-documented C#
+ target.
+\end_layout
+
+\begin_layout Standard
+A language needed to be selected with which to implement the compiler.
+ I chose C# .NET for this purpose [DAH7]because of my personal experience
+ using the language and also its object-oriented design.
+ This would allow the AST to be designed using principles of inheritance
+ and overloading, making my code more coherent.
+\end_layout
+
+\begin_layout Standard
+I designed a set of classes to represent the BASIC code once it had been
+ processed by the parser.
+ The most important class is 
+\family typewriter
+Statement
+\family default
+.
+ Each line of BASIC would be parsed into an instance of the 
+\family typewriter
+Statement
+\family default
+ class and the AST would be represented as a list of 
+\family typewriter
+Statement
+\family default
+s.
+ I designed a set of 14 subclasses of 
+\family typewriter
+Statement
+\family default
+ to represent the different types of statement defined in the BASIC specificatio
+n (
+\family typewriter
+Statement_Goto
+\family default
+, 
+\family typewriter
+Statement_Input
+\family default
+ etc).
+ Lines of BASIC could therefore be parsed into an instance of the appropriate
+ class while still being treated as an instance of 
+\family typewriter
+Statement
+\family default
+.
+ I intended to place general methods relevant to all statements in the 
+\family typewriter
+Statement
+\family default
+ class, while adding purpose-specific methods to each subclass.
+ 
+\family typewriter
+Statement
+\family default
+ would also contain a 
+\family typewriter
+code()
+\family default
+ method for generation of LLVM bytecode.
+ This could then be overridden by each subclass.
+ I then designed classes for representing all features described in the
+ specification.
+ These included classes for constants, variables, value expressions and
+ relational expressions.
+\end_layout
+
+\begin_layout Standard
+I studied the language reference for LLVM [REF] to get an idea of how each
+ rule in the context-free grammar would translate into LLVM bytecode.
+ Some constructs such as simple arithmetic operations and 
+\family typewriter
+GOTO
+\family default
+ statements map directly to LLVM instructions (
+\family typewriter
+add
+\family default
+, 
+\family typewriter
+sub
+\family default
+, 
+\family typewriter
+mul
+\family default
+, 
+\family typewriter
+div
+\family default
+ and 
+\family typewriter
+br
+\family default
+ respectively).
+ Other structures such as assignments would need to be compiled with a combinati
+on of several instructions.
+ Some statements such as 
+\family typewriter
+PRINT
+\family default
+ would be very impractical to implement in LLVM bytecode.
+ The approach here would be to use the LLVM 
+\family typewriter
+call
+\family default
+ instruction to invoke C library functions and pass relevant variables.
+\end_layout
+
+\begin_layout Standard
+The code generation module of the compiler involved use of the LLVM API.
+ A complication to this step was the fact that there do not exist a complete
+ set of bindings of the (very extensive) API for .NET development.
+ There do exist several attempts at writing said bindings at differing stages
+ of completeness.
+ The solution was therefore to select an appropriate set of bindings and
+ then add to them when required functionality is not implemented.
+ After investigating several options I opted to use the bindings written
+ by my project supervisor Michael Gale some years ago.
+\end_layout
+
+\begin_layout Standard
+I chose to develop the compiler using an iterative software engineering
+ principle.
+ Instead of completing the integration of the parser then working on the
+ code generation, I opted to iteratively integrate portions of the parser
+ then implement the relevant portions of code generation.
+ This allowed me to see working end-to-end results at an earlier stage.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+chapter{Implementation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{Reading in file}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+BASIC is a very line-based language.
+ Statements and expressions cannot span over multiple lines, nor can multiple
+ statements appear on a single line.
+ The most important control-flow statement is 
+\family typewriter
+GOTO
+\family default
+ and loop blocks are enclosed by 
+\family typewriter
+FOR
+\family default
+ and 
+\family typewriter
+NEXT
+\family default
+ lines.
+ For this reason I decided to parse the BASIC code on a line-by-line basis.
+ A stream reader is used to read from the input file.
+ As each line is read it is passed individually to the parser.
+ This approach to parsing is reflected in the AST base structure being a
+ list of 
+\family typewriter
+Statement
+\family default
+s, as each line of BASIC contains exactly one BASIC statement, which is
+ parsed into a 
+\family typewriter
+Statement
+\family default
+ object.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{Parser}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The ANSI X3.60-1978 standard for BASIC contains a context-free grammar for
+ the language.
+ I adapted this into the format required by ANTLR.
+ The grammar in the specification does not differentiate between parser
+ and lexer rules, but ANTLR requires parser and lexer rules to be defined
+ separately.
+ To debug the CFG I used ANTLR 4.5’s 
+\family typewriter
+TestRig
+\family default
+ component, which produces a graphical tree representation of how an input
+ string is parsed by the grammar [example downstairs].
+ This allowed me to pass lines of BASIC in and ensure that they were being
+ parsed as expected.
+ This was particularly important in the writing of the rules for expression
+ parsing, as it allowed me to verify operator grouping rules (eg BIDMAS)
+ were being obeyed by the parser.
+ Once the grammar correctly interpreted the language I used ANTLR to produce
+ the C# class files that constitute the parser.
+ These classes then had to be integrated with the code generation module
+ of the compiler.
+\end_layout
+
+\begin_layout Standard
+I chose to integrate the parser by use of a listener module.
+ This works by a unique method being called on entering or exiting each
+ parser rule.
+ These methods can then construct the internal representation of the code
+ used by the code generation module.
+ I implemented the 
+\family typewriter
+BASICListener
+\family default
+ interface produced by ANTLR.
+ This provided stubs for all methods required for the listener.
+ I initially integrated a small subset of the parser and then implemented
+ the code generation module for this subset.
+ This allowed an end-to-end demonstration of the compiler from an earlier
+ stage.
+\end_layout
+
+\begin_layout Standard
+At this stage of compilation some syntax errors are detected and C# exceptions
+ are thrown.
+ Errors thrown by ANTLR (ie input that could not be matched to a rule by
+ the parser) are handled.
+ Other simple errors that are detected include missing statements and missing
+ print statement subjects.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{Code Generation Tools}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The remainder of development was the module that actually generates LLVM
+ bytecode from the AST.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{LLVM API}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I made extensive use of the LLVM API for the generation of the LLVM IR code.
+ The API works by defining a global context, and then splitting an input
+ program into modules, functions and basic blocks.
+ Because my compiler only works with a single input source file, and does
+ not require subroutine calls, I was able to use a single LLVM module containing
+ a single function, and hence a single entry point into the code.
+ All[DAH8] sections of code dealing with code generation make use of the
+ LLVM context, module and main function variables.
+ To minimise the need to pass these as arguments, I create a single instance
+ of each variable and refer to these instances throughout compilation.
+ This is achieved by use of the singleton design pattern - they are stored
+ as public static members in the Parser class.
+\end_layout
+
+\begin_layout Standard
+Within the main function are basic blocks which are represented by the 
+\family typewriter
+LLVM.BasicBlock
+\family default
+ class.
+ These contain a block of code, and are represented in LLVM IR by a labelled
+ section of bytecode.
+ To insert code into a BasicBlock I made use of the 
+\family typewriter
+LLVM.IRBuilder
+\family default
+ class.
+ This provides methods such as 
+\family typewriter
+CreateAlloca
+\family default
+, 
+\family typewriter
+CreateFAdd
+\family default
+, 
+\family typewriter
+CreateBr
+\family default
+ to easily insert IR instructions into a 
+\family typewriter
+BasicBlock
+\family default
+.
+ All types of BASIC statements can be compiled to a single 
+\family typewriter
+BasicBlock
+\family default
+.
+ Hence each line of BASIC corresponds to exactly one LLVM 
+\family typewriter
+BasicBlock
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{C Standard Library}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To compile more complex statements such as 
+\family typewriter
+PRINT
+\family default
+ and 
+\family typewriter
+INPUT
+\family default
+ [see below], and arithmetic function calls such as 
+\family typewriter
+SIN
+\family default
+ and 
+\family typewriter
+SQR
+\family default
+ [see below], I chose to make use of C standard library functions.
+ This avoids the need to write these procedures from scratch but requires
+ that the standard library is available at link time for static linking,
+ or at runtime for dynamic linking.
+\end_layout
+
+\begin_layout Standard
+For example, consider the following simple BASIC program:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+10 LET A = SQR(9)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+20 END
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+My compiler produces the following LLVM bytecode:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+define i32 @main(i32, i8**) {
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+line10:
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%A = alloca double
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%2 = call double @sqrt(double 9.000000e+00)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+store double %2, double* %A
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+br label %line20
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+line20:
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+ret i32 0
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+declare double @sqrt(double)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The C library function 
+\family typewriter
+double sqrt(double)
+\family default
+ is imported at the bottom.
+ The assignment on line 10 is compiled by allocating the space, calculating
+ the result then storing the result in the allocated space.
+ The calculation is performed by calling the imported library function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{Types}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{BASIC types}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The BASIC standard defines just two types – string and numeric, with no
+ differentiation between integer and floating point values.
+ My compiler addresses this by representing all numbers internally as doubles.
+ This allows all operations to be seamlessly compiled regardless of the
+ initial type of the numbers.
+ This approach requires additional steps when outputting numeric values
+ to hide decimal places when the user expects an integer [see 3.10.3]
+\end_layout
+
+\begin_layout Standard
+This approach to storing numeric values has some potential downsides.
+ In C# a double has a size of 64 bits.
+ A long is also 64 bits, and a signed int is 32 bits.
+ Thus when storing integer values it can be wasteful to use a double when
+ an int would suffice.
+ The floating point nature of a double means that a very large range of
+ numbers can represented, much greater than that representable with an int
+ or long.
+ However precision can be lost when representing very large positive or
+ negative numbers.
+ The mantissa size of a double is 52 bits, offering a precision of between
+ 15 and 16 significant figures.
+ This is greater than the precision offered by an int, but less than that
+ provided by a long.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{LLVM types}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The code generation module makes extensive use of the LLVM API’s type construct
+ 
+\family typewriter
+LLVM.Type
+\family default
+.
+ To minimise calls to the API all common types (
+\family typewriter
+i8
+\family default
+, 
+\family typewriter
+i8*
+\family default
+, 
+\family typewriter
+i8**
+\family default
+, 
+\family typewriter
+i32
+\family default
+, 
+\family typewriter
+double
+\family default
+, 
+\family typewriter
+double*
+\family default
+, 
+\family typewriter
+void
+\family default
+) are initialised at the start of execution and are stored as static members
+ in the 
+\family typewriter
+Parser
+\family default
+ class.
+ This minimises calls to the LLVM API.
+\end_layout
+
+\begin_layout Standard
+The 
+\family typewriter
+LLVM.Constant
+\family default
+ corresponding to the number zero is also frequently used in various types
+ in the code generation module.
+ Hence I have also chosen to store the zero constant as static members in
+ the 
+\family typewriter
+Parser
+\family default
+ class as an 8-bit integer, a 32-bit integer and a double.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{Expressions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{String expressions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The BASIC standard specifies that string expressions consist of either a
+ string variable or a string literal.
+ Thus string expressions are very simple and no operations on strings are
+ possible.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways true
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/David/Desktop/expressionDemo.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The parse tree for 
+\family typewriter
+4+SIN(0.5)^2*(A+1)*2/4
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exampleparsetree"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Numeric expressions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Numeric expressions are much more versatile than string expressions.
+ The parser rules for a numeric expression are as follows:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+numericexpression : sign? term (sign term)*;
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+term              : factor (multiplier factor)*;
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+factor            : primary (CIRCUMFLEXACCENT primary)*;
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+multiplier        : ASTERISK
+\end_layout
+
+\begin_layout Plain Layout
+
+                  | SOLIDUS;
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+primary           : numericvariable
+\end_layout
+
+\begin_layout Plain Layout
+
+                  | numericconstant
+\end_layout
+
+\begin_layout Plain Layout
+
+                  | numericfunctionref
+\end_layout
+
+\begin_layout Plain Layout
+
+                  | LPAREN numericexpression RPAREN;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This structure allows complex recursive numeric expressions to be parsed
+ correctly in accordance with BIDMAS rules.
+ An example of how complex expressions are parsed is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exampleparsetree"
+
+\end_inset
+
+.
+ This was generated by the ANTLR4 
+\family typewriter
+TestRig
+\family default
+ tool, which I used to debug my context-free grammar for BASIC.
+ The tree represents the expression 
+\family typewriter
+4+SIN(0.5)^2*(A+1)*2/4
+\family default
+.
+ The adherence to BIDMAS rules is shown by the fact that the tree branches
+ in the correct order.
+ ie first at plus signs, then by multipliers, then by indices, then by brackets,
+ then by function calls.
+ The LLVM bytecode for evaluation of this expression is as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%2 = call double @sin(double 5.000000e-01)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%3 = call double @pow(double %2, double 2.000000e+00)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%temp = load double* %A
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%addtmp = fadd double %temp, 1.000000e+00
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%multmp = fmul double %3, %addtmp
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%multmp1 = fmul double %multmp, 2.000000e+00
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%divtmp = fdiv double %multmp1, 4.000000e+00
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%addtmp2 = fadd double 4.000000e+00, %divtmp
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can see that the 
+\family typewriter
+sin()
+\family default
+ function is handled first, by calling a C library function [see 3.3.2 or
+ 3.91].
+ The power is then compiled in the same way.
+ Then the bracket is evaluated by loading variable 
+\family typewriter
+A
+\family default
+ and adding 
+\family typewriter
+1
+\family default
+ to it.
+ The multiplication and division operations are then compiled, with the
+ outer addition being performed last.
+\end_layout
+
+\begin_layout Standard
+Numeric expressions also demonstrate the earliest optimisation performed
+ by the LLVM API.
+ Consider the trivial example expression 
+\family typewriter
+1+2+3+4
+\family default
+.
+ This is parsed into the parse tree shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:1+2+3+4"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/David/Desktop/trivial_exp.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The parse tree for 
+\family typewriter
+1+2+3+4
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:1+2+3+4"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+My compiler compiles this expression by emitting three 
+\family typewriter
+fadd
+\family default
+ instructions, feeding in a constant double and the result of the previous
+ instruction [see how I compile expressions][DAH9].
+ However, the resultant LLVM code for the statement 
+\family typewriter
+LET A=1+2+3+4
+\family default
+ is as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%A = alloca double
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+store double 1.000000e+01, double* %A
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We see that the LLVM API has detected that the repeated 
+\family typewriter
+fadd
+\family default
+ instructions are pointless and inefficient and has simplified the code
+ to the equivalent to 
+\family typewriter
+LET A=10
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{Compiler passes}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+My compiler makes three passes through the list of 
+\family typewriter
+Statement
+\family default
+ objects returned by the parser.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{First pass}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first pass calls the 
+\family typewriter
+code()
+\family default
+ function on each line, which generates the LLVM IR for the line.
+ Recursive 
+\family typewriter
+code()
+\family default
+ calls are made to instances of AST classes representing to structures used
+ within the line to compile these structures.
+ After each line is processed, a reference to the corresponding 
+\family typewriter
+Statement
+\family default
+ object is placed in 
+\family typewriter
+Parser.variables.lines
+\family default
+, a dictionary indexed against BASIC line numbers.
+ This dictionary is used to compile 
+\family typewriter
+GOTO
+\family default
+ and other control-flow statements in the third pass.
+ 
+\family typewriter
+Parser.variables
+\family default
+ is a static instance of 
+\family typewriter
+VariableStore
+\family default
+ [see 3.8]
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Second pass}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The second compiler pass calls the 
+\family typewriter
+jumpToNext()
+\family default
+ method on each line, passing a reference to the sequential next line of
+ the program.
+ This method is defined in the abstract 
+\family typewriter
+Statement
+\family default
+ class and inserts a 
+\family typewriter
+br
+\family default
+ instruction at the end of the 
+\family typewriter
+BasicBlock
+\family default
+ associated with the line, causing a jump to the 
+\family typewriter
+BasicBlock
+\family default
+ associated with the following line.
+\end_layout
+
+\begin_layout Standard
+The 
+\family typewriter
+jumpToNext()
+\family default
+ method is overridden in classes inheriting 
+\family typewriter
+Statement
+\family default
+ that represent lines where this jump is not necessary, ie lines containing
+ control-flow statements.
+ For example, the override 
+\family typewriter
+jumpToNext()
+\family default
+ method for 
+\family typewriter
+Statement_Goto
+\family default
+ is empty, as execution should not pass to the next line after a 
+\family typewriter
+GOTO
+\family default
+ statement.
+\end_layout
+
+\begin_layout Standard
+The 
+\family typewriter
+jumpToNext()
+\family default
+ method for 
+\family typewriter
+Statement_Next
+\family default
+ does not create a jump to the next line, but instead stores the next line
+ in a member variable.
+ This reference will be needed to construct the conditional jump created
+ in the third pass.
+ Similarly the 
+\family typewriter
+jumpToNext()
+\family default
+ method for 
+\family typewriter
+Statement_For
+\family default
+ stores the following line in a variable, but also creates a jump to it,
+ as execution always passes to the next line following a 
+\family typewriter
+FOR
+\family default
+ statement.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Third pass}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The final compiler pass calls the 
+\family typewriter
+processGoto()
+\family default
+ method for each line.
+ The body of this method in 
+\family typewriter
+Statement
+\family default
+ is blank, as for most lines there is no need for further compilation.
+ This pass is only used for lines which contain control-flow statements.
+ A case in point is the 
+\family typewriter
+GOTO
+\family default
+ statement.
+ This cannot be compiled earlier as it depends on the ability to translate
+ an in-code line number to a 
+\family typewriter
+BasicBlock
+\family default
+ reference for the target line.
+ This cannot be done until all lines have first been processed, and the
+ 
+\family typewriter
+Parser.variables.lines
+\family default
+ dictionary has been filled [see 3.8.1 and?].
+ Hence in this pass a 
+\family typewriter
+Statement_Goto
+\family default
+ will retrieve the 
+\family typewriter
+BasicBlock
+\family default
+ associated with the in-code line number and create a 
+\family typewriter
+br
+\family default
+ instruction to this block.
+ Similar operations are performed in this pass for lines containing 
+\family typewriter
+FOR
+\family default
+, 
+\family typewriter
+NEXT
+\family default
+ or 
+\family typewriter
+IF
+\family default
+ statements, as these all depend on the 
+\family typewriter
+BasicBlock
+\family default
+ for a target line being initialised.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{Error Handling}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Exceptions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I have defined a new 
+\family typewriter
+System.Exception
+\family default
+ which I have named 
+\family typewriter
+CompileException
+\family default
+.
+ I use this to represent handled compile-time errors, ie errors where the
+ compiler knows what has gone wrong.
+ These exceptions can then be differentiated from other 
+\family typewriter
+System.Exceptions
+\family default
+ in catch blocks to provide differing information to the user.
+ The constructor for 
+\family typewriter
+CompileException
+\family default
+ takes a string containing a descriptive error message to be displayed to
+ the user.
+ 
+\end_layout
+
+\begin_layout Standard
+Throughout all stages of compilation, the line number currently being processed
+ is stored statically in the 
+\family typewriter
+Parser
+\family default
+ class as 
+\family typewriter
+Parser.lineNumber
+\family default
+.
+ This means that should a 
+\family typewriter
+CompileException
+\family default
+ be thrown at any point during lexing, parsing or code generation, the error
+ message can include the line number where the error is found.
+ This has obvious advantages for users debugging their BASIC code.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{ANTLR error listener}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When initialising the ANTLR 
+\family typewriter
+BASICParser
+\family default
+ class used to parse the input code, the default ANTLR 
+\family typewriter
+BaseErrorListener
+\family default
+ is removed from the 
+\family typewriter
+BASICParser
+\family default
+, and an overloaded error listener class is attached instead.
+ I have named this class 
+\family typewriter
+ANTLRErrorListener
+\family default
+.
+ This overrides the default error behaviour (to output any error immediately
+ to stdout) so the more advanced error information supplied by the ANTLR
+ system is only displayed if my compiler has been executed with the 
+\family typewriter
+–debug
+\family default
+ flag set.
+ This error information includes the line number where ANTLR encountered
+ the error, but as the source code is fed to the parser line-by-line this
+ number is always 1.
+ 
+\family typewriter
+ANTLRErrorListener
+\family default
+ also addresses this problem by instead outputting 
+\family typewriter
+Parser.currentLine
+\family default
+, which contains the correct BASIC line number.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{VariableStore}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Storage of line and variable addresses}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\family typewriter
+VariableStore
+\family default
+ class is used to contain dictionaries and lists which store allocation
+ addresses and other key information relating to variables defined and used
+ in the BASIC code.
+ 
+\family typewriter
+VariableStore
+\family default
+ is initialised as a public static variable 
+\family typewriter
+Parser.variables
+\family default
+ in the 
+\family typewriter
+Parser
+\family default
+ class, and is thus accessible throughout the compilation process.
+ [strings vs stringpointers + stringisPointer] [purpose for each dictionary].[DAH
+10]
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Array operation methods}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+VariableStore
+\family default
+ also contains two important methods for the handling of arrays, 
+\family typewriter
+initialiseArray()
+\family default
+ and 
+\family typewriter
+arrayItem()
+\family default
+.
+ These initialise a numeric array and return a pointer to an item in the
+ array respectively.
+\end_layout
+
+\begin_layout Standard
+Initialisation involves emitting a simple 
+\family typewriter
+alloca
+\family default
+ instruction but including a second argument stipulating the number of items
+ for which memory should be allocated.
+ The 
+\family typewriter
+initialiseArray()
+\family default
+ method takes any 
+\family typewriter
+LLVM.Value
+\family default
+ as the array size, allowing arrays to be initialised with arbitrary length.
+ Thus an array can be defined with a length specified by the user at runtime.
+ This poses a slight problem in that numeric values are stored as doubles
+ throughout, and array indexing is one of the few times where an integer
+ value is required.
+ To get around this an 
+\family typewriter
+fptoui
+\family default
+ instruction is emitted.
+ This casts the supplied floating point value to an unsigned integer, casting
+ towards zero, which can be used to initialise the array.
+ A reference to the head of the array is stored in arrays, a dictionary
+ indexed against the name of the array.
+ The size of the array is stored in the dictionary 
+\family typewriter
+arraySizes
+\family default
+ – this is necessary for compilation of a 
+\family typewriter
+WRITE
+\family default
+ statement, where the call to helper function 
+\family typewriter
+writeArrayToFile
+\family default
+ requires the length of the array.
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+arrayItem()
+\family default
+ simply retrieves the array pointer from arrays and returns a pointer to
+ the requested item.
+ Again, the 
+\family typewriter
+LLVM.Value
+\family default
+ supplied as the array index is cast to an unsigned integer.
+ A call to 
+\family typewriter
+arrayItem()
+\family default
+ before 
+\family typewriter
+initialiseArray()
+\family default
+ indicates that the array has been referenced before it is defined with
+ a corresponding 
+\family typewriter
+DIM
+\family default
+ statement.
+ In many languages this would result in an exception, however the BASIC
+ specification states that this is actually allowed, and the array in question
+ should be initialised with a default length of 11 items.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{Numeric functions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Supplied numeric functions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The BASIC standard defines eleven supplied numeric functions that must be
+ included in the implementation.
+ These functions (
+\family typewriter
+ABS
+\family default
+, 
+\family typewriter
+ATN
+\family default
+, 
+\family typewriter
+COS
+\family default
+, 
+\family typewriter
+EXP
+\family default
+, 
+\family typewriter
+INT
+\family default
+, 
+\family typewriter
+LOG
+\family default
+, 
+\family typewriter
+RND
+\family default
+, 
+\family typewriter
+SGN
+\family default
+, 
+\family typewriter
+SIN
+\family default
+, 
+\family typewriter
+SQR
+\family default
+, 
+\family typewriter
+TAN
+\family default
+) all map fairly directly onto C equivalents.
+ Hence I chose to compile these by calling the relevant C function.
+ I took a similar approach to compile 
+\family typewriter
+PRINT
+\family default
+ and 
+\family typewriter
+INPUT
+\family default
+ statements, making calls to 
+\family typewriter
+printf
+\family default
+ and 
+\family typewriter
+scanf
+\family default
+ respectively.
+ This means the standard C library will need to be present at link time
+ (a reasonable assumption).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Defined numeric functions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To easily broaden the functionality of the language, I implemented the ability
+ to call external C functions defined in files included at link time.
+ These function calls can either have a single double argument or none.
+ A key example was in the fast Fourier transform algorithm I implemented
+ as part of the evaluation process, where I used this feature to implement
+ the modulo operator and Pi [see eval].
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{I/O}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{stdin/stdout}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+stdin and stdout are read/written to with the 
+\family typewriter
+PRINT
+\family default
+ and 
+\family typewriter
+INPUT
+\family default
+ statements.
+ These are compiled by calling the C functions 
+\family typewriter
+printf
+\family default
+ and 
+\family typewriter
+scanf
+\family default
+ respectively[DAH11].
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{File I/O}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A useful feature missing from the original BASIC spec is file IO.
+ Particularly when using algorithms which worked with large arrays of numbers
+ it became tedious to type in input data at the command line and read output
+ data from stdout.
+ To address this I defined two additional statements – 
+\family typewriter
+READ
+\family default
+ and 
+\family typewriter
+WRITE
+\family default
+.
+ The format of these statements is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+READ A filename
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+WRITE A filename
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where A is a pre-defined array and filename is a string expression containing
+ the filename to read/write.
+ These statements are compiled by calling two C helper functions I placed
+ in the file 
+\family typewriter
+libBASICLLVM.c
+\family default
+ [appendix].
+ These helper functions are passed pointers to the array and the string
+ containing the filename, along with the length of the array being passed.
+ They open a file pointer to the specified file and use 
+\family typewriter
+fgets
+\family default
+/
+\family typewriter
+fprintf
+\family default
+ to perform the operation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Numeric representation in I/O}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As mentioned in [3.4.1] numeric values are always represented as doubles in
+ the LLVM bytecode generated by my compiler.
+ This addresses the ambiguity of numeric data types in the BASIC specification.
+ However this poses a problem when outputting numeric variables using 
+\family typewriter
+PRINT
+\family default
+ or 
+\family typewriter
+WRITE
+\family default
+.
+ Consider the following example code
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET A = 10
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+PRINT A
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The user would reasonably expect the output to be “10”.
+ However the number is being represented internally as the double “10.00000…”
+ and will be output as such.
+ I chose to address this by using the format argument accepted by 
+\family typewriter
+printf
+\family default
+ and 
+\family typewriter
+fprintf
+\family default
+.
+ This is a string argument which specifies how a numeric variable should
+ be represented as a string.
+ The “
+\family typewriter
+%g
+\family default
+” format specifier outputs the number using the shortest possible representation
+, so the double “10.00000000…” is output as “10”, while numeric values which
+ require a higher level of precision are still returned to an appropriate
+ number of decimal places.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{Command line options}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I implemented a small number of command line options to make the compiler
+ more usable and versatile.
+ The 
+\family typewriter
+–debug
+\family default
+ flag is used to enable verbose output.
+ Without this option the compiler will only output to stdout if there is
+ an error.
+ With 
+\family typewriter
+–debug
+\family default
+ enabled other diagnostic information is displayed.
+ Detailed errors reported by the ANTLR parser are shown, and the entire
+ LLVM module is dumped to stdout once code generation is complete.
+ The 
+\family typewriter
+–o
+\family default
+ option is used to specify an output file.
+\end_layout
+
+\begin_layout Standard
+The 
+\family typewriter
+–output
+\family default
+ option instructs the compiler to perform further processing on the generated
+ bytecode.
+ The options are 
+\family typewriter
+LL
+\family default
+, 
+\family typewriter
+S
+\family default
+ or 
+\family typewriter
+EXE
+\family default
+, which produce a 
+\family typewriter
+.ll
+\family default
+ bytecode file, a 
+\family typewriter
+.s
+\family default
+ assembly file or an executable respectively.
+ This option is discussed further in [3.12 ?]
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{Further compilation and assembly}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{llc}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By passing my compiler the command line option 
+\family typewriter
+–output=S
+\family default
+, after compiling BASIC source to LLVM bytecode, the bytecode is further
+ compiled into an assembly file.
+ This works by calling the 
+\family typewriter
+llc
+\family default
+ tool provided with LLVM.
+ This is a static compiler for LLVM bytecode.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{gcc}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By passing my compiler the command line option 
+\family typewriter
+–output=EXE
+\family default
+, the output bytecode is first passed to 
+\family typewriter
+llc
+\family default
+ for compilation to assembly, then the assembly is passed to 
+\family typewriter
+gcc
+\family default
+ (the GNU Compiler Collection).
+ This is a versatile open-source compiler.
+ Here it is used simply to assemble and link the assembly generated by 
+\family typewriter
+llc
+\family default
+ and produce an executable file.
+ In addition to the generated assembly 
+\family typewriter
+gcc
+\family default
+ is passed the library file 
+\family typewriter
+libBASICLLVM.c
+\family default
+ which contains the helper functions necessary for the File IO functions
+ [see 3.9]
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Compiling for other architectures}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By passing the 
+\family typewriter
+–output
+\family default
+ option to my compiler, an executable is produced which will run natively
+ on the current machine.
+ However, a key advantage of using an LLVM-based compiler is that the bytecode
+ can be compiled for a variety of different architectures.
+ This can be achieved by specifying 
+\family typewriter
+–output=LL
+\family default
+ (or not passing an output argument) and then running the bytecode through
+ 
+\family typewriter
+llc
+\family default
+ and 
+\family typewriter
+gcc
+\family default
+ separately.
+ [see 4.2 for example]
+\end_layout
+
+\begin_layout Standard
+The target architecture is specified to 
+\family typewriter
+llc
+\family default
+ by use of a string descriptor known as a target triple.
+ A target triple generally takes the format 
+\family typewriter
+<architecture>-<vendor>-<system>
+\family default
+.
+ Examples of architecture include 
+\family typewriter
+i686
+\family default
+,
+\family typewriter
+arm
+\family default
+ and 
+\family typewriter
+mips
+\family default
+.
+ Examples of vendor include 
+\family typewriter
+pc
+\family default
+, 
+\family typewriter
+apple
+\family default
+ and 
+\family typewriter
+ibm
+\family default
+.
+ Examples of system include 
+\family typewriter
+win32
+\family default
+, 
+\family typewriter
+linux
+\family default
+ and 
+\family typewriter
+darwin
+\family default
+.
+ So for example target triple for the machine I was developing on is 
+\family typewriter
+i686-pc-win32
+\family default
+.
+ The target triple is passed to 
+\family typewriter
+llc
+\family default
+ by using the 
+\family typewriter
+–mtriple= argument
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection{Soft vs hard float ABI}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The application binary interface defines how code modules interact with
+ each other, including the way arguments are passed to functions.
+ In my case, this applies to the way my code passes arguments to functions
+ contained in 
+\family typewriter
+libBASICLLVM
+\family default
+ and to C library functions.
+ The Raspberry Pi uses a “hard float” ABI (Application Binary Interface).
+ This means floating point arithmetic is supported by the hardware.
+ Conversely, soft float ABI systems do not have dedicated floating point
+ hardware, and floating point arithmetic must be handled with software.
+\end_layout
+
+\begin_layout Standard
+The two float passing conventions are not compatible.
+ Thus assembly targeting a Raspberry Pi must be compiled with hard float
+ ABI specified so it links correctly with the C libraries present on a Raspberry
+ Pi.
+ This is done with the 
+\family typewriter
+–float-abi=hard
+\family default
+ argument when calling 
+\family typewriter
+llc
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+chapter{Evaluation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The initial aim of the project was to produce a correctly working compiler.
+ Therefore the obvious first step was to run a number of test programs through
+ the compiler to ensure the expected output was produced.
+ This was a valuable bug-finding exercise and verified that the compiler
+ was indeed correctly compiling the BASIC code.
+ To assist with this task I made use of LLVM’s 
+\family typewriter
+lli
+\family default
+ tool.
+ This is an interpreter which works directly on the LLVM IR bytecode produced
+ by my compiler, running it by use of a just-in-time compiler.
+ This allowed me to rapidly test output without needing to compile the bytecode
+ to native assembly.
+\end_layout
+
+\begin_layout Standard
+Part of the reason for using LLVM was the cross-platform nature of its backend,
+ allowing a variety of architectures to be targeted by the compiler.
+ I was developing on a 64-bit Windows machine, on which code was being successfu
+lly compiled and run.
+ To test the cross-platform capabilities of the compiler, I compiled some
+ BASIC test code for the ARM platform, 32-bit Windows and 64-bit Linux architect
+ures.
+ I then assembled and ran the resultant assembly on machines using the respectiv
+e instruction sets.
+ To test the ARM output I used a Raspberry Pi [see 3.11.4?].
+ The code compiled and ran successfully on all architectures I tested it
+ on.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{LLVM optimisation passes}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The level of optimisation performed by LLVM when compiling bytecode to assembly
+ is selected by using the 
+\family typewriter
+–Ox
+\family default
+ argument when calling 
+\family typewriter
+llc
+\family default
+, where 
+\family typewriter
+x
+\family default
+ is a number from zero to three.
+ To demonstrate the impact this has on assembly size, I wrote the following
+ trivial BASIC program:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET A = 3
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET A = 5
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET B = A
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+PRINT B
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+END
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The program is clearly inefficient - the first line is not needed as the
+ value it assigns A is superseded by the following line.
+ Correction of these types of inefficiency are simplified by LLVM’s use
+ of static single assignment form, which transforms the code into something
+ more like this:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+A1 = 3
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+A2 = 5
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+B1 = A2
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+print(B1)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can see that variables are only assigned once, and it is easy to see
+ that the 
+\family typewriter
+A1
+\family default
+ variable is never used after definition and is therefore redundant and
+ can be removed.
+ It is also easier for an optimising compiler to make this observation –
+ the use-define tree is more straightforward to calculate.
+\end_layout
+
+\begin_layout Standard
+I ran this program through my compiler to compile it to bytecode, then passed
+ it to 
+\family typewriter
+llc
+\family default
+ with the 
+\family typewriter
+–O0
+\family default
+ flag set.
+ This tells 
+\family typewriter
+llc
+\family default
+ not to perform any optimisation passes when compiling the code.
+ The resultant assembly file size was 1,315 bytes.
+ By passing the 
+\family typewriter
+–O3
+\family default
+ flag (most aggressive optimisation option instructing 
+\family typewriter
+llc
+\family default
+ to perform the largest number of optimisation algorithms) I produced a
+ file of size 898 bytes.
+ This is a substantial improvement for such a trivial inefficiency.
+\end_layout
+
+\begin_layout Standard
+I performed the same experiment with my BASIC fast Fourier transform example
+ (which is reasonably efficiently coded).
+ The assembly file without optimisation was 40KB and with 3-pass optimisation
+ was 21KB.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section{FFT for Raspberry Pi}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As a real-world example and to give my compiler a real workout I implemented
+ the Fast Fourier Transform (FFT) algorithm in BASIC.
+ This is an efficient algorithm for computing the discrete Fourier transform
+ of a sampled signal which decomposes the signal into its constituent frequencie
+s and their relative sizes.
+ I found an implementation of FFT for a different dialect of BASIC [http://www.ni
+cholson.com/dsp.fft1.html] and adapted it to fit my specification.
+\end_layout
+
+\begin_layout Standard
+The FFT program gave me an opportunity to test the 
+\family typewriter
+NumericDefinedFunction
+\family default
+ feature.
+ The algorithm makes use of Pi and the modulo function, neither of which
+ are BASIC supplied functions.
+ I wrote two simple functions 
+\family typewriter
+MOD2()
+\family default
+ and 
+\family typewriter
+PI()
+\family default
+ in C which wrap around the library function 
+\family typewriter
+fmod()
+\family default
+ and C constant 
+\family typewriter
+M_PI
+\family default
+ respectively [appendix].
+ My compiler detected the non-supplied function and passed it through in
+ the assembly.
+ By linking the compiled code with the helper functions the code worked
+ correctly.
+\end_layout
+
+\begin_layout Standard
+As an example of the ability to target multiple architectures I compiled
+ my Fast Fourier Transform program to run on a Raspberry Pi.
+ I ran 
+\family typewriter
+gcc –dumpmachine
+\family default
+ on the Raspberry Pi which returns the appropriate target triple for the
+ current system (in this case 
+\family typewriter
+arm-linux-gnueabihf
+\family default
+).
+ I ran the source code through my compiler to generate 
+\family typewriter
+fft.ll
+\family default
+.
+ I then ran this through llc using the argument 
+\family typewriter
+–mtriple=arm-linux-gnueabihf
+\family default
+.
+ I also passed the 
+\family typewriter
+argument –float-abi=hard
+\family default
+.
+ This instructs 
+\family typewriter
+llc
+\family default
+ to generate assembly which uses “hard float ABI” (this is explained in
+ the previous section).
+ 
+\family typewriter
+llc
+\family default
+ produced 
+\family typewriter
+fft.s
+\family default
+ which I transferred to the Raspberry Pi then ran through gcc.
+ I used the command
+\family typewriter
+ gcc fft.s libBASICLLVM.c additionalFunctions.c –o fft.out
+\family default
+ which assembled and linked three source files to produce the executable
+ 
+\family typewriter
+fft.out
+\family default
+.
+ This ran and produced expected output.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+chapter{Conclusions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Blah
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+chapter*{Bibliography}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Bibliography}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Blah
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+chapter*{Appendices}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Appendices}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{C helper functions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following C functions are called when compiling the READ and WRITE statement
+s.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+blah
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{Fast Fourier Transform Algorithm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following BASIC code for performing a fast Fourier transform is based
+ on an implementation for a different dialect of BASIC found here: [http://www.ni
+cholson.com/dsp.fft1.html]
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+PRINT "F?"
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+INPUT F
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+PRINT "m?"
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+INPUT M
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+PRINT ""
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET N = 2^M
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+DIM V(N)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+DIM G(N)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+READ V "v.csv"
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+READ G "g.csv"
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+PRINT V(0),V(1),V(2),V(3)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+PRINT G(0),G(1),G(2),G(3)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET Q = 0
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET P = 0
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET A = 0
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+FOR K=0 TO N-1
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET X = K
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET R = 0
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+FOR I=1 TO M
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET R = R*2 
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+IF MOD2(X) <> 1 THEN 20
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET R = R+1
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+20 LET X = INT(X/2)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+NEXT I
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+IF R <= K THEN 40
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET Q = V(R)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET V(R) = V(K)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET V(K) = Q
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET P = G(R)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET G(R) = G(K)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET G(K) = P
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+40 NEXT K
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET B = 2
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+45 IF B > N THEN 60
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET C = B/2
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET D = N/B
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+FOR Z = 0 TO C-1
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET A = Z * D
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET A1 = 2*PI()*A/N
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET A3 = A+N/4
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET A2 = 2*PI()*A3/N
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET H = SIN(A2)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET W = SIN(A1)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+IF F > -1 THEN 50
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET W = -W
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+50 FOR X = 0 TO (N-B) STEP B
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET I = Z + X
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET J = C + I
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET Q = H * V(J) - W * G(J)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET P = H * G(J) + W * V(J)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET Y = V(I)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET S = G(I)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET V(J) = Y - Q
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET G(J) = S - P
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET V(I) = Y + Q
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET G(I) = S + P
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+NEXT X
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+NEXT Z
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET B = B * 2
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+GOTO 45
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+60 IF F > -1 THEN 70 
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET A = 1/N
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+FOR L=0 TO N-1 
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET V(L) = V(L)*A
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+LET G(L) = G(L)*A
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+NEXT L
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+70 PRINT V(0),V(1),V(2),V(3)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+PRINT G(0),G(1),G(2),G(3)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+WRITE V "v2.csv"
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+WRITE G "g2.csv"
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+PRINT V(0),V(1),V(2),V(3)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+PRINT G(0),G(1),G(2),G(3)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+END
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+chapter*{Project Proposal}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Project Proposal}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{Introduction}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the late 70s to the early 90s, the most widely used programming language
+ was BASIC (Beginner's All-purpose Symbolic Instruction Code).
+ A BASIC interpreter was included on the vast majority of consumer microcomputer
+s released during this period.
+ As its name suggests, the language was designed with ease of use in mind
+ – the commands are designed to be human readable and potentially confusing
+ syntax (eg semicolons at ends of lines) was omitted.
+ This was significant at the time as it was the first language with ease
+ of use as a consideration – other languages used at the time (FORTRAN,
+ COBOL etc) were much harder to understand, and hence less accessible to
+ less technical users.
+\end_layout
+
+\begin_layout Standard
+LLVM is a compilation platform written in C++.
+ The principle is that high level languages are compiled into LLVM's bytecode
+ language, which is then run through the LLVM compiler, which can target
+ many different CPU architectures.
+ The advantages of this approach are numerous.
+ It is clearly much easier to write software to target multiple architectures,
+ as once the code is compiled to bytecode the LLVM backend can compile this
+ to machine code for any appropriate architecture.
+ The bytecode is also in Static Single Assignment form.
+ This means the LLVM framework is able to make many compile-time optimisations
+ without needing to perform expensive tree-based operations.
+\end_layout
+
+\begin_layout Standard
+The classic problem with distributing BASIC programs is that it is generally
+ an interpreted language, so developers rely on end-users having a compatible
+ interpreter installed.
+ There does not currently exist a compiler from a BASIC standard to LLVM
+ bytecode.
+ This would allow straightforward and optimised compilation from BASIC to
+ any system architecture supported by the LLVM framework.
+\end_layout
+
+\begin_layout Standard
+An example follows of how a trivial BASIC program might be translated into
+ LLVM code:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+BASIC:
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+x% = 3
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+x% = x% + 4
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+x% = x% * 5
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+LLVM:
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%x1 = 3
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%tmp1 = 4
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%x2 = add i16 %x1, %tmp1
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%tmp2 = 5
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+%x3 = mul i16 %x2, %tmp2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The project is to implement a fully functional compiler for BASIC.
+ The compiler will output LLVM bytecode which can then be compiled by the
+ LLVM framework to target a large array of end-user architectures.
+ The BASIC dialect I have chosen to implement is ANSI X3.60-1978 (BASIC 78).
+\end_layout
+
+\begin_layout Standard
+I have chosen to use Microsoft's C# language to implement this compiler.
+ This provides a feature-rich, mature platform for development.
+ C# is object-oriented and type safe, and has valuable traits for writing
+ compilers.
+ It is also a language which I am very familiar with, reducing the amount
+ of studying necessary before programming can begin.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{Resources Required}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Windows PC – My preferred development environment.
+ I will use my own machine.
+\end_layout
+
+\begin_layout Itemize
+Microsoft Visual Studio – This provides a mature compiler and IDE for C#
+ in which the compiler will be written.
+ Any edition of Visual Studio will suffice.
+\end_layout
+
+\begin_layout Itemize
+Private off-site Git repository – this will provide version control and
+ backups for both the source code and the dissertation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{Starting Point}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+I have a working knowledge of compilers and their structure from the IB
+ Compiler Construction course
+\end_layout
+
+\begin_layout Itemize
+I have experience working with both BASIC and C#
+\end_layout
+
+\begin_layout Itemize
+The project will make use of the LLVM compilation framework.
+ An appropriate set of C# bindings for the library will be used.
+\end_layout
+
+\begin_layout Itemize
+A parser generator for C# will be used to produce a skeleton parser as a
+ starting point for the project.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{Structure and Substance of the Project}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As with the development of any compiler, the project will require the production
+ of modules for lexing, parsing and code generation.
+ The object oriented nature of C# lends itself to this modular way of working.
+\end_layout
+
+\begin_layout Standard
+The first step will be to select an appropriate parser generator.
+ An appropriate context-free grammar to represent the syntax of BASIC must
+ be fed into the generator such that a correct lexer/parser is returned.
+ A set of classes must be constructed that represent all features and constructs
+ representable in the language.
+ This is where the use of an object-oriented language such as C# becomes
+ advantageous, as I can use subclassing and inheritance to produce a meaningful
+ and structured set of classes.
+ Once these classes are designed, the parser will have to be adapted to
+ return the appropriate instance of the classes, forming an abstract syntax
+ tree.
+ A pretty printer would be helpful for debugging at this stage.
+\end_layout
+
+\begin_layout Standard
+Once the classes are designed, the actual code generator must be written.
+ This involves taking the AST and returning the appropriate LLVM bytecode.
+ Appropriate C# bindings for the LLVM library will make this process more
+ straightforward and will optimise the LLVM code as it is generated.
+ This is the phase of development which will take the longest, but a gradual
+ approach to the build is acceptable.
+ I intend to initially implement arithmetic operations and build from there.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{Success Criteria}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The goal is to produce a working compiler from the ANSI X.360-1978 dialect
+ of BASIC to valid LLVM bytecode written in C#.
+ A selling point for LLVM is compile-time optimisation so it would be interestin
+g to evaluate the performance of programs compiled using my compiler against
+ those compiled using an existing, more conventional BASIC compilation pipeline.
+ The size of the executables produced by each compiler could also be compared.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{Timetable and Milestones}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection*{3rd-16th November 2014}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Read up on LLVM and its bytecode dialect.
+ Write simple programs in LLVM language to explore how the Clang compiler
+ and its optimisation techniques work.
+ Study BASIC 78 in depth and get familiar with all the features that will
+ have to be implemented by the compiler.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection*{17th-30th November 2014}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Write some compilers for toy languages in C#.
+ Select an appropriate set of C# bindings for the LLVM library and get familiar
+ with how they work/any shortcomings.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection*{1st-21st December 2014}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Further study of languages.
+ Make any necessary changes to the C# bindings for LLVM.
+ Begin to design and implement the classes necessary for representation
+ of BASIC's simple data structures in C#.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection*{22nd December 2014-11th January 2014}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Complete the development of necessary classes.
+ Continue to write compilers targeting LLVM in C#.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection*{12th-25th January 2015}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Write a context-free grammar for BASIC 78.
+ Use a parser generator to produce an appropriate parser.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection*{26th January-8th February 2015}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Implement code generation for simple arithmetic and assignment operations.
+ Implement classes necessary for representing flow control operators.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection*{9th-22nd February 2015}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Implement code generation for BASIC input and output, looping and GOTO operators.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection*{23rd February-8th March 2015}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Implement additional functionality.
+ At this stage the compiler will be largely complete and optimisation/additional
+ features can be added.
+ Begin writing initial chapters of dissertation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection*{9th-22nd March 2015}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Extensive testing of compiler.
+ Clean up any untidy/inefficient portions of code.
+ Continue to write dissertation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsection*{23rd March-}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Send first draft of dissertation to supervisor and continually redraft chapters.
+ Send draft to DoS by 21st April for feedback and complete and submit final
+ dissertation early May.
+\end_layout
+
+\end_body
+\end_document
