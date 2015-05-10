@@ -3,6 +3,9 @@
 \begin_document
 \begin_header
 \textclass book
+\begin_preamble
+\floatname{algorithm}{Listing}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -912,6 +915,52 @@ SQR
 
 \begin_layout Standard
 For example, consider the following simple BASIC program:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+10 LET A = SQR(9)
+\end_layout
+
+\begin_layout Plain Layout
+\paragraph_spacing single
+
+20 END
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
