@@ -549,11 +549,15 @@ The first stage in any compiler is the lexer, which converts input code
 
 \begin_layout Standard
 A language needed to be selected with which to implement the compiler.
- I chose C# .NET for this purpose because of its object-oriented design.
+ Appropriate languages from the course included ML and Java; ML in particular
+ is designed with compiler construction in mind.
+ The use of LLVM imposed restrictions on implementation languages as bindings
+ for LLVM needed to be available for my chosen language, ruling out ML.
+ An object-oriented language would be ideal.
  This would allow the AST to be designed using principles of inheritance
  and overloading, making my code more coherent and maintanable.
- There was also the added advantage that I was already familiar with using
- C# .NET.
+ LLVM-compatible object-oriented languages inluded Java and C# .NET.
+ I elected to use C# .NET as I was most familiar with it out of the two.
 \end_layout
 
 \begin_layout Standard
