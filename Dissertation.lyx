@@ -622,8 +622,8 @@ From the language reference for LLVM [REF] I was able to determine how each
 GOTO
 \family default
  statements map directly to LLVM instructions.
- Other structures such as assignments would need to be compiled with a combinati
-on of several instructions.
+ Other structures such as assignment would need to be compiled with a combinatio
+n of several instructions.
  Some statements such as 
 \family typewriter
 PRINT
@@ -644,12 +644,12 @@ call
 The code generation module of the compiler involved use of the LLVM API.
  A complication to this step was the fact that there does not exist a complete
  set of bindings of the (very extensive) API for .NET development.
- However, several attempts at writing said bindings exist albeit at differing
+ However, several attempts at writing bindings exist albeit at differing
  stages of completeness.
  The solution was therefore to select an appropriate set of bindings and
- then add to them when required functionality is not implemented.
+ then add to them as required.
  After investigating several options I opted to use the bindings written
- by my project supervisor Michael Gale some years ago.
+ by my project supervisor Michael Gale.
 \end_layout
 
 \begin_layout Standard
@@ -781,8 +781,9 @@ TestRig
  This allowed me to pass lines of BASIC in and ensure that they were being
  parsed as expected.
  This was particularly important in the writing of the rules for expression
- parsing, as it allowed me to verify operator grouping rules (eg BIDMAS)
- were being obeyed by the parser.
+ parsing, as it allowed me to verify operator grouping rules (eg the BIDMAS
+ rules for operator precedence - Brackets Indicies Division Multiplication
+ Addition Subtraction) were being obeyed by the parser.
  Once the grammar correctly interpreted the language I used ANTLR to produce
  the C# class files that constitute the parser.
  These classes then had to be integrated with the code generation module
@@ -869,8 +870,8 @@ I made extensive use of the LLVM API for the generation of the LLVM IR code.
  not require subroutine calls (as the 1978 BASIC specification does not
  allow for subroutines), I was able to use a single LLVM module containing
  a single function, and hence a single entry point into the code.
- All[DAH8] sections of code dealing with code generation make use of the
- LLVM context, module and main function variables.
+ All sections of code dealing with code generation make use of the LLVM
+ context, module and main function variables.
  To minimise the need to pass these as arguments, I create a single instance
  of each variable and refer to these instances throughout compilation.
  This is achieved by use of the singleton design pattern - they are stored
@@ -1641,7 +1642,7 @@ My compiler compiles this expression by emitting three
 fadd
 \family default
  instructions, feeding in a constant double and the result of the previous
- instruction [see how I compile expressions][DAH9].
+ instruction [see how I compile expressions].
  However, the resultant LLVM code for the statement 
 \family typewriter
 LET A=1+2+3+4
@@ -2146,8 +2147,7 @@ Parser.variables
 Parser
 \family default
  class, and is thus accessible throughout the compilation process.
- [strings vs stringpointers + stringisPointer] [purpose for each dictionary].[DAH
-10]
+ [strings vs stringpointers + stringisPointer] [purpose for each dictionary].
 \end_layout
 
 \begin_layout Standard
@@ -2436,7 +2436,7 @@ printf
 \family typewriter
 scanf
 \family default
- respectively[DAH11].
+ respectively.
 \end_layout
 
 \begin_layout Standard
