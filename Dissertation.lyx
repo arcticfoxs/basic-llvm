@@ -763,8 +763,8 @@ BASICListener
 \begin_layout Standard
 At this stage of compilation some syntax errors are detected and C# exceptions
  are thrown.
- Errors thrown by ANTLR (ie input that could not be matched to a rule by
- the parser) are handled.
+ Errors thrown by ANTLR (i.e.
+ input that could not be matched to a rule by the parser) are handled.
  Other simple errors that are detected and handled include missing statements
  and missing print statement subjects.
 \end_layout
@@ -1416,7 +1416,8 @@ TestRig
 .
  The adherence to BIDMAS rules is shown by the fact that the tree branches
  in the correct order.
- ie first at plus signs, then by multipliers, then by indices, then by brackets,
+ i.e.
+ first at plus signs, then by multipliers, then by indices, then by brackets,
  then by function calls.
  The LLVM bytecode for evaluation of this expression is as follows:
 \end_layout
@@ -1709,8 +1710,8 @@ code()
 \family typewriter
 code()
 \family default
- calls are made to instances of AST classes representing to structures used
- within the line to compile these structures.
+ calls are made to instances of AST classes representing the structures
+ used within the line to compile these structures.
  After each line is processed, a reference to the corresponding 
 \family typewriter
 Statement
@@ -1767,7 +1768,7 @@ Statement
 \family typewriter
 br
 \family default
- instruction at the end of the 
+ (branch) instruction at the end of the 
 \family typewriter
 BasicBlock
 \family default
@@ -1787,8 +1788,8 @@ jumpToNext()
 \family typewriter
 Statement
 \family default
- that represent lines where this jump is not necessary, ie lines containing
- control-flow statements.
+ that represent lines where this jump is not necessary, i.e.
+ lines containing control-flow statements.
  For example, the override 
 \family typewriter
 jumpToNext()
@@ -1813,8 +1814,9 @@ jumpToNext()
 \family typewriter
 Statement_Next
 \family default
- does not create a jump to the next line, but instead stores the next line
- in a member variable.
+ differs from other statements.
+ Here a jump to the next line is not created, but a reference to the basic
+ block for the next line is stored in a member variable.
  This reference will be needed to construct the conditional jump created
  in the third pass.
  Similarly the 
@@ -1952,13 +1954,13 @@ System.Exception
 CompileException
 \family default
 .
- I use this to represent handled compile-time errors, ie errors where the
- compiler knows what has gone wrong.
+ I use this to represent handled compile-time errors, i.e.
+ errors where the compiler knows what has gone wrong.
  These exceptions can then be differentiated from other 
 \family typewriter
 System.Exceptions
 \family default
- in catch blocks to provide differing information to the user.
+ in catch blocks to provide context-sensitive debug information to the user.
  The constructor for 
 \family typewriter
 CompileException
@@ -2168,7 +2170,7 @@ fptoui
 \family typewriter
 arraySizes
 \family default
- – this is necessary for compilation of a 
+; this is necessary for compilation of a 
 \family typewriter
 WRITE
 \family default
@@ -2207,7 +2209,7 @@ DIM
  statement.
  In many languages this would result in an exception, however the BASIC
  specification states that this is actually allowed, and the array in question
- should be initialised with a default length of 11 items.
+ should be initialised with a default length of (rather oddly) 11 items.
 \end_layout
 
 \begin_layout Standard
@@ -2334,7 +2336,7 @@ To easily broaden the functionality of the language, I implemented the ability
  These function calls can either have a single double argument or none.
  A key example was in the fast Fourier transform algorithm I implemented
  as part of the evaluation process, where I used this feature to implement
- the modulo operator and Pi [see eval].
+ the modulo operator and pi [see eval].
 \end_layout
 
 \begin_layout Standard
@@ -2409,8 +2411,8 @@ subsection{File I/O}
 \begin_layout Standard
 A useful feature missing from the original BASIC spec is file IO.
  Particularly when using algorithms which worked with large arrays of numbers
- it became tedious to type in input data at the command line and read output
- data from stdout.
+ it became tedious, not to mention error-prone, to type in input data at
+ the command line and read output data from stdout.
  To address this I defined two additional statements – 
 \family typewriter
 READ
@@ -2570,7 +2572,7 @@ PRINT A
 \begin_layout Standard
 The user would reasonably expect the output to be “10”.
  However the number is being represented internally as the double “10.00000…”
- and will be output as such.
+ and would be output as such.
  I chose to address this by using the format argument accepted by 
 \family typewriter
 printf
@@ -2623,7 +2625,7 @@ I implemented a small number of command line options to make the compiler
 –debug
 \family default
  enabled other diagnostic information is displayed.
- Detailed errors reported by the ANTLR parser are shown, and the entire
+ For example, errors reported by the ANTLR parser are shown, and the entire
  LLVM module is dumped to stdout once code generation is complete.
  The 
 \family typewriter
@@ -2735,18 +2737,18 @@ By passing my compiler the command line option
 \family typewriter
 llc
 \family default
- for compilation to assembly, then the assembly is passed to 
+ for compilation to assembly, then the assembly code is passed to 
 \family typewriter
 gcc
 \family default
- (the GNU Compiler Collection).
+ (the GNU Compiler Collection [ref?]).
  This is a versatile open-source compiler.
  Here it is used simply to assemble and link the assembly generated by 
 \family typewriter
 llc
 \family default
  and produce an executable file.
- In addition to the generated assembly 
+ In addition to the generated assembly, 
 \family typewriter
 gcc
 \family default
@@ -3136,7 +3138,7 @@ A1
 \family default
  variable is never used after definition and is therefore redundant and
  can be removed.
- It is also easier for an optimising compiler to make this observation –
+ It is also easier for an optimising compiler to make this observation as
  the use-define tree is more straightforward to calculate.
 \end_layout
 
@@ -3172,7 +3174,7 @@ llc
 
 \begin_layout Standard
 I performed the same experiment with my BASIC fast Fourier transform example
- (which is reasonably efficiently coded).
+ (which from inspection appears to be efficiently coded).
  The assembly file without optimisation was 40KB and with 3-pass optimisation
  was 21KB.
 \end_layout
@@ -3196,9 +3198,9 @@ section{FFT for Raspberry Pi}
 \begin_layout Standard
 As a real-world example and to give my compiler a real workout I implemented
  the Fast Fourier Transform (FFT) algorithm in BASIC.
- This is an efficient algorithm for computing the discrete Fourier transform
- of a sampled signal which decomposes the signal into its constituent frequencie
-s and their relative sizes.
+ This is an efficient algorithm for computing the Fourier transform of a
+ sampled signal which decomposes the signal into its constituent frequencies
+ and their relative sizes.
  I found an implementation of FFT for a different dialect of BASIC [http://www.ni
 cholson.com/dsp.fft1.html] and adapted it to fit my specification.
 \end_layout
@@ -3209,8 +3211,16 @@ The FFT program gave me an opportunity to test the
 NumericDefinedFunction
 \family default
  feature.
- The algorithm makes use of Pi and the modulo function, neither of which
- are BASIC supplied functions.
+ The algorithm makes use of pi and the modulo function, neither of which
+ are standard 1978 BASIC 
+\begin_inset Quotes eld
+\end_inset
+
+supplied
+\begin_inset Quotes erd
+\end_inset
+
+ functions.
  I wrote two simple functions 
 \family typewriter
 MOD2()
@@ -3231,7 +3241,9 @@ M_PI
  My compiler detected the non-supplied function and passed it through in
  the assembly.
  By linking the compiled code with the helper functions the code worked
- correctly.
+ correctly i.e.
+ the output data from the FFT procedure was identical to that generated
+ by Excel's FFT function on the same data.
 \end_layout
 
 \begin_layout Standard
@@ -3287,7 +3299,7 @@ fft.s
 fft.out
 \family default
 .
- This ran and produced expected output.
+ This ran and produced the expected output.
 \end_layout
 
 \begin_layout Standard
