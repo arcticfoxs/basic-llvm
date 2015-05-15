@@ -20,6 +20,7 @@
 @Misc{freebasic,
   Title                    = {FreeBASIC},
   HowPublished             = {\url{http://www.freebasic.net/}},
+  Note                     = {Accessed: 2015-04-16},
 
   Owner                    = {David},
   Timestamp                = {2015.05.15}
@@ -29,13 +30,5 @@
   Title                    = {LLVM Language Reference},
   HowPublished             = {\url{http://llvm.org/docs/LangRef.html}},
   Note                     = {Accessed: 2015-02-20}
-}
-
-@Misc{smallbasic,
-  Title                    = {Microsoft Small Basic},
-  HowPublished             = {\url{http://smallbasic.com/}},
-
-  Owner                    = {David},
-  Timestamp                = {2015.05.15}
 }
 
